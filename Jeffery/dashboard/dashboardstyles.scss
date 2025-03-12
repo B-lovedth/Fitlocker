@@ -1,15 +1,33 @@
-
 //Fonts
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "Neue Haas Grotesque";
+  src: url(../../assets/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayLight.ttf)  
+    format("truetype");
+}
 
+/* Variables */
+:root {
+  /* fonts */
+  --Poppins: "Poppins", sans-serif;
+  --Neue: "Neue Haas Grotesque", sans-serif;
 
+  /* colors */
+  --nude: #f9ecee;
+  --gray: #888888;
+  --black: #000000;
+  --deeppink: #cc339c;
+  --peach: #ffc0cb;
+  --white: #ffffff;
+  --yellow: #fae89e;
+}
 
 // Main dashboard styles
 
 .main-dashboard {
   height: 100%;
   width: 100%;
-  padding: 4rem 8rem;
+  padding: 4rem 6rem;
   display: flex;
   overflow-x: hidden;
   flex-direction: column;
@@ -18,14 +36,13 @@
 .title-container {
   display: flex;
   flex-direction: row;
-  gap: .5rem;
-
+  gap: 0.5rem;
 }
 
 #title {
   height: auto;
   width: 100%;
-  font-size: calc(1rem + .2vw);
+  font-size: calc(1rem + 0.2vw);
 }
 
 #info {
@@ -49,18 +66,18 @@
   align-items: center;
   border: 2px solid #000000;
   border-radius: 5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 #searchBox {
   width: 80%;
   height: 100%;
   border: 0;
   outline: none;
-  font-size: calc(.7rem + .4vw);
+  font-size: calc(0.7rem + 0.4vw);
 }
 #searchIcon {
-    width: 10%;
-    fill: #000000bb;
+  width: 10%;
+  fill: #000000bb;
 }
 .close-btn {
   width: 10%;
@@ -68,20 +85,19 @@
   border: 0;
   border-radius: 0 5px 5px 0;
   background-color: inherit;
-  transition: .2s;
-  scale: .8;
+  transition: 0.2s;
+  scale: 0.8;
 }
 .close-btn:hover {
   cursor: pointer;
   transform: scale(1.2);
-  
 }
 
 // Grid Styles
 
 .grid-container {
   height: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--Poppins);
   font-style: normal;
   font-weight: 400;
   display: grid;
@@ -99,23 +115,24 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #F9ECEE;
+  background-color: var(--nude);
+  color: var(--black);
   padding: 1.5rem 2rem;
   gap: 1rem;
-  transition: .3s;
+  transition: 0.3s;
 }
-.box:hover {
-  transform: scale(1.01)
+.large:hover {
+  transform: scale(1.01);
 }
 
 .large {
   @extend .box;
   flex-direction: row;
-  background-color: #FAEB9E;
+  background-color: var(--yellow);
 }
 #box9 {
   @extend .large;
-  background-color: #FFC0CB;
+  background-color: var(--peach);
 }
 
 #largeBoxIcon {
@@ -123,8 +140,8 @@
   aspect-ratio: 1/1;
   border-radius: 50%;
   border: 0;
-  background-color: #000000;
-  transition: .2s;
+  background-color: var(--black);
+  transition: 0.2s;
 }
 #largeBoxIcon:hover {
   cursor: pointer;
@@ -139,7 +156,7 @@
 }
 #boxImage {
   width: 50%;
-  background-color: #FFFFFF;
+  background-color: var(--white);
 }
 #box1 {
   grid-column: 1 / span 2;
@@ -157,12 +174,12 @@
   width: 100%;
 }
 #largeBoxName {
-    font-weight: 500;
-    font-size: calc(.7rem + 1vw);
+  font-weight: 500;
+  font-size: calc(0.7rem + 1vw);
 }
 #boxName {
   font-weight: 500;
-  font-size: calc(.2rem + 1vw);
+  font-size: calc(0.2rem + 1vw);
   width: 80%;
 }
 #boxIcon {
@@ -201,7 +218,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: calc(.7rem + 0.3vw);
+  font-size: calc(0.7rem + 0.3vw);
   width: 100%;
   height: 60%;
   color: #000000;
@@ -209,7 +226,7 @@
   margin-bottom: 0.3rem;
 }
 #countChangeInfo {
-  font-size: calc(.5rem + .1vw);
+  font-size: calc(0.5rem + 0.1vw);
 }
 
 //Footer
