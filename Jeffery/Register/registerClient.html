@@ -102,8 +102,7 @@
       <div class="register-container">
         <header class="top">
           <div>Register Client</div>
-          <i>icon</i>        
-        </header>
+-        </header>
         <div class="subject">
           <h1>Register Client</h1>
           <a href="./registerFamily.html">Register Famliy</a>
@@ -111,7 +110,7 @@
         <form class="clientForm" action="#">
           <div class="personal panel">
             <h3>Personal Details</h3>
-            <div class="fields">
+            <div class="fields p-d">
               <div class="field">
                 <label for="firstname">Firstname</label>
                 <input type="text" id="firstname" name="firstname" />
@@ -125,7 +124,7 @@
                 <input type="tel" id="phone" name="phone" />
               </div>
               <div class="field">
-                <label for="address">Age</label>
+                <label for="age">Age</label>
                 <input type="number" min="1" id="age" name="age" />
               </div>
               <div class="field">
@@ -138,17 +137,35 @@
               </div>
               <div class="field">
                 <label for="family">Add to family</label>
-                <select name="family" id="family">
-                  <option disabled selected>Select Family</option>
-                  <option value="1">Fam 1</option>
-                  <option value="2">Fam 2</option>
-                </select>
+                <div class="row">
+                  <label class="flex small" value="1">
+                    <input type="radio" name="family" value="yes">Yes</label>
+
+                    <label class="flex small" value="2">
+                      <input type="radio" name="family" value="no">No</label>
+                  </div>
               </div>
             </div>
           </div>
           <div class="measurement panel">
             <h3>Measurements(Inches)</h3>
-            <div class="fields">
+            <div class="fields m-d">
+              <div class="field">
+                <label for="firstname">Height</label>
+                <input type="number" name="height" />
+              </div>
+              <div class="field">
+                <label for="firstname">Height</label>
+                <input type="number" name="height" />
+              </div>
+              <div class="field">
+                <label for="firstname">Height</label>
+                <input type="number" name="height" />
+              </div>
+              <div class="field">
+                <label for="firstname">Height</label>
+                <input type="number" name="height" />
+              </div>
               <div class="field">
                 <label for="firstname">Height</label>
                 <input type="number" name="height" />
@@ -183,6 +200,7 @@
               </div>
             </div>
           </div>
+          <button type="submit">Register</button>
         </form>
       </div>
     </div>

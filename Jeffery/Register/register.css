@@ -1,7 +1,7 @@
 .register-container {
   height: 100%;
   width: 100%;
-  padding: 4rem 8rem;
+  padding: 5rem 5rem 3rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,9 +10,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 .register-container > header {
@@ -26,15 +23,16 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  margin-bottom: 3rem;
 }
 
 .register-container > .subject {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -49,14 +47,132 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
   margin-top: 2rem;
 }
 
+.subject > h1 {
+  font-size: 2rem;
+}
+
+.subject > a {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: #D148A6;
+  -webkit-box-shadow: 3px 4px 1px #000;
+          box-shadow: 3px 4px 1px #000;
+}
+
 .panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
   border: 1px solid #000;
   border-radius: 20px;
   padding: 3rem;
+}
+
+.panel h3 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 1rem;
+}
+
+.fields {
+  display: -ms-grid;
+  display: grid;
+}
+
+.fields.p-d {
+  -ms-grid-columns: (minmax(100px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.fields.m-d {
+  -ms-grid-columns: (minmax(220px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.fields > .field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.field :where(input:not([type="radio"]), select) {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.field :where(input, select):focus {
+  outline: none;
+}
+
+.field > label:first-child {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.small {
+  font-size: 0.6rem;
+}
+
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: #D148A6;
+  -webkit-box-shadow: 3px 4px 1px #000;
+          box-shadow: 3px 4px 1px #000;
+  cursor: pointer;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 /*# sourceMappingURL=register.css.map */
