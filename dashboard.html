@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitLocker: Dashboard</title>
 
-    <link rel="stylesheet" href="../../Styles/main.css" />
-    <link rel="stylesheet" href="../../Styles/sidebar.css " />
-    <link rel="stylesheet" href="dashboardstyles.css" />
+    <link rel="stylesheet" href="./Styles/main.css" />
+    <link rel="stylesheet" href="./Styles/sidebar.css" />
+    <link rel="stylesheet" href="./Styles/dashboardstyles.css" />
   </head>
   <body>
     <div class="container">
-      <nav class="dashboard-navbar" id="sideNav">
+      <aside class="dashboard-navbar" id="sideNav">
         <div id="topSide">
           <div></div>
           <button
@@ -97,7 +97,7 @@
             </svg>
           </button>
         </div>
-      </nav>
+      </aside>
 
       <div class="main-dashboard">
         <div class="title-container">
@@ -174,7 +174,7 @@
             </div>
           </a>
 
-          <div class="box large" id="box2">
+          <a href="../Register/registerFamily.html" class="box large" id="box2">
             <div id="leftsideInfoLarge">
               <h2 id="largeBoxName">Register a Family</h2>
               <button type="button" id="largeBoxIcon">
@@ -194,7 +194,7 @@
             <div id="boxImage">
               <img src="" alt="" />
             </div>
-          </div>
+          </a>
 
           <div class="box" id="box3">
             <div id="boxTopside">
@@ -374,15 +374,9 @@
             </div>
           </div>
         </div>
-
-        <hr />
-
-        <footer>
-          <p>All Rights Reserved, FitLocker 2025</p>
-        </footer>
       </div>
     </div>
 
-    <script src="dashboardscript.js"></script>
+    <script src="./Scripts/dashboardscript.js"></script>
   </body>
 </html>

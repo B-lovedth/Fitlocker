@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--bodyfont);
+    font-weight: 400;
+    box-sizing: border-box;
+    outline: transparent;
+}
+
+/* Global Design Styles */
+:root {
+    /* Colors */
+    --nude: #f9ecee;
+    --grey: #888888;
+    --black: #1b1b1b;
+    --deep-pink: #cc339c;
+    --yellow: #fae89e;
+    --peach: #FFC0CB;
+    --brown: #660033;
+    --lilac: #D0A8F0;
+    --green: #467A1F;
+    --lime: #ABE87D;
+    --red: #E51A1A;
+
+    /* Font Sizes */
+    --heading1: 4rem;
+    --heading2: 3rem;
+    --heading3: 2.5rem;
+    --heading4: 2.25rem;
+    --heading5: 1.5rem;
+    --body-lg: 2rem;
+    --body-md: 1.25rem;
+    --body-sm: 1rem;
+    --body-tn: 1.6rem;
+    --btn-lg: 1.375rem;
+    --btn-md: var(--body-md);
+    --btn-sm: var(--body-sm); 
+    --btn-tn: var(--body-tn);
+    --base-font-mobile: 10px;
+
+    /* Font Familes */
+    --headingfont: Arial;
+    --bodyfont: Verdana, Geneva, Tahoma, sans-serif;
+
+    /* Shadows */
+    --large-shadow: 10px 10px var(--black);
+    --medium-shadow: 5px 5px var(--black);
+    --small-shadow: 3px 3px var(--black);
+    --blur-shadow: 10px 10px .5 var(--black);
+
+    /* Padding & Gaps */
+    --padding-side-lg: 10%; /*for very large sections, like header, footer, main*/ 
+    --padding-top-or-bottom-lg: 50px;
+    --large-gap: 1.875rem;
+    --medium-gap: 25px;
+    --small-gap: 10px;
+
+    /* Borders */
+    --border-thick: 2px solid var(--black);
+    --border-normal: 1.5px solid var(--black);
+    --border-thin: 1px solid var(--black);
+}
+
+
+/* Semantic elements (edit elements outside body in your own seperate css if necessary) */
+body {
+    background-color: var(--nude);
+    background-image: url(assets/img/background-net.svg);
+    background-size: contain;
+    min-height: 100vh;
+}
+
+/* If any edits to padding, use the variables in place of actual numbers so it can be consistent with other pages and easily updated. The only other accepted value is 0*/
+header {
+    padding: var(--padding-top-or-bottom-lg) var(--padding-side-lg) 0 var(--padding-side-lg);
+    width: 100%;
+}
+main {
+    padding: 50px 10%;
+}
+
+
+/* Text Components */
+h1 {
+    font-family: var(--headingfont);
+    font-size: var(--heading1);
+    line-height: 100%;  
+}
+
+h2 {
+    font-family: var(--headingfont);
+    font-size: var(--heading2);
+    line-height: 100%; 
+}
+h3 {
+    font-family: var(--headingfont);
+    font-size: var(--heading3);
+    line-height: 100%; 
+}
+h4 {
+    font-family: var(--headingfont);
+    font-size: var(--heading4);
+    line-height: 100%; 
+}
+h5 {
+    font-family: var(--headingfont);
+    font-size: var(--heading2);
+    line-height: 100%; 
+}
+
+a {
+    color: inherit;
+}
+
+p {
+    font-size: var(--body-md);
+}
+ p.lg {
+    font-size: var(--body-lg);
+ }
+
+ p.sm {
+    font-size: var(--body-sm);
+ }
+ 
+/* Each label with input should be in a div wrapper */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--body-sm);
+}
+
+ input {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: var(--border-normal);
+    width: 100%;
+}
+
+
+/* Buttons */
+/* Button Sizes */
+.btn {
+    border: var(--border-thick);
+    color: var(--black);
+    border-radius: 8px;
+}
+
+.btn-lg{
+    font-size: var(--btn-lg);
+    padding: 24px 32px;
+    border-radius: 12px;
+}
+
+.btn-md {
+    font-size: var(--btn-md);
+    padding: 20px 28px;
+    border: var(--border-thick);
+}
+
+.btn-sm {
+    font-size: var(--btn-sm);
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: var(--border-thin);
+}
+
+.btn-tn {
+    font-size: var(--btn-tn);
+    padding: 12px 20px;
+}
+
+.btn-primary {
+    background-color: var(--yellow);
+}
+.btn-primary:hover {
+    background-color: var(--lime);
+}
+
+.btn-secondary {
+    background-color: var(--deep-pink);
+}
+.btn-secondary:hover {
+    background-color: var(--peach);
+}
+
+.btn-outline {
+    background-color: var(--peach);
+}
+.btn-outline:hover {
+    background-color: var(--brown);
+    color: white;
+}
+
+.btn-ghost {
+    border: none;
+    background-color: transparent;
+}
+.btn-ghost:hover {
+    background-color: var(--brown);
+    color: white;
+}
+
+.btn a {
+    text-decoration: none;
+}
+/* Shadow Classes(don't use if none). Use the middle option(sh). But for large elements with shadows, use sh-lg. sh-sm is for all buttons on mobile*/
+.sh-lg { 
+    box-shadow: var(--large-shadow);
+}
+
+.sh-md { 
+    box-shadow: 5px 5px var(--black);
+}
+
+.sh-sm {
+    box-shadow: var(--small-shadow);
+}
+
+/* Reuseable Components */
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--black);
+    text-align: center;
+    padding: 30px 30px;
+}
+footer p{
+    display: inline-block;
+    font-size: var(--body-sm);
+}
+
+
+/* Form and Navbars will be added soon */
+
+/* Sidebar Mobile */
+
+/* 475 640 760 1024 1440 Media querie Breakpoints*/
+
+
+
+/* Styles used in JS */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--black);
+    width: 100vw;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.bold {
+    font-weight: bold;
+}

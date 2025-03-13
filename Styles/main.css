@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @font-face {
   font-family: "Neue Haas Grotesque";
-  src: url(../../assets/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayLight.ttf)  
+  src: url(./assets/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayLight.ttf)  
     format("truetype");
 }
 
 :root {
-  /* fonts */
-  --Poppins: "Poppins", sans-serif;
-  --Neue: "Neue Haas Grotesque", sans-serif;
+/* Font Familes */
+  --headingfont: "Neue Haas Grotesque", Arial, sans-serif;
+  --bodyfont: "Poppins", sans-serif;
+
 
   /* colors */
   --nude: #f9ecee;
@@ -18,12 +19,53 @@
   --peach: #ffc0cb;
   --white: #ffffff;
   --yellow: #fae89e;
+
+
+  /* Font Sizes */
+  --heading1: 4rem;
+  --heading2: 3rem;
+  --heading3: 2.5rem;
+  --heading4: 2.25rem;
+  --heading5: 1.5rem;
+  --body-lg: 2rem;
+  --body-md: 1.25rem;
+  --body-sm: 1rem;
+  --body-tn: 1.6rem;
+  --btn-lg: 1.375rem;
+  --btn-md: var(--body-md);
+  --btn-sm: var(--body-sm); 
+  --btn-tn: var(--body-tn);
+  --base-font-mobile: 10px;
+
+  
+
+  /* Shadows */
+  --large-shadow: 10px 10px var(--black);
+  --medium-shadow: 5px 5px var(--black);
+  --small-shadow: 3px 3px var(--black);
+  --blur-shadow: 10px 10px .5 var(--black);
+
+  /* Padding & Gaps */
+  --padding-side-lg: 10%; /*for very large sections, like header, footer, main*/ 
+  --padding-top-or-bottom-lg: 50px;
+  --large-gap: 1.875rem;
+  --medium-gap: 25px;
+  --small-gap: 10px;
+
+  /* Borders */
+  --border-thick: 2px solid var(--black);
+  --border-normal: 1.5px solid var(--black);
+  --border-thin: 1px solid var(--black);
+
+
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: var(--bodyfont);
+  
 }
 a{
     text-decoration:none;
@@ -42,4 +84,141 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: 7% 93%;
+}
+
+/* Text Components */
+h1 {
+  font-family: var(--headingfont);
+  font-size: var(--heading1);
+  line-height: 100%;  
+}
+
+h2 {
+  font-family: var(--headingfont);
+  font-size: var(--heading2);
+  line-height: 100%; 
+}
+h3 {
+  font-family: var(--headingfont);
+  font-size: var(--heading3);
+  line-height: 100%; 
+}
+h4 {
+  font-family: var(--headingfont);
+  font-size: var(--heading4);
+  line-height: 100%; 
+}
+h5 {
+  font-family: var(--headingfont);
+  font-size: var(--heading2);
+  line-height: 100%; 
+}
+
+a {
+  color: inherit;
+}
+
+p {
+  font-size: var(--body-md);
+}
+p.lg {
+  font-size: var(--body-lg);
+}
+
+p.sm {
+  font-size: var(--body-sm);
+}
+
+/* Each label with input should be in a div wrapper */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--body-sm);
+}
+
+input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: var(--border-normal);
+  width: 100%;
+}
+
+
+/* Buttons */
+/* Button Sizes */
+.btn {
+  border: var(--border-thick);
+  color: var(--black);
+  border-radius: 8px;
+}
+
+.btn-lg{
+  font-size: var(--btn-lg);
+  padding: 24px 32px;
+  border-radius: 12px;
+}
+
+.btn-md {
+  font-size: var(--btn-md);
+  padding: 20px 28px;
+  border: var(--border-thick);
+}
+
+.btn-sm {
+  font-size: var(--btn-sm);
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: var(--border-thin);
+}
+
+.btn-tn {
+  font-size: var(--btn-tn);
+  padding: 12px 20px;
+}
+
+.btn-primary {
+  background-color: var(--yellow);
+}
+.btn-primary:hover {
+  background-color: var(--lime);
+}
+
+.btn-secondary {
+  background-color: var(--deeppink);
+}
+.btn-secondary:hover {
+  background-color: var(--peach);
+}
+
+.btn-outline {
+  background-color: var(--peach);
+}
+.btn-outline:hover {
+  background-color: var(--brown);
+  color: white;
+}
+
+.btn-ghost {
+  border: none;
+  background-color: transparent;
+}
+.btn-ghost:hover {
+  background-color: var(--brown);
+  color: white;
+}
+
+.btn a {
+  text-decoration: none;
+}
+/* Shadow Classes(don't use if none). Use the middle option(sh). But for large elements with shadows, use sh-lg. sh-sm is for all buttons on mobile*/
+.sh-lg { 
+  box-shadow: var(--large-shadow);
+}
+
+.sh-md { 
+  box-shadow: 5px 5px var(--black);
+}
+
+.sh-sm {
+  box-shadow: var(--small-shadow);
 }
