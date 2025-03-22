@@ -1,0 +1,87 @@
+.btn {
+    width: 100%;
+} 
+
+main {
+    padding: 30px 5% 30px 10%;
+}
+main.sign-form {
+    display: flex;
+    align-items: center;
+    gap: 10%;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+.get-started-img  {
+    border: 2px solid #1b1b1b;
+    border-radius: 25px;
+    height: 100%;
+    max-width: 50%;
+}
+
+form {
+    flex-grow: 1;
+    min-width: fit-content; 
+    width: 40%;
+}
+
+form .inputs-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 5px;
+    color: #E51A1A;
+}
+
+.password-status span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.password-status-icon {
+    height: 1.2rem;
+}
+
+form, .other-info  {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form .terms-container {
+    display: flex;
+    gap: 7px;
+}
+
+form .or {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+}
+form hr {
+    width: 100%;
+    height: 0.5px;
+    background-color: #1b1b1b;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+    main {
+        padding: 50px 10%;
+    }
+
+    /* Clear Desktop Images */
+    .get-started-img {
+        display: none;
+    }
+    
+
+}

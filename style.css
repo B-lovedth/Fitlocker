@@ -1,0 +1,441 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--bodyfont);
+    font-weight: 400;
+    box-sizing: border-box;
+    outline: transparent;
+}
+
+/* Global Design Styles */
+:root {
+    /* Colors */
+    --nude: #f9ecee;
+    --grey: #888888;
+    --black: #1b1b1b;
+    --deep-pink: #cc339c;
+    --yellow: #fae89e;
+    --peach: #FFC0CB;
+    --brown: #660033;
+    --lilac: #D0A8F0;
+    --green: #467A1F;
+    --lime: #ABE87D;
+    --red: #E51A1A;
+
+    /* Font Sizes */
+    --heading1: 3rem;
+    --heading2: 2.5rem;
+    --heading3: 2rem;
+    --heading4: 1.5rem;
+    --heading5: 1rem;
+    --body-lg: 1.25rem;
+    --body-md: 1rem;
+    --body-sm: 0.75rem;
+    --body-tn: 0.5rem;
+    --btn-md: var(--body-md);
+    --btn-sm: var(--body-sm); 
+    --btn-tn: var(--body-tn);
+    --base-font-mobile: 10px;
+
+    /* Font Familes */
+    --headingfont: Arial;
+    --bodyfont: Verdana, Geneva, Tahoma, sans-serif;
+
+    /* Shadows */
+    --large-shadow: 10px 10px var(--black);
+    --medium-shadow: 5px 5px var(--black);
+    --small-shadow: 3px 3px var(--black);
+    --blur-shadow: 10px 10px .5 var(--black);
+
+    /* Padding & Gaps */
+    --padding-side-lg: 10%; /*for very large sections, like header, footer, main*/ 
+    --padding-top-or-bottom-lg: 50px;
+    --large-gap: 1.875rem;
+    --medium-gap: 25px;
+    --small-gap: 10px;
+
+    /* Borders */
+    --border-thick: 2px solid var(--black);
+    --border-normal: 1.5px solid var(--black);
+    --border-thin: 1px solid var(--black);
+}
+
+/* Semantic elements { */
+body {
+    background-color: var(--nude);
+    background-image: url(assets/img/background-net.svg);
+    background-size: contain;
+    min-height: 100vh;
+}
+header {
+    padding: 50px 10% 0 10%;
+    width: 100%;
+}
+main {
+    padding: 50px 10%;
+}
+
+.content {
+    width: 100%;
+    padding: 0 10%;
+}
+
+/* Text Components */
+h1 {
+    font-family: var(--headingfont);
+    font-size: var(--heading1);
+    line-height: 100%;  
+}
+
+h2 {
+    font-family: var(--headingfont);
+    font-size: var(--heading2);
+    line-height: 100%; 
+}
+h3 {
+    font-family: var(--headingfont);
+    font-size: var(--heading3);
+    line-height: 100%; 
+}
+h4 {
+    font-family: var(--headingfont);
+    font-size: var(--heading4);
+    line-height: 100%; 
+}
+h5 {
+    font-family: var(--headingfont);
+    font-size: var(--heading2);
+    line-height: 100%; 
+}
+
+a {
+    color: inherit;
+    font-size: inherit;
+}
+
+p {
+    font-size: var(--body-md);
+}
+
+/* Font sizes applicable to all non heading elements when necessary using it as a class  */
+ .lg {
+    font-size: var(--body-lg);
+ }
+
+ .md {
+    font-size: var(--body-md);
+ }
+
+ .sm {
+    font-size: var(--body-sm);
+ }
+
+/* ignore */
+section.home {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 450px;
+}
+
+h1 {
+    font-size: 4rem;
+    max-width: 400px;
+    line-height: 60px;
+}
+/* ignore */
+
+
+/* Buttons */
+
+/* Button Sizes */
+.btn {
+    border: var(--border-thick);
+    color: var(--black);
+    border-radius: 8px;
+}
+
+.btn-lg{
+    font-size: var(--btn-lg);
+    padding: 18px 24px;
+    border-radius: 12px;
+}
+
+.btn-md {
+    font-size: var(--btn-md);
+    padding: 14px 20px;
+    border: var(--border-normal);
+}
+
+.btn-sm {
+    font-size: var(--btn-sm);
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: var(--border-thin);
+}
+
+.btn-tn {
+    font-size: var(--btn-tn);
+    padding: 12px 20px;
+    border: var(--border-thin);
+}
+
+.btn-primary {
+    background-color: var(--yellow);
+}
+.btn-primary:hover {
+    background-color: var(--lime);
+}
+
+.btn-secondary {
+    background-color: var(--deep-pink);
+}
+.btn-secondary:hover {
+    background-color: var(--peach);
+}
+
+.btn-outline {
+    background-color: var(--nude);
+}
+.btn-outline:hover {
+    background-color: var(--brown);
+    color: white;
+}
+
+.btn-ghost {
+    border: none;
+    background-color: transparent;
+}
+.btn-ghost:hover {
+    background-color: var(--brown);
+    color: white;
+}
+
+.btn a {
+    text-decoration: none;
+}
+/* Shadow Classes(don't use if none). Use the middle option(sh). But for large elements with shadows, use sh-lg. sh-sm is for all buttons on mobile*/
+.sh-lg { 
+    box-shadow: var(--large-shadow);
+}
+
+.sh-md { 
+    box-shadow: 5px 5px var(--black);
+}
+
+.sh-sm {
+    box-shadow: var(--small-shadow);
+}
+
+/* Reuseable Components */
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--black);
+    text-align: center;
+    padding: 30px 30px;
+}
+footer p{
+    display: inline-block;
+    font-size: var(--body-sm);
+}
+
+/* Navbar */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid var(--black);
+}
+
+.logo-lg {
+    height: auto;
+}
+
+.logo-lg img {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+}
+
+.navbar ul{
+    list-style-type: none;
+}
+
+.navbar li {
+    display: inline-block;
+}
+
+header a, .side-menu {
+    color: inherit;
+}
+
+/* Navbar Mobile */
+.hamburger-menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: var(--nude);
+    border-bottom: 1px solid #1b1b1b;
+    box-shadow: var(--blur-shadow);
+    padding: 10%;
+}
+
+.hamburger-menu .menu-head {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--black);
+}
+
+.hamburger-menu .menu-items{
+    width: 100%;
+    margin-bottom: 30px;
+}
+.hamburger-menu li{
+    display: block;
+    border-bottom: 1px solid var(--black);
+    text-align: center;
+} 
+
+.hamburger-menu a{
+    text-decoration: none;
+}
+
+.hamburger-menu .btn-ghost {
+    border-radius: 0;
+}
+
+#close-menu {
+    transition: ease-in 5s;;
+}
+
+/* Left Sidebar */
+.left-sidebar {
+    width: fit-content;
+    height: 100vh;
+    padding: 50px 15px;
+    background-color: var(--deep-pink);
+    display: flex;
+    flex-shrink: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-sidebar>div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.left-sidebar button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.left-sidebar button:hover {
+    background-color: var(--peach);
+    color: var(--black);
+}
+
+.left-sidebar img {
+    aspect-ratio: 1/1;
+    height: var(--body-md);
+}
+
+
+/* Forms */
+form.column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--medium-gap);
+}
+
+form.input-small {
+    font-size: var(--body-sm);
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--body-sm);
+}
+
+input:is([type="text"], [type="email"], [type="password"], [type="tel"], [type="number"], [type="search"])  {
+    padding: 0.75rem 0.75rem;
+    border-radius: 8px;
+    border: var(--border-normal);
+    width: 100%;
+    font-size: var(--body-sm);
+}
+
+input[type="checkbox"] {
+    accent-color: #1b1b1b;
+}
+input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+}
+/* Mobile Styles */
+@media (max-width: 700px) {
+    * {
+        font-size: 12px;
+    }
+
+    /* Navbar Mobile Responsive */
+    .navbar .nav-items, .navbar>button {
+        display: none;
+    }
+    .sign-in {
+        display: none;
+    }
+    #hamburger {
+        display: inline-block;
+    }
+
+    /* Clear Desktop Images */
+
+}
+
+
+
+
+
+
+/* Sidebar Mobile */
+
+/* 475 640 760 1024 1440 Media querie Breakpoints*/
+
+/* Styles used in JS */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--black);
+    width: 100vw;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.flex-end {
+    justify-content: flex-end;
+    transition: ease-in 1000ms;
+}
+
+.green {
+    color: var(--green);
+}
+
+.red {
+    color: var(--red);
+}
+.bold {
+    font-weight: bold;
+}
