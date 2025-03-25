@@ -1,16 +1,41 @@
+<?php
+// Start the session
+session_start();
+
+// Include database connection
+require_once 'db_connect.php'; // Assuming you have this file or will create it
+
+// Check if user is logged in and fetch user data (optional, for validation)
+$is_logged_in = false;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 1) {
+        $is_logged_in = true;
+    } else {
+        // If user_id doesn't exist in DB, invalidate session
+        unset($_SESSION['user_id']);
+        $is_logged_in = false;
+    }
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitLocker</title>
-    <link rel="stylesheet" href="./Styles/main.css">
-    <link rel="stylesheet" type="text/css" href="./Styles/homepagestyles.css" />
-
+    <link rel="stylesheet" href="./Styles/main.css?v=1">
+    <link rel="stylesheet" type="text/css" href="./Styles/homepagestyles.css?v=1" />
   </head>
   <body>
     <nav id="nav-bar" class="navBar">
-      <a href="homepage.html" id="logo-link">
+      <a href="homepage.php" id="logo-link">
         <img
           src="./assets/Logos/FitLocker lightbg.png"
           alt="FitLocker Logo"
@@ -18,11 +43,13 @@
         />
       </a>
       <ul id="nav-links">
-        <li class="nav-link active"><a href="./homepage.html">Home</a></li>
-        <li class="nav-link"><a href="./homepage.html">About</a></li>
-        <li class="nav-link"><a href="./homepage.html">Contact Us</a></li>
+        <li class="nav-link active"><a href="./homepage.php">Home</a></li>
+        <li class="nav-link"><a href="./about.php">About</a></li>
+        <li class="nav-link"><a href="./about.php#contactUs">Contact Us</a></li>
       </ul>
-      <a  class="btn btn-secondary btn-sm" type="button" href="#">Log In</a>
+      <a class="btn btn-secondary btn-sm" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
+        <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
+      </a>
     </nav>
 
     <hr />
@@ -33,12 +60,12 @@
           All your customer details in <span id="highlight">one place</span>
         </h1>
         <p id="extra-info">
-          Easily store, oraganize and access all your customer measurements in
+          Easily store, organize and access all your customer measurements in
           our secure platform to streamline your workflow and ensure flawless
-          fits everytime
+          fits every time
         </p>
 
-        <button id="main-button" type="button">
+        <button id="main-button" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
           Store your first measurement
           <svg
             width="24"
@@ -117,3 +144,10 @@
     <script src="homepagescript.js"></script>
   </body>
 </html>
+
+<?php
+// Close database connection (optional, depending on your setup)
+if (isset($conn)) {
+    $conn->close();
+}
+?>

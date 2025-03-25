@@ -74,7 +74,8 @@ body {
   width: 100vw;
   height: 100vh;
   font-size: 16px;
-  background: var(--nude);
+  background-color: var(--nude);
+  background-image: url("./assets/img/background-net.svg");
   overflow-x: hidden;
 }
 

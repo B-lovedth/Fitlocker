@@ -11,11 +11,13 @@
   /* colors */
   --nude: #f9ecee;
   --gray: #888888;
-  --black: #000000;
+  --black: #1b1b1b;
   --deeppink: #cc339c;
   --peach: #ffc0cb;
   --white: #ffffff;
   --yellow: #fae89e;
+  --brown: #660033;
+  --lilac: #d0a8f0;
 }
 
 .main-dashboard {
@@ -53,43 +55,32 @@
   font-size: calc(1rem + 2.5vw);
 }
 
-.search-container {
-  width: 30%;
-  height: 60%;
+.search-btn-main {
+  width: 10%;
+  height: 70%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  border: 2px solid #000000;
-  border-radius: 5px;
-  background-color: #ffffff;
+  gap: calc(0.1rem + 0.4vw);
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  background-color: var(--black);
+  color: var(--white);
+  transition: 0.1s;
 }
 
-#searchBox {
-  width: 80%;
-  height: 100%;
-  border: 0;
-  outline: none;
-  font-size: calc(0.7rem + 0.4vw);
-}
-
-#searchIcon {
-  width: 10%;
-  fill: rgba(0, 0, 0, 0.7333333333);
-}
-
-.close-btn {
-  width: 10%;
-  height: 100%;
-  border: 0;
-  border-radius: 0 5px 5px 0;
-  background-color: inherit;
-  transition: 0.2s;
-  scale: 0.8;
-}
-
-.close-btn:hover {
+.search-btn-main:hover {
   cursor: pointer;
-  transform: scale(1.2);
+  scale: 1.05;
+  background-color: var(--gray);
+}
+
+.search-btn-main > img {
+  width: 15%;
+  aspect-ratio: 1/1;
+  color: var(--white);
+  fill: var(--white);
 }
 
 .grid-container {
@@ -144,6 +135,14 @@
 #largeBoxIcon:hover {
   cursor: pointer;
   transform: scale(1.2);
+}
+
+#largeBoxIcon > img {
+  display: flex;
+  margin: auto;
+  width: 80%;
+  aspect-ratio: 1/1;
+  color: var(--white);
 }
 
 #leftsideInfoLarge {
@@ -228,8 +227,19 @@
   width: 100%;
   height: 60%;
   color: #000000;
-  background-color: green;
   margin-bottom: 0.3rem;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+
+.gray {
+  background-color: gray;
 }
 
 #countChangeInfo {

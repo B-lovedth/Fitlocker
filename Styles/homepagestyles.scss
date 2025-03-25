@@ -18,6 +18,8 @@
   --peach: #ffc0cb;
   --white: #ffffff;
   --yellow: #fae89e;
+  --brown: #660033;
+  --lilac: #d0a8f0;
 }
 
 * {
@@ -30,7 +32,6 @@ body {
   height: 100vh;
   width: 100vw;
   font-size: 16px;
-  background-color: var(--nude);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -144,7 +145,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .2rem;
+  gap: 0.2rem;
   width: 70%;
   margin: 3rem 0 2rem;
   height: 6vh;
@@ -161,6 +162,7 @@ hr {
 #main-button:hover {
   scale: 1.05;
   cursor: pointer;
+  background-color: var(--lilac);
 }
 
 #activityContainer {

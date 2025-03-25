@@ -1,3 +1,4 @@
+
 function clearSearch() {
   document.getElementById("searchBox").value = "";
 }
@@ -11,3 +12,5 @@ function switchActive(clickedButton) {
 
   clickedButton.classList.add("active");
 }
+
+

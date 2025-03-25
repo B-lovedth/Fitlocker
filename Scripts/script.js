@@ -10,9 +10,6 @@ const expandIcon = document.getElementById("expand-icon");
 const leftSideBar = document.querySelector(".left-sidebar")
 const leftSideBarTexts = document.getElementsByClassName("sidebar-text");
 
-const passwordInput = document.getElementById("password");
-const passwordParameter = document.getElementById("");
-
 // Responsive navbar menu
 hamburgerBtn.addEventListener('click', () => {
     hamburgerMenu.classList.toggle('hide');
@@ -41,11 +38,4 @@ expandBtn.addEventListener('click', () => {
     } else {
         expandIcon.setAttribute("src", "assets/icons/collapse.svg");
     }
-})
-
-// Password Validation
-//Check Special Characters
-let validPassword;
-passwordInput.addEventListener('input', () => {
-    currentText = passwordInput.textContent; //T.B.C
 })
