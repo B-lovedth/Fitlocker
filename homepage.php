@@ -54,40 +54,20 @@ if (isset($_SESSION['user_id'])) {
 
     <hr />
 
-    <div class="homepage" id="main-container">
+    <main class="homepage" id="main-container">
       <div id="left-handside">
-        <h1 id="slogan">
+        <h1>
           All your customer details in <span id="highlight">one place</span>
         </h1>
-        <p id="extra-info">
+        <p>
           Easily store, organize and access all your customer measurements in
           our secure platform to streamline your workflow and ensure flawless
           fits every time
         </p>
 
-        <button id="main-button" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
+        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
           Store your first measurement
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            id="arrowIcon"
-          >
-            <path
-              d="M5.5 12L18 12"
-              stroke="#1B1B1B"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M12.5 5.5L18.7172 11.7172C18.8734 11.8734 18.8734 12.1266 18.7172 12.2828L12.5 18.5"
-              stroke="#1B1B1B"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
+          <img src="assets/icons/arrow-right.svg" alt="right-arrow">
         </button>
 
         <div id="activityContainer">
@@ -103,26 +83,26 @@ if (isset($_SESSION['user_id'])) {
           </div>
         </div>
       </div>
-
+      
       <div id="right-handside">
+        <div id="image-container">
+          <img src="./assets/img/hero-img.png" alt="hero-image" id="image" />
+        </div>
         <div class="statContainer">
           <div class="stat">
-            <h2>3k+</h2>
+            <h3>3k+</h3>
             <p>Fashion Designers</p>
           </div>
           <div class="stat">
-            <h2>6.5k</h2>
+            <h3>6.5k</h3>
             <p>Family Accounts</p>
           </div>
           <div class="stat">
-            <h2>16k</h2>
+            <h3>16k</h3>
             <p>Registered Customers</p>
           </div>
         </div>
 
-        <div id="image-container">
-          <img src="./assets/img/hero-img.png" alt="hero-image" id="image" />
-        </div>
       </div>
     </div>
 
