@@ -65,10 +65,7 @@ if (isset($_SESSION['user_id'])) {
           fits every time
         </p>
 
-        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
-          Store your first measurement
-          <img src="assets/icons/arrow-right.svg" alt="right-arrow">
-        </button>
+        <button id="main-button" class="btn btn-lg btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
 
         <div id="activityContainer">
           <div id="profileContainer">
@@ -78,9 +75,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="circle-profile" id="circle4"></div>
             <div class="circle-profile" id="circle5"></div>
           </div>
-          <div id="activityInfo">
-            <span>1.5k Active Users</span>
-          </div>
+          <h4>1.5k Active Users</h4>
         </div>
       </div>
       
@@ -90,21 +85,21 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="statContainer">
           <div class="stat">
-            <h3>3k+</h3>
-            <p>Fashion Designers</p>
+            <h4>3k+</h4>
+            <p class="sm">Fashion Designers</p>
           </div>
           <div class="stat">
-            <h3>6.5k</h3>
-            <p>Family Accounts</p>
+            <h4>6.5k</h4>
+            <p class="sm">Family Accounts</p>
           </div>
           <div class="stat">
-            <h3>16k</h3>
-            <p>Registered Customers</p>
+            <h4>16k</h4>
+            <p class="sm">Registered Customers</p>
           </div>
         </div>
 
       </div>
-    </div>
+    </main>
 
     <footer id="footer" class="footer">
       <img src="./assets/img/Aj Stitches.png" alt="ajstitches" id="footerImage" />
