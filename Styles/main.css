@@ -164,6 +164,10 @@ input {
   gap: .5rem;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .btn-lg{
   font-size: var(--btn-lg);
   padding: 18px 24px;
@@ -240,23 +244,10 @@ input {
   * {
       font-size: 12px;
   }
-
-  /* Navbar Mobile Responsive */
-  .navbar .nav-items, .navbar>button {
-      display: none;
-  }
-  .sign-in {
-      display: none;
-  }
-  #hamburger {
-      display: inline-block;
-  }
-
   /* Clear Desktop Images */
 
 }
 
-/* JS Classes */
-.hide {
-  display: none;
+.bold {
+  font-weight: bold;
 }

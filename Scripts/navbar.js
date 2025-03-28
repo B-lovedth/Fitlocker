@@ -8,7 +8,7 @@ const signInBtn = document.querySelector(".sign-in");
 // Responsive navbar menu
 hamburgerBtn.addEventListener('click', () => {
     hamburgerMenu.classList.toggle('hide');
-    overlay.classList.toggle("hide")
+    // overlay.classList.toggle("hide");
 })
 closeMenu.addEventListener('click', () => {    
     hamburgerMenu.classList.toggle('hide')

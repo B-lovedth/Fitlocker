@@ -1,0 +1,92 @@
+/* Navbar Styles */
+h2 {
+    font-size: 5rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 10% 10px 10%;
+    width: 100%;
+}
+  
+#logo {
+    height: auto;
+}
+
+#logo img {
+    height: 2rem;
+}
+  
+.navbar ul {
+    list-style-type: none;
+}
+
+.navbar li {
+    display: inline-block;
+}
+  
+  /* Navbar Mobile */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: var(--nude);
+    border-bottom: 1px solid #1b1b1b;
+    box-shadow: var(--blur-shadow);
+    padding: 10%;
+}
+  
+.menu-head {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--black);
+}
+  
+.hamburger-menu .menu-items{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.hamburger-menu li{
+    display: block;
+    border-bottom: 1px solid var(--black);
+    text-align: center;
+} 
+  
+.hamburger-menu a{
+    text-decoration: none;
+}
+  
+.hamburger-menu .btn-ghost {
+    border-radius: 0;
+}
+  
+#close-menu {
+    height: 2rem;
+    transition: ease-in 5s;;
+}
+  
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+    /* Navbar Mobile Responsive */
+    .nav-items, .navbar>button {
+        display: none;
+    }
+    .sign-in {
+        display: none;
+    }
+    #hamburger {
+        display: inline-block;
+    }
+    /* Clear Desktop Images */
+  
+}
+
+/* JS Classes */
+.hide {
+    display: none;
+}
