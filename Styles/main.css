@@ -6,11 +6,6 @@
 }
 
 :root {
-/* Font Familes */
-  --headingfont: "Neue Haas Grotesque", Arial, sans-serif;
-  --bodyfont: "Poppins", sans-serif;
-
-
   /* colors */
   --nude: #f9ecee;
   --gray: #888888;
@@ -20,6 +15,9 @@
   --white: #ffffff;
   --yellow: #fae89e;
 
+  /* Font Familes */
+  --headingfont: "Neue Haas Grotesque", Arial, sans-serif;
+  --bodyfont: "Poppins", Helvetica, sans-serif;
 
   /* Font Sizes */
   --heading1: 3rem;
@@ -36,8 +34,6 @@
   --btn-sm: var(--body-sm); 
   --btn-tn: var(--body-tn);
   --base-font-mobile: 12px;
-
-  
 
   /* Shadows */
   --large-shadow: 10px 10px var(--black);
@@ -64,6 +60,7 @@
   padding: 0;
   border: 0;
   font-family: var(--bodyfont);
+  font-weight: 400;
   outline: transparent;
 }
 
@@ -99,19 +96,22 @@ h2 {
   font-size: var(--heading2);
   line-height: 100%; 
 }
+
 h3 {
   font-family: var(--headingfont);
   font-size: var(--heading3);
   line-height: 100%; 
 }
+
 h4 {
   font-family: var(--headingfont);
   font-size: var(--heading4);
   line-height: 100%; 
 }
+
 h5 {
   font-family: var(--headingfont);
-  font-size: var(--heading2);
+  font-size: var(--heading5);
   line-height: 100%; 
 }
 
@@ -121,6 +121,7 @@ a {
 
 p {
   font-size: var(--body-md);
+  line-height: 100%;
 }
 
 .lg {
@@ -156,6 +157,10 @@ input {
   border: var(--border-thick);
   color: var(--black);
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
 }
 
 .btn-lg{
