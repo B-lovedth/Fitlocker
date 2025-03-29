@@ -339,7 +339,7 @@ $empty_family_total_stmt->close();
         </div>
     </div>
 
-    <script src="./Scripts/password.js"></script>
+    <script src="./Scripts/script.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
 
 </body>

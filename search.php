@@ -11,14 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 // Initialize variables
 $searchTerm = '';
 $viewMode = $_GET['view'] ?? 'individual';
-$data = []; // Changed from $customers to $data for both views
+$data = [];
 $filters = [
-    'lower_age' => $_GET['lower_age'] ?? null,
-    'upper_age' => $_GET['upper_age'] ?? null,
-    'gender' => $_GET['sex'] ?? null,
-    'family_name' => $_GET['family_name'] ?? null,
-    'lower_height' => $_GET['lower_height'] ?? null,
-    'upper_height' => $_GET['upper_height'] ?? null
+    'lower_age'    => $_GET['lower_age'] ?? null,
+    'upper_age'    => $_GET['upper_age'] ?? null,
+    'gender'       => $_GET['sex'] ?? null,
+    'family_name'  => $_GET['family_name'] ?? null,
 ];
 
 // Get current user ID
@@ -33,7 +31,9 @@ if ($viewMode === 'family') {
               WHERE f.user_id = ?";
 } else {
     $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender,
-                     c.height, f.family_name
+                     c.height, c.chest, c.waist, c.hip, c.sleeve, 
+                     c.inseam, c.outseam, c.shoulder, c.short_length,
+                     f.family_name
               FROM customers c
               LEFT JOIN families f ON c.family_id = f.family_id
               WHERE c.user_id = ?";
@@ -52,9 +52,9 @@ if (!empty($_GET['search'])) {
 // Add filters
 $filterClauses = [];
 $params = [];
-$types = 'i'; // Start with user_id param type
+$types = 'i';
 
-// Age filter (only for individual view)
+// Age filter
 if ($viewMode === 'individual' && ($filters['lower_age'] || $filters['upper_age'])) {
     $filterClauses[] = "c.age BETWEEN ? AND ?";
     $types .= 'ii';
@@ -62,7 +62,7 @@ if ($viewMode === 'individual' && ($filters['lower_age'] || $filters['upper_age'
     $params[] = $filters['upper_age'] ?: 100;
 }
 
-// Gender filter (only for individual view)
+// Gender filter
 if ($viewMode === 'individual' && $filters['gender'] && in_array(strtoupper($filters['gender']), ['M', 'F', 'O'])) {
     $filterClauses[] = "c.gender = ?";
     $types .= 's';
@@ -99,19 +99,22 @@ $paramValues = [$user_id];
 if (!empty($searchTerm)) {
     $searchPattern = "%$searchTerm%";
     if ($viewMode === 'family') {
+        $types .= 's';
         $paramValues[] = $searchPattern;
     } else {
+        $types .= 'sss';
         array_push($paramValues, $searchPattern, $searchPattern, $searchPattern);
     }
 }
 
+// Merge filter parameters
 $paramValues = array_merge($paramValues, $params);
 $stmt->bind_param($types, ...$paramValues);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -157,6 +160,39 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             top: 2px;
             left: 2px;
             transition: transform 0.3s ease;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -314,6 +350,15 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
     </main>
 
+    <div class="modal-overlay" id="customerModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <img src="assets/icons/close-x.svg" alt="Close">
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
     <!-- Mobile Menu for dashboard-->
     <aside class="hamburger-menu hide">
         <div class="menu-head">
@@ -336,6 +381,53 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
     <script src="scripts/script.js"></script>
     <script>
+        // Pass customer data to JS
+        const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
+
+        // Modal handling
+        document.querySelectorAll('.view-details').forEach(button => {
+            button.addEventListener('click', () => {
+                const customer = customers[button.dataset.customerId];
+                if (customer) {
+                    const content = `
+                        <h2>${customer.first_name} ${customer.last_name}</h2>
+                        <p><strong>Age:</strong> ${customer.age}</p>
+                        <p><strong>Gender:</strong> ${customer.gender}</p>
+                        ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
+                        
+                        <div class="measurements">
+                            <h3>Body Measurements</h3>
+                            ${customer.height ? `<p>Height: ${customer.height}cm</p>` : ''}
+                            ${customer.chest ? `<p>Chest: ${customer.chest}cm</p>` : ''}
+                            ${customer.waist ? `<p>Waist: ${customer.waist}cm</p>` : ''}
+                            ${customer.hip ? `<p>Hip: ${customer.hip}cm</p>` : ''}
+                            
+                            <h3>Garment Measurements</h3>
+                            ${customer.sleeve ? `<p>Sleeve: ${customer.sleeve}cm</p>` : ''}
+                            ${customer.inseam ? `<p>Inseam: ${customer.inseam}cm</p>` : ''}
+                            ${customer.outseam ? `<p>Outseam: ${customer.outseam}cm</p>` : ''}
+                            ${customer.shoulder ? `<p>Shoulder: ${customer.shoulder}cm</p>` : ''}
+                            ${customer.short_length ? `<p>Short Length: ${customer.short_length}cm</p>` : ''}
+                        </div>
+                    `;
+                    document.getElementById('modalContent').innerHTML = content;
+                    document.getElementById('customerModal').style.display = 'flex';
+                }
+            });
+        });
+
+        // Close modal handlers
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('customerModal').style.display = 'none';
+        });
+
+        document.getElementById('customerModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('customerModal')) {
+                document.getElementById('customerModal').style.display = 'none';
+            }
+        });
+
+
         // Function to reset search
         function resetSearch() {
             document.getElementById('searchInput').value = '';

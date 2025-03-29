@@ -89,8 +89,8 @@ if (isset($_GET['forgot_password'])) {
         .left img { max-width: 600px; }
         form { display: flex; flex-direction: column; gap: 1rem; }
     </style>
-    <link rel="stylesheet" href="./Styles/main.css">
-    <link rel="stylesheet" href="./Styles/signup.css">
+    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/signup.css?v=1.0">
 </head>
 <body>
 <main class="sign-form">
@@ -138,14 +138,14 @@ if (isset($_GET['forgot_password'])) {
                     <?php endif; ?>
                 </div>
                 <div id="remember-container">
-                    <input type="checkbox" name="remember" id="remember" required>
+                    <input type="checkbox" name="remember" id="remember">
                     <label for="remember">Remember me</label>
                 </div>
             </div>
 
             <div class="other-info">
                 <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account">
-                    Create Account
+                    Login
                 </button>
                 <a href="reset-password.php">Forgot password?</a>
             </div>
