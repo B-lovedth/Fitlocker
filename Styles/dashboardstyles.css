@@ -197,6 +197,14 @@
   color: var(--white);
 }
 
+#largeBoxIcon > img {
+  display: flex;
+  margin: auto;
+  width: 80%;
+  aspect-ratio: 1/1;
+  color: var(--white);
+}
+
 #leftsideInfoLarge {
   display: -webkit-box;
   display: -ms-flexbox;

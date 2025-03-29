@@ -37,3 +37,4 @@ function setActiveBasedOnPage() {
 document.addEventListener("DOMContentLoaded", function () {
   setActiveBasedOnPage();
 });
+
