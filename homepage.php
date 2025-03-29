@@ -37,21 +37,33 @@ if (isset($_SESSION['user_id'])) {
   <body>
     <header>
           <!-- Responsive Navbar -->
-          <div id="logo"><a href="homepage.php"><img src="assets/Logos/FitLocker lightbg.png" alt="Fitlocker Logo"></a></div>
-          <nav class="navbar">
-              <ul class="nav-items">
-                  <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
-                  <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
-                  <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
-              </ul>            
-          </nav>
-          <img src="./assets/icons/menu-hamburger.svg" alt="" id="hamburger" class="hide">
-          <a class="btn btn-secondary btn-sm sign-in" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
-          <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
-          </a>
-  
+          <div class="menu-head">
+            <div id="logo"><a href="homepage.php"><img src="assets/Logos/FitLocker lightbg.png" alt="Fitlocker Logo"></a></div>
+            <nav class="navbar">
+                <ul class="nav-items">
+                    <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+                </ul>            
+            </nav>
+            <img src="./assets/icons/menu-hamburger.svg" id="hamburger" class="hide" alt="hamburger-menu">
+            <a class="btn btn-secondary btn-sm sign-in" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
+              <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
+            </a>
+          </div>
+          <hr>
+          <div class="hamburger-menu hide">
+            <ul class="menu-items">
+            <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
+                      <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+                      <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+            </ul>
+            <button class="btn btn-sm btn-secondary">Sign In</button>
+          </div>
+            
     </header> 
-    
+    <div id="overlay" class="hide"></div>
+          
     <!-- <nav id="nav-bar" class="navBar">
       <a href="homepage.php" id="logo-link">
         <img
@@ -70,12 +82,11 @@ if (isset($_SESSION['user_id'])) {
       </a>
     </nav> -->
 
-    <hr>
 
     <main class="homepage" id="main-container">
       <div id="left-handside">
         <h1>
-          All Your Customer Details in <span id="highlight">One Place</span>
+          All Your Customer Details In <span id="highlight">One Place</span>
         </h1>
         <p>
           Easily store, organize and access all your customer measurements in
@@ -83,7 +94,7 @@ if (isset($_SESSION['user_id'])) {
           fits every time
         </p>
 
-        <button id="main-button" class="btn btn-lg btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
+        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
 
         <div id="activityContainer">
           <div id="profileContainer">
@@ -93,7 +104,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="circle-profile" id="circle4"></div>
             <div class="circle-profile" id="circle5"></div>
           </div>
-          <h4>1.5k Active Users</h4>
+          <h5>1.5k Active Users</h5>
         </div>
       </div>
       
@@ -134,20 +145,6 @@ if (isset($_SESSION['user_id'])) {
         id="footerImage"
       />
     </footer>
-
-    <aside class="hamburger-menu hide">
-        <div class="menu-head">
-            <div id="logo"><a href="homepage.php"><img src="./assets/Logos/FitLocker lightbg.png" alt="FitLocker Logo"></a></div>
-            <img src="assets/icons/close-x.svg" alt="" id="close-menu">
-        </div>
-        <ul class="menu-items">
-        <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
-                  <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
-                  <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
-        </ul>
-        <button class="btn btn-sm btn-secondary">Sign In</button>
-    </aside>
-
 
     <script src="homepagescript.js"></script>
     <script src="./Scripts/navbar.js"></script>

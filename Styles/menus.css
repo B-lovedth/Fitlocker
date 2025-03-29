@@ -1,16 +1,35 @@
+:root {
+    /* colors */
+    --nude: #f9ecee;
+    --gray: #888888;
+    --black: #1b1b1b;
+    --deeppink: #cc339c;
+    --peach: #ffc0cb;
+    --white: #ffffff;
+    --yellow: #fae89e;
+}
+
 /* Navbar Styles */
 h2 {
     font-size: 5rem;
 }
 
 header {
+    position: sticky;
+    top: 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 50px 10% 10px 10%;
+    flex-direction: column;
+    padding: 50px 10% 1rem;
     width: 100%;
+    background-color: var(--nude);
+    z-index: 1;
 }
-  
+
+.add-border-bottom {
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--black);
+}
+
 #logo {
     height: auto;
 }
@@ -19,35 +38,43 @@ header {
     height: 2rem;
 }
   
-.navbar ul {
+.nav-items {
     list-style-type: none;
 }
 
-.navbar li {
+.nav-items li {
     display: inline-block;
+}
+
+.nav-items li:hover {
+    transform: scale(1.25);
+    cursor: pointer;
+    background-color: var(--nude);
+    color: var(--black);
 }
   
   /* Navbar Mobile */
 .hamburger-menu {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
     background-color: var(--nude);
-    border-bottom: 1px solid #1b1b1b;
     box-shadow: var(--blur-shadow);
-    padding: 10%;
 }
   
 .menu-head {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--black);
+    margin-bottom: 1rem;
 }
-  
+
+.hamburger-menu .menu-items+.btn-secondary {
+    width: 100%;
+}
+
 .hamburger-menu .menu-items{
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 1rem;
 }
 
 .hamburger-menu li{
@@ -55,7 +82,7 @@ header {
     border-bottom: 1px solid var(--black);
     text-align: center;
 } 
-  
+
 .hamburger-menu a{
     text-decoration: none;
 }
@@ -64,6 +91,7 @@ header {
     border-radius: 0;
 }
   
+.hamburger-menu .btn-ghost
 #close-menu {
     height: 2rem;
     transition: ease-in 5s;;
@@ -90,3 +118,14 @@ header {
 .hide {
     display: none;
 }
+
+.fixed {
+    position: sticky;
+}
+
+.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  

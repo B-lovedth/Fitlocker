@@ -14,6 +14,9 @@
   --peach: #ffc0cb;
   --white: #ffffff;
   --yellow: #fae89e;
+  --green: #467A1F;
+  --lime: #ABE87D;
+  --red: #E51A1A;
 
   /* Font Familes */
   --headingfont: "Neue Haas Grotesque", Arial, sans-serif;
@@ -24,7 +27,7 @@
   --heading2: 2.5rem;
   --heading3: 2rem;
   --heading4: 1.5rem;
-  --heading5: 1rem;
+  --heading5: 1.2rem;
   --body-lg: 1.25rem;
   --body-md: 1rem;
   --body-sm: 0.75rem;
@@ -120,11 +123,6 @@ a {
   color: inherit;
 }
 
-p {
-  font-size: var(--body-md);
-  line-height: 120%;
-}
-
 .lg {
   font-size: var(--body-lg);
 }
@@ -170,26 +168,26 @@ input {
 
 .btn-lg{
   font-size: var(--btn-lg);
-  padding: 18px 24px;
+  padding: 1.125rem 1.5rem;
   border-radius: 12px;
 }
 
 .btn-md {
   font-size: var(--btn-md);
-  padding: 14px 20px;
+  padding: 0.875rem 1.25rem;
   border: var(--border-thick);
 }
 
 .btn-sm {
   font-size: var(--btn-sm);
-  padding: 8px 16px;
+  padding: 0.5rem 2rem;
   border-radius: 6px;
   border: var(--border-thin);
 }
 
 .btn-tn {
   font-size: var(--btn-tn);
-  padding: 5px 10px;
+  padding: 0.3rem 0.625rem;
 }
 
 .btn-primary {
@@ -248,6 +246,15 @@ input {
 
 }
 
+/* JS STYLES */
 .bold {
   font-weight: bold;
+}
+
+#overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
 }
