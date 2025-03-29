@@ -71,11 +71,10 @@
   outline: transparent;
 }
 
-a{
-    text-decoration:none;
 a {
   text-decoration: none;
 }
+
 body {
   width: 100vw;
   min-height: 100vh;
@@ -121,8 +120,6 @@ h4 {
 h5 {
   font-family: var(--headingfont);
   font-size: var(--heading5);
-  line-height: 100%; 
-  font-size: var(--heading2);
   line-height: 100%;
 }
 

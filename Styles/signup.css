@@ -99,6 +99,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
+form #remember-container {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   main {

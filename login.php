@@ -93,15 +93,10 @@ if (isset($_GET['forgot_password'])) {
     <link rel="stylesheet" href="./Styles/signup.css">
 </head>
 <body>
-    <div class="container">
-        <div class="wrapper">
-            <div class="left">
-                <img src="images/login.jpg" alt="Login illustration">
-            </div>
-            <div class="right">
-                <h1>Welcome Back</h1>
-                
-                <?php if (!empty($errors)): ?>
+<main class="sign-form">
+        <form method="post" class="column">
+            <h2>Log in</h2>
+            <?php if (!empty($errors)): ?>
                     <div class="error">
                         <?php foreach ($errors as $error): ?>
                             <p><?= $error ?></p>
@@ -109,39 +104,53 @@ if (isset($_GET['forgot_password'])) {
                     </div>
                 <?php endif; ?>
 
-                <form action="login.php" method="post">
-                    <input type="email" name="email" placeholder="Email" 
-                           value="<?= htmlspecialchars($email ?? '') ?>" required>
-                    
-                    <input type="password" name="password" placeholder="Password" required>
-                    
-                    <div>
-                        <span>
-                            <input type="checkbox" name="remember" id="remember" <?= $remember ? 'checked' : '' ?>>
-                            <label for="remember">Remember me</label>
+            <div class="inputs-section">
+               <div class="input-container">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" id="email" 
+                           value="<?= htmlspecialchars($email ?? '') ?>" 
+                           placeholder="johndoe8@gmail.com" required>
+                    <?php if (!empty($errors['email'])): ?>
+                        <div class="error"><?= $errors['email'] ?></div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" 
+                           placeholder="********" required>
+                    <!-- <div class="password-status">
+                        <span class="sm password-parameters" id="length-parameter">
+                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
+                            8 characters
                         </span>
-                        <a href="reset-password.php">Forgot password?</a>
-                    </div>
-                    
-                    <button type="submit">Sign In</button>
-                    
-                    <div class="or-separator">
-                        <hr>
-                        <span>OR</span>
-                        <hr>
-                    </div>
-                    
-                    <a href="google-auth.php" class="google-btn">
-                        Sign in with Google
-                    </a>
-                    
-                    <div>
-                        Don't have an account? 
-                        <a href="signup.php">Create one!</a>
-                    </div>
-                </form>
+                        <span class="sm password-parameters" id="number-parameter">
+                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
+                            1 number
+                        </span>
+                        <span class="sm password-parameters" id="special-character-parameter">
+                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
+                            1 special character
+                        </span>
+                    </div> -->
+                    <?php if (!empty($errors['password'])): ?>
+                        <div class="error"><?= $errors['password'] ?></div>
+                    <?php endif; ?>
+                </div>
+                <div id="remember-container">
+                    <input type="checkbox" name="remember" id="remember" required>
+                    <label for="remember">Remember me</label>
+                </div>
             </div>
-        </div>
-    </div>
+
+            <div class="other-info">
+                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account">
+                    Create Account
+                </button>
+                <a href="reset-password.php">Forgot password?</a>
+            </div>
+        </form>
+        <img src="./assets/img/measuring-img.png" alt="" class="get-started-img sh-lg">
+    </main>
 </body>
 </html>
