@@ -175,18 +175,29 @@ main {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 890px) {
   main {
     flex-direction: column;
     #left-handside {
-      width: 100%;
+      width: fit-content;
     }
+    
+    #right-handside {
+      width: 100%;
+      gap: 2rem;
+      img {
+        width: 60%;
+      }
+    }
+    
     #image-container {
-      margin: auto;
+      width: fit-content;
     }
     .statContainer {
-      display: none;
+      display: flex;
+
     }
+
     footer {
       img:nth-child(2) {
         display: none;
