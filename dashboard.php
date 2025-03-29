@@ -397,6 +397,7 @@ $orphan_total_stmt->close();
         </div>
     </div>
 
+    <script src="./Scripts/password.js"></script>
     <script src="./Scripts/dashboardscript.js"></script>
 
     <script>

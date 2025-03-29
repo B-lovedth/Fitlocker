@@ -35,96 +35,79 @@ if (isset($_SESSION['user_id'])) {
   <title>FitLocker: About Us</title>
   <link rel="stylesheet" href="./Styles/main.css?v=1" />
   <link rel="stylesheet" href="./Styles/about.css?v=1" />
+  <link rel="stylesheet" href="./Styles/menus.css">
 </head>
 
 <body>
-  <nav id="nav-bar" class="navBar">
-    <a href="homepage.php" id="logo-link">
-      <img
-        src="./assets/Logos/FitLocker lightbg.png"
-        alt="FitLocker Logo"
-        id="logo" />
-    </a>
-    <ul id="nav-links">
-      <li class="nav-link"><a href="./homepage.php">Home</a></li>
-      <li class="nav-link active"><a href="./about.php">About</a></li>
-      <li class="nav-link"><a href="./about.php#contactUs">Contact Us</a></li>
-    </ul>
-    <a class="btn btn-secondary btn-sm" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
-      <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
-    </a>
-  </nav>
+    <header>
+          <!-- Responsive Navbar -->
+          <div class="menu-head">
+            <div id="logo"><a href="homepage.php"><img src="assets/Logos/FitLocker lightbg.png" alt="Fitlocker Logo"></a></div>
+            <nav class="navbar">
+                <ul class="nav-items">
+                    <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+                </ul>            
+            </nav>
+            <img src="./assets/icons/menu-hamburger.svg" id="hamburger" class="hide" alt="hamburger-menu">
+            <a class="btn btn-secondary btn-sm sign-in" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
+              <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
+            </a>
+          </div>
+          <hr>
+          <div class="hamburger-menu hide">
+            <ul class="menu-items">
+            <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
+                      <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+                      <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+            </ul>
+            <button class="btn btn-sm btn-secondary">Sign In</button>
+          </div>
+    </header> 
+    <div id="overlay" class="hide"></div>
 
-  <hr>
-
-  <section class="page" id="about">
-    <div class="page-container">
-      <div id="aboutInfo">
+  <main>
+    <section class="page" id="about">
+      <div class="page-info">
         <h1>Who we are?</h1>
         <p>We're just a bunch of CSC students that had to do this for good grades. That's all. <br> What? Were you expecting more? Sorry nothing for you. <br> Scroll, click the button or do something man, irdc.</p>
-        <button id="aboutButton" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
-          Get Started
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            id="arrowIcon">
-            <path
-              d="M5.5 12L18 12"
-              stroke="#1B1B1B"
-              stroke-width="2"
-              stroke-linecap="round" />
-            <path
-              d="M12.5 5.5L18.7172 11.7172C18.8734 11.8734 18.8734 12.1266 18.7172 12.2828L12.5 18.5"
-              stroke="#1B1B1B"
-              stroke-width="2"
-              stroke-linecap="round" />
-          </svg>
-        </button>
+        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">Get Started <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
       </div>
-      <div id="aboutImage">
+      <div class="page-image">
         <img src="./assets/img/hero-img.png" alt="hero-image" class="section-image">
       </div>
-    </div>
-  </section>
-
-  <hr>
-
-
-  <section class="page" id="contactUs">
-    <div class="page-container">
-      <div id="contactUsImage">
-        <img src="./assets/img/hero-img.png" alt="hero-image" class="section-image">
-      </div>
-      <div id="contactUsInfo">
-        <h1>Get in Touch</h1>
-        <p>For any complaints, queries, or suggestions, please call or visit our social media handles below:</p>
-        <div id="largeContactButtons">
-          <button class="large-btn" id="mail"><img src="./assets/icons/mail_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="">Send an Email</button>
-          <button class="large-btn" id="call"><img src="./assets/icons/call_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" alt="">Call Us</button>
+    </section>
+    <hr>
+    
+      <section class="page" id="contactUs">
+        <div class="page-image">
+          <img src="./assets/img/hero-img.png" alt="hero-image" class="section-image">
         </div>
-        <div id="smallContactButtons">
-          <button class="small-btn"><img src="./assets/icons/instagram.svg" alt="instagram" class="social-icon"></button>
-          <button class="small-btn"><img src="./assets/icons/facebook.svg" alt="facebook" class="social-icon"></button>
-          <button class="small-btn"><img src="./assets/icons/twitter-alt.svg" alt="twitter" class="social-icon"></button>
+        <div class="page-info">
+          <h1>Get in Touch</h1>
+          <p>For any complaints, queries, or suggestions, please call or visit our social media handles below:</p>
+          <div id="largeContactButtons">
+            <button class="btn btn-md btn-primary sh-md" id="mail"><img src="./assets/icons/mail.svg" alt="">Send an Email</button>
+            <button class="btn btn-md btn-secondary sh-md" id="call"><img src="./assets/icons/call.svg" alt="">Call Us</button>
+          </div>
+          <div id="smallContactButtons">
+            <button class="btn btn-sm btn-outline sh-sm"><img src="./assets/icons/instagram.svg" alt="instagram" class="social-icon"></button>
+            <button class="btn btn-sm btn-outline sh-sm"><img src="./assets/icons/facebook.svg" alt="facebook" class="social-icon"></button>
+            <button class="btn btn-sm btn-outline sh-sm"><img src="./assets/icons/twitter-alt.svg" alt="twitter" class="social-icon"></button>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+        </section>
+    
+      <hr>
+  </main>
 
-  <hr>
 
   <footer>
     <p class="sm">COPYRIGHT FitLocker, 2025</p>
   </footer>
 
-
-
-
-
-
+  <script src="./Scripts/navbar.js"></script>
 </body>
 
 </html>

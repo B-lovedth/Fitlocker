@@ -89,6 +89,8 @@ if (isset($_GET['forgot_password'])) {
         .left img { max-width: 600px; }
         form { display: flex; flex-direction: column; gap: 1rem; }
     </style>
+    <link rel="stylesheet" href="./Styles/main.css">
+    <link rel="stylesheet" href="./Styles/signup.css">
 </head>
 <body>
     <div class="container">

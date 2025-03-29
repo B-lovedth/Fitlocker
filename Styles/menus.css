@@ -28,6 +28,7 @@ header {
 .add-border-bottom {
     padding-bottom: 2rem;
     border-bottom: 2px solid var(--black);
+    border-radius:  0 0 1rem 1rem;
 }
 
 #logo {
@@ -124,7 +125,7 @@ header {
 }
 
 .absolute {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 }

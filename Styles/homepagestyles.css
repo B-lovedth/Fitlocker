@@ -19,6 +19,7 @@
 
 body {
   min-height: 100vh;
+  /* Ensure the body takes the full viewport height */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

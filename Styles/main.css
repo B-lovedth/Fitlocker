@@ -205,7 +205,7 @@ input {
 }
 
 .btn-outline {
-  background-color: var(--peach);
+  background-color: var(--nude);
 }
 .btn-outline:hover {
   background-color: var(--brown);
@@ -235,6 +235,11 @@ input {
 
 .sh-sm {
   box-shadow: var(--small-shadow);
+}
+
+hr {
+  height: 0.5px;
+  background-color: var(--black);
 }
 
 /* Mobile Styles */

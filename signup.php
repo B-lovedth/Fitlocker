@@ -164,7 +164,7 @@ if (isset($conn)) {
     </main>
 
 
-    <script src="./Scripts/signup.js"></script>
+    <script src="./Scripts/password.js"></script>
     <script src="./Scripts/script.js"></script>
 </body>
 </html>

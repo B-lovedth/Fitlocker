@@ -63,25 +63,6 @@ if (isset($_SESSION['user_id'])) {
             
     </header> 
     <div id="overlay" class="hide"></div>
-          
-    <!-- <nav id="nav-bar" class="navBar">
-      <a href="homepage.php" id="logo-link">
-        <img
-          src="./assets/Logos/FitLocker lightbg.png"
-          alt="FitLocker Logo"
-          id="logo"
-        />
-      </a>
-      <ul id="nav-links">
-        <li class="nav-link active"><a href="./homepage.php">Home</a></li>
-        <li class="nav-link"><a href="./about.php">About</a></li>
-        <li class="nav-link"><a href="./about.php#contactUs">Contact Us</a></li>
-      </ul>
-      <a class="btn btn-secondary btn-sm" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
-        <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
-      </a>
-    </nav> -->
-
 
     <main class="homepage" id="main-container">
       <div id="left-handside">
