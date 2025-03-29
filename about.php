@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
       <div id="aboutInfo">
         <h1>Who we are?</h1>
         <p>We're just a bunch of CSC students that had to do this for good grades. That's all. <br> What? Were you expecting more? Sorry nothing for you. <br> Scroll, click the button or do something man, irdc.</p>
-        <button id="aboutButton" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
+        <button id="aboutButton" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './registerClient.php' : './signup.php'; ?>'">
           Get Started
           <svg
             width="24"

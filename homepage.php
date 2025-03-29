@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id'])) {
           fits every time
         </p>
 
-        <button id="main-button" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">
+        <button id="main-button" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './registerClient.php' : './signup.php'; ?>'">
           Store your first measurement
           <svg
             width="24"
