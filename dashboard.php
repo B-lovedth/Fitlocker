@@ -180,166 +180,153 @@ $empty_family_total_stmt->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitLocker: Dashboard</title>
-    <link rel="stylesheet" href="./Styles/main.css?v=1">
+    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/dashboardstyles.css?v=1.0">
 </head>
 
 <body>
-    <div class="container">
         <!-- sidebar import -->
         <?php require_once "./sidebar.php" ?>
-
         <!-- modal impport -->
         <?php require_once "./accountsModal.php" ?>
-
-        <div class="main-dashboard">
-
-            <div class="title-container">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="#000000">
-                    <path
-                        d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z" />
-                </svg>
-                <span id="title">Dashboard</span>
-            </div>
-
-            <div id="info">
-                <h2>Welcome <?php echo htmlspecialchars($username); ?></h2>
-
-                <button type="button" onclick="window.location.href='./search.php'" class="search-btn-main">
-                    <img src="./assets/icons/search-white.svg" alt="search-button">
-                    <p class="sm">Search</p>
-                </button>
-
-            </div>
-
-
-
-            <div class="grid-container">
-                <a href="registerClient.php" class="box large" id="box1">
-                    <div id="leftsideInfoLarge">
-                        <h2 id="largeBoxName">Register a Person</h2>
-                        <button type="button" id="largeBoxIcon">
-                            <img src="./assets/icons/plus-icon.svg" alt="add-client">
+        
+        <div class="container">
+            <?php require_once "./navbar.php" ?>
+            <div id="overlay" class="hide"></div>
+                <main class="main-section-container">
+        
+                    <div id="main-section-header">
+                        <h2>Welcome <?php echo htmlspecialchars($username); ?></h2>
+                        <button class="btn btn-sm btn-outline sh-sm" type="button" onclick="window.location.href='./search.php'" class="search-btn-main">
+                            <img src="./assets/icons/search-white.svg" alt="search-button">
+                            Search
                         </button>
                     </div>
-                    <div id="boxImage">
-                        <img src="" alt="" />
-                    </div>
-                </a>
-
-                <a href="registerFamily.php" class="box large" id="box2">
-                    <div id="leftsideInfoLarge">
-                        <h2 id="largeBoxName">Register a Family</h2>
-                        <button type="button" id="largeBoxIcon">
-                            <img src="./assets/icons/plus-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div id="boxImage">
-                        <img src="" alt="" />
-                    </div>
-                </a>
-
-                <div class="box" id="box3">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Individual Accounts</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $individual_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $individual_color; ?>"><?php echo $individual_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+        
+                    <div class="grid-container">
+                        <a href="registerClient.php" class="box large sh-md" id="box1">
+                            <div id="leftsideInfoLarge">
+                                <h3 id="largeBoxName">Register a Person</h3>
+                                <button type="button" id="largeBoxIcon">
+                                    <img src="./assets/icons/plus-icon.svg" alt="add-client">
+                                </button>
+                            </div>
+                            <div id="boxImage">
+                                <img src="" alt="" />
+                            </div>
+                        </a>
+        
+                        <a href="registerFamily.php" class="box large sh-sm" id="box2">
+                            <div id="leftsideInfoLarge">
+                                <h3 id="largeBoxName">Register a Family</h3>
+                                <button type="button" id="largeBoxIcon">
+                                    <img src="./assets/icons/plus-icon.svg" alt="">
+                                </button>
+                            </div>
+                            <div id="boxImage">
+                                <img src="" alt="" />
+                            </div>
+                        </a>
+        
+                        <div class="box" id="box3">
+                            <div id="boxTopside">
+                                <h3 id="boxName">Individual Accounts</h3>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $individual_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $individual_color; ?>"><?php echo $individual_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box" id="box4">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Family Accounts</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $family_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $family_color; ?>"><?php echo $family_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+                        <div class="box" id="box4">
+                            <div id="boxTopside">
+                                <h2 id="boxName">Family Accounts</h2>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $family_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $family_color; ?>"><?php echo $family_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box" id="box5">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Males</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $male_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $male_color; ?>"><?php echo $male_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+                        <div class="box" id="box5">
+                            <div id="boxTopside">
+                                <h2 id="boxName">Males</h2>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $male_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $male_color; ?>"><?php echo $male_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box" id="box6">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Females</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $female_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $female_color; ?>"><?php echo $female_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+                        <div class="box" id="box6">
+                            <div id="boxTopside">
+                                <h2 id="boxName">Females</h2>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $female_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $female_color; ?>"><?php echo $female_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box" id="box7">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Orphans</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $orphan_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $orphan_color; ?>"><?php echo $orphan_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+                        <div class="box" id="box7">
+                            <div id="boxTopside">
+                                <h2 id="boxName">Orphans</h2>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $orphan_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $orphan_color; ?>"><?php echo $orphan_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box" id="box8">
-                    <div id="boxTopside">
-                        <h2 id="boxName">Empty Families</h2>
-                        <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
-                    </div>
-                    <div id="boxBottomside">
-                        <div id="boxCount"><?php echo $empty_family_total; ?></div>
-                        <div id="countChangeBox">
-                            <div id="countChange" class="<?php echo $empty_family_color; ?>"><?php echo $empty_family_change; ?>%</div>
-                            <span id="countChangeInfo">vs last month</span>
+                        <div class="box" id="box8">
+                            <div id="boxTopside">
+                                <h2 id="boxName">Empty Families</h2>
+                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                            </div>
+                            <div id="boxBottomside">
+                                <div id="boxCount"><?php echo $empty_family_total; ?></div>
+                                <div id="countChangeBox">
+                                    <div id="countChange" class="<?php echo $empty_family_color; ?>"><?php echo $empty_family_change; ?>%</div>
+                                    <span id="countChangeInfo">vs last month</span>
+                                </div>
+                            </div>
                         </div>
+        
+                        <a href="about.php" class="box large" id="box9">
+                            <div id="leftsideInfoLarge">
+                                <h2 id="largeBoxName">Get Help</h2>
+                                <button type="button" id="largeBoxIcon">
+                                    <img src="./assets/icons/contact_support_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="help">
+                                </button>
+                            </div>
+                            <div id="boxImage">
+                                <img src="" alt="" />
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <a href="about.php" class="box large" id="box9">
-                    <div id="leftsideInfoLarge">
-                        <h2 id="largeBoxName">Get Help</h2>
-                        <button type="button" id="largeBoxIcon">
-                            <img src="./assets/icons/contact_support_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="help">
-                        </button>
-                    </div>
-                    <div id="boxImage">
-                        <img src="" alt="" />
-                    </div>
-                </a>
+                </main>
             </div>
         </div>
-    </div>
 
-    <script src="./Scripts/password.js"></script>
+    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
 
 </body>

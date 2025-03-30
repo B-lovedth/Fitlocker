@@ -14,7 +14,10 @@
 
 .dashboard-navbar {
   height: 100vh;
-  width: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 3rem 1.75rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,6 +34,13 @@
   background-color: var(--deeppink);
 }
 
+.dashboard-navbar img {
+  height: 1.5em;
+  aspect-ratio: 1/1;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
 #topSide, #bottomSide {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -45,45 +55,21 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 0.5rem;
-  margin: 3rem auto;
+  gap: 1rem;
 }
 
 #topSide > .home-link {
-  width: 60%;
+  width: 100%;
   aspect-ratio: 1/1;
   background-color: #FFFFFF;
   margin-bottom: 1rem;
-}
-
-.nav-icon {
-  width: 50%;
-  aspect-ratio: 1/1;
-  background-color: transparent;
-  border: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.nav-icon > svg {
-  width: 50%;
-  aspect-ratio: 1/1;
 }
 
 .nav-icon:not(.active):hover {
   cursor: pointer;
 }
 
-.nav-icon:not(.active):hover svg {
+.nav-icon:not(.active):hover img {
   width: 60%;
   -webkit-transition: .3s;
   transition: .3s;
@@ -99,5 +85,14 @@
   width: 80%;
   -webkit-transition: .3s;
   transition: .3s;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  /* Navbar Mobile Responsive */
+  .dashboard-navbar {
+    display: none;
+  }
+  /* Clear Desktop Images */
 }
 /*# sourceMappingURL=sidebar.css.map */

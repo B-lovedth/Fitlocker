@@ -96,44 +96,12 @@ main {
 #activityContainer {
   display: flex;
   align-items: center;
+  gap: .5rem;
 }
 
-#profileContainer {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  position: relative;
-}
-#profileContainer h5{
-  right: 2.5rem;
-}
-.circle-profile {
-  position: relative;
-  width: 2rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 1px solid var(--black);
-}
-
-#circle1 {
-  background-color: green;
-}
-
-#circle2 {
-  background-color: purple;
-  right: 0.5rem;
-}
-#circle3 {
-  background-color: darkred;
-  right: 1rem;
-}
-#circle4 {
-  background-color: gray;
-  right: 1.5rem;
-}
-#circle5 {
-  background-color: pink;
-  right: 2rem;
+#activityContainer img{
+  height: 2rem;
+  width: auto;
 }
 
 #right-handside {
@@ -184,27 +152,24 @@ main {
     
     #right-handside {
       width: 100%;
-      gap: 2rem;
-      img {
-        width: 60%;
+      justify-content: flex-start;
+      align-items: flex-start;
+      #image {
+        width: 100%;
       }
     }
     
     #image-container {
-      width: fit-content;
+      width: 60%;
     }
+
     .statContainer {
       display: flex;
-
-    }
-
-    footer {
-      img:nth-child(2) {
-        display: none;
-      }
     }
   }
-  /* Clear Desktop Images */
+  #footer img:nth-child(3){
+      display: none;
+  }
   
 }
 
@@ -218,7 +183,7 @@ main {
   #right-handside {
     width: 50%;
   }
-    #image-container {
+  #image-container {
     width: 100%;
   }
   .statContainer {

@@ -28,9 +28,13 @@ body {
   background-repeat: no-repeat;
 }
 
+main {
+  padding: 0 10%;
+}
+
 /* Section styles */
 .page {
-  padding: 20vh 10%;
+  padding: 20vh 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -72,18 +76,18 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   gap: 1rem;
   width: 100%;
 }
 
-#largeContactButtons button {
+#largeContactButtons a {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+#largeContactButtons button {
+  width: 100%;
 }
 
 #smallContactButtons {
@@ -99,6 +103,17 @@ body {
           justify-content: start;
   width: 100%;
   gap: 1rem;
+}
+
+#smallContactButtons button {
+  width: 2rem;
+  height: 2rem;
+}
+
+#smallContactButtons button:hover {
+  background-color: var(--nude);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .social-icon {
