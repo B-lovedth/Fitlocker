@@ -45,8 +45,8 @@ if (isset($_SESSION['user_id'])) {
             <div id="logo"><a href="homepage.php"><img src="assets/Logos/FitLocker lightbg.png" alt="Fitlocker Logo"></a></div>
             <nav class="navbar">
                 <ul class="nav-items">
-                    <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
-                    <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class=" sm">Home</a></li>
+                    <li class="btn btn-sm btn-ghost"><a href="./about.php" class="bold sm">About</a></li>
                     <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
                 </ul>            
             </nav>

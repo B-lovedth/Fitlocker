@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $age = !empty($_POST['age']) ? (int)$_POST['age'] : null;
   $gender = $_POST['gender'];
   $add_to_family = $_POST['add_to_family'];
-  $family_address = $_POST['family_address'] ?? null;
+  $family_name = $_POST['family_name'] ?? null;
 
   // Measurements (convert empty fields to null)
   $measurements = [
@@ -44,14 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Handle family logic (if applicable)
   $family_id = null;
   if ($add_to_family === 'yes') {
-    $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND family_address = ? AND user_id = ?");
-    $stmt->bind_param("ssi", $last_name, $family_address, $user_id);
+    $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND family_name = ? AND user_id = ?");
+    $stmt->bind_param("ssi", $last_name, $family_name, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
       $family_id = $result->fetch_assoc()['family_id'];
     } else {
-      $stmt = $conn->prepare("INSERT INTO families (family_name, family_address, user_id) VALUES (?, ?, ?)");
+      $stmt = $conn->prepare("INSERT INTO families (family_name, family_name, user_id) VALUES (?, ?, ?)");
       $stmt->bind_param("ssi", $last_name, $family_address, $user_id);
       $stmt->execute();
       $family_id = $stmt->insert_id;
@@ -164,8 +164,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
             </div>
             <div class="field" id="family_address_field" style="display:none;">
-              <label for="family_address">Family Address</label>
-              <input type="text" id="family_address" name="family_address" />
+              <label for="family_address">Family Name</label>
+              <input type="text" id="family_name" name="family_name" />
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       hideModal('successModal');
       document.querySelector('.clientForm').reset();
       // Reset visibility of toggled fields
-      document.getElementById('family_address_field').style.display = 'none';
+      document.getElementById('family_name_field').style.display = 'none';
     }
 
     function tryAgain() {
@@ -264,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Show/hide family address field based on "Add to family" selection
     document.querySelectorAll('input[name="add_to_family"]').forEach(radio => {
       radio.addEventListener('change', function() {
-        document.getElementById('family_address_field').style.display = this.value === 'yes' ? 'block' : 'none';
+        document.getElementById('family_name_field').style.display = this.value === 'yes' ? 'block' : 'none';
       });
     });
   </script>

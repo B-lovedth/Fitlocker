@@ -134,7 +134,7 @@ if (isset($conn)) {
                     <input type="checkbox" name="terms" id="terms" required>
                     <label for="terms">I have read the <a href="#">Terms and Conditions</a></label>
                 </span>
-                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account">
+                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account" disabled>
                     Create Account
                 </button>
                 <div class="or">
@@ -146,11 +146,11 @@ if (isset($conn)) {
                 </button>
             </div>
         </form>
-        <img src="./assets/img/measuring-img.png" alt="" class="get-started-img sh-lg">
+        <img src="assets/img/measuring-img.png" alt="" class="get-started-img sh-lg">
     </main>
 
 
-    <!-- <script src="./Scripts/password.js"></script> -->
+    <script src="./Scripts/signup.js"></script>
     <script src="./Scripts/script.js"></script>
 </body>
 </html>

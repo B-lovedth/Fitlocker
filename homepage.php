@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
           fits every time
         </p>
 
-        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './register-client.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
+        <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './registerClient.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
 
         <div id="activityContainer">
           <img src="./assets/img/profile-images.png" alt="user-profiles-images">
