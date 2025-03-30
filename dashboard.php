@@ -200,7 +200,7 @@ $empty_family_total_stmt->close();
                     <div id="main-section-header">
                         <h2>Welcome <?php echo htmlspecialchars($username); ?></h2>
                         <button class="btn btn-sm btn-outline sh-sm" type="button" onclick="window.location.href='./search.php'" class="search-btn-main">
-                            <img src="./assets/icons/search-white.svg" alt="search-button">
+                            <img src="./assets/icons/search.svg" alt="search-button">
                             Search
                         </button>
                     </div>
@@ -208,17 +208,17 @@ $empty_family_total_stmt->close();
                     <div class="grid-container">
                         <a href="registerClient.php" class="box large sh-md" id="box1">
                             <div id="leftsideInfoLarge">
-                                <h3 id="largeBoxName">Register a Person</h3>
+                                <h3>Register a Person</h3>
                                 <button type="button" id="largeBoxIcon">
                                     <img src="./assets/icons/plus-icon.svg" alt="add-client">
                                 </button>
                             </div>
                             <div id="boxImage">
-                                <img src="" alt="" />
+                                <img src="./assets/img/individual.svg" alt="individual-illustration" />
                             </div>
                         </a>
         
-                        <a href="registerFamily.php" class="box large sh-sm" id="box2">
+                        <a href="registerFamily.php" class="box large sh-md" id="box2">
                             <div id="leftsideInfoLarge">
                                 <h3 id="largeBoxName">Register a Family</h3>
                                 <button type="button" id="largeBoxIcon">
@@ -226,14 +226,13 @@ $empty_family_total_stmt->close();
                                 </button>
                             </div>
                             <div id="boxImage">
-                                <img src="" alt="" />
+                                <img src="./assets/img/family.svg" alt="family-illustration" />
                             </div>
                         </a>
         
-                        <div class="box" id="box3">
+                        <div class="box sh-md" id="box3">
                             <div id="boxTopside">
-                                <h3 id="boxName">Individual Accounts</h3>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Individual Accounts</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $individual_total; ?></div>
@@ -243,10 +242,9 @@ $empty_family_total_stmt->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="box" id="box4">
+                        <div class="box sh-md" id="box4">
                             <div id="boxTopside">
-                                <h2 id="boxName">Family Accounts</h2>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Family Accounts</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $family_total; ?></div>
@@ -256,10 +254,9 @@ $empty_family_total_stmt->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="box" id="box5">
+                        <div class="box sh-md" id="box5">
                             <div id="boxTopside">
-                                <h2 id="boxName">Males</h2>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Males</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $male_total; ?></div>
@@ -269,10 +266,9 @@ $empty_family_total_stmt->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="box" id="box6">
+                        <div class="box sh-md" id="box6">
                             <div id="boxTopside">
-                                <h2 id="boxName">Females</h2>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Females</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $female_total; ?></div>
@@ -282,10 +278,9 @@ $empty_family_total_stmt->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="box" id="box7">
+                        <div class="box sh-md" id="box7">
                             <div id="boxTopside">
-                                <h2 id="boxName">Orphans</h2>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Orphans</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $orphan_total; ?></div>
@@ -295,10 +290,9 @@ $empty_family_total_stmt->close();
                                 </div>
                             </div>
                         </div>
-                        <div class="box" id="box8">
+                        <div class="box sh-md" id="box8">
                             <div id="boxTopside">
-                                <h2 id="boxName">Empty Families</h2>
-                                <img src="./assets/icons/arrow-right.svg" alt="arrowIcon">
+                                <h4>Empty Families</h4>
                             </div>
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $empty_family_total; ?></div>
@@ -309,15 +303,15 @@ $empty_family_total_stmt->close();
                             </div>
                         </div>
         
-                        <a href="about.php" class="box large" id="box9">
+                        <a href="about.php" class="box large sh-md" id="box9">
                             <div id="leftsideInfoLarge">
-                                <h2 id="largeBoxName">Get Help</h2>
+                                <h4>Get Help</h4>
                                 <button type="button" id="largeBoxIcon">
                                     <img src="./assets/icons/contact_support_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="help">
                                 </button>
                             </div>
                             <div id="boxImage">
-                                <img src="" alt="" />
+                                <img src="./assets/img/get-help.svg" alt="get-help" />
                             </div>
                         </a>
                     </div>

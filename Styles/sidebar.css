@@ -81,14 +81,14 @@
   border-radius: 3px;
 }
 
-.active > svg {
+.active > img {
   width: 80%;
   -webkit-transition: .3s;
   transition: .3s;
 }
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 890px) {
   /* Navbar Mobile Responsive */
   .dashboard-navbar {
     display: none;

@@ -18,6 +18,9 @@
   --white: #ffffff;
   --yellow: #fae89e;
   --brown: #660033;
+  --green: #467A1F;
+  --lime: #ABE87D;
+  --red: #E51A1A;
   --lilac: #d0a8f0;
 }
 
@@ -36,23 +39,29 @@ main {
 }
 
 .search-btn-main:hover {
-  cursor: pointer;
   scale: 1.05;
   background-color: var(--gray);
 }
 
-.search-btn-main > img {
-  width: 1rem;
-  aspect-ratio: 1/1;
-  color: var(--black);
-  fill: var(--black);
+.search-btn-main img {
+  height: 1rem;
+  aspect-ratio: 1 / 1;
+}
+
+.search-btn-main:hover {
+  cursor: pointer;
+  background-color: var(--peach);
+  -webkit-transition: scale(1.1);
+  transition: scale(1.1);
 }
 
 .grid-container {
+  display: -ms-grid;
+  display: grid;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  padding: 2.5rem 0 5rem;
+  gap: 1.5rem;
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
   -ms-grid-rows: 1fr 1fr 1fr;
@@ -60,7 +69,7 @@ main {
 }
 
 .box, .large, #box9 {
-  border: 1px solid #000000;
+  border: 2px solid var(--black);
   border-radius: 0.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,7 +84,7 @@ main {
   background-color: var(--nude);
   color: var(--black);
   padding: 1.5rem 2rem;
-  gap: 2rem;
+  gap: 1rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -120,7 +129,6 @@ main {
   margin: auto;
   width: 80%;
   aspect-ratio: 1/1;
-  color: var(--white);
 }
 
 #leftsideInfoLarge {
@@ -134,13 +142,16 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 50%;
+  width: 100%;
   gap: 2rem;
 }
 
 #boxImage {
   width: 50%;
-  background-color: var(--white);
+}
+
+#boxImage img {
+  height: 7rem;
 }
 
 #box1 {
@@ -219,8 +230,6 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: calc(1rem + 1vw);
-  font-weight: 400;
 }
 
 #countChangeBox {
@@ -237,7 +246,9 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 30%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: 100%;
 }
 
@@ -261,7 +272,7 @@ main {
 }
 
 .green {
-  background-color: green;
+  background-color: gr;
 }
 
 .red {
@@ -294,12 +305,7 @@ footer {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -ms-grid-row: 2;
-    grid-area: 2rem;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: ()[auto];
-        grid-template-rows: repeat(auto);
+    gap: 1.5rem;
   }
 }
 /*# sourceMappingURL=dashboardstyles.css.map */

@@ -17,12 +17,12 @@
   --green: #467A1F;
   --lime: #ABE87D;
   --red: #E51A1A;
+  --lilac: #d0a8f0;
+  --brown: #660033;
 
   /* Font Familes */
   --headingfont: "Neue Haas Grotesque", Arial, sans-serif;
   --bodyfont: "Poppins", Helvetica, sans-serif;
-  --brown: #660033;
-  --lilac: #d0a8f0;
 
   /* Font Sizes */
   --heading1: 3rem;
