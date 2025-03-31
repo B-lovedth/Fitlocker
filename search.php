@@ -8,6 +8,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Add after session_start()
+if (isset($_SESSION['message'])) {
+    $successMessage = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['error'])) {
+    $errorMessage = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
 // Initialize variables
 $searchTerm = '';
 $viewMode = $_GET['view'] ?? 'individual';
@@ -25,13 +35,14 @@ $user_id = $_SESSION['user_id'];
 // Build base query based on view mode
 if ($viewMode === 'family') {
     $query = "SELECT f.family_id, f.family_name, f.family_address, 
-                     COUNT(c.customer_id) AS member_count
+                     COUNT(c.customer_id) AS member_count,
+                     GROUP_CONCAT(CONCAT(c.first_name, ' ', c.last_name) SEPARATOR ', ') AS member_names
               FROM families f
               LEFT JOIN customers c ON f.family_id = c.family_id
               WHERE f.user_id = ?";
 } else {
-    $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender,
-                     c.height, c.chest, c.waist, c.hip, c.sleeve, 
+    $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender, c.address,
+                     c.phone, c.height, c.chest, c.waist, c.hip, c.sleeve, 
                      c.inseam, c.outseam, c.shoulder, c.short_length,
                      f.family_name
               FROM customers c
@@ -248,7 +259,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </form>
-            
+
             <!-- /*     if ($customers == [] || $customers == null) {
                     echo
                     ('
@@ -355,11 +366,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <button id="deleteCustomer" class="btn btn-danger">Delete</button>
             </div>
         </div>
-
     </div>
 
+
+
+
+
     <script src="./Scripts/navbar.js"></script>
-    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/script.js?v=1.0"></script>
     <script src="./Scripts/dashboardscript.js"></script>
     <script>
         // Pass customer data to JS
@@ -381,8 +395,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <h2>${customer.first_name} ${customer.last_name}</h2>
                        
                         </div>
-                        <p><strong>Age:</strong> ${customer.age}</p>
-                        <p><strong>Gender:</strong> ${customer.gender}</p>
+                        <p><strong>Age:</strong> ${customer.age || 'N/A'}</p>
+                        <p><strong>Gender:</strong> ${customer.gender || 'N/A'}</p>
+                        <p><strong>Address:</strong> ${customer.address || 'N/A'}</p>
+                        <p><strong>Phone:</strong> ${customer.phone || 'N/A'}</p>
                         ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
                         
                         <div class="measurements">
@@ -406,6 +422,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     `;
                     document.getElementById('modalContent').innerHTML = content;
                     document.getElementById('customerModal').style.display = 'flex';
+                    document.querySelector('.modal-actions').style.display = 'flex';
                 }
             });
         });
@@ -417,12 +434,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     const content = `
                         <h2><strong>Family Name:</strong> ${family.family_name}</h2>
                         <h3><strong>Family Address:</strong> ${family.family_address}</h3>
-                       
-                       
-                        
+                        <p><strong>Members Count:</strong> ${family.member_count || 'N/A'}</p>
+                        <h3><strong>Family Members:</strong></h3>
+                        <p>${family.member_names || 'This Family is empty'}</p> 
                     `;
                     document.getElementById('modalContent').innerHTML = content;
                     document.getElementById('customerModal').style.display = 'flex';
+                    document.querySelector('.modal-actions').style.display = 'none';
                 }
             });
         });
@@ -440,10 +458,6 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         });
 
         // Close modal handlers
-        document.getElementById('closeModal').addEventListener('click', () => {
-            document.getElementById('customerModal').style.display = 'none';
-        });
-
         document.getElementById('customerModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('customerModal')) {
                 document.getElementById('customerModal').style.display = 'none';
@@ -483,6 +497,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             });
         });
     </script>
+
 </body>
 
 </html>

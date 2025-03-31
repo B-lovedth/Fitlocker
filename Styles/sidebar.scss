@@ -13,63 +13,77 @@
   --yellow: #fae89e;
 }
 
-
 .dashboard-navbar {
-    height: 100vh;
-    width: fit-content;
-    padding: 3rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: var(--deeppink);
-    img {
-      height: 1.5rem;
-      aspect-ratio: 1/1;
-      transition: .3s;
-    }  
-    button {
-      :hover {
-        background-color: var(--peach);
-        border: 1px solid var(--black);
-      }
-      height: 3rem;
-      width: 3rem;
-    }
-  }
-  #topSide, #bottomSide {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1rem;
-  }
+  height: 100vh;
+  width: fit-content;
+  padding: 3rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--deeppink);
 
-  #topSide > .home-link {
-    width: 100%;
-    aspect-ratio: 1/1;
-    background-color: #FFFFFF;
-    margin-bottom: 2rem;
+  button {
+    height: 3rem;
+    width: 3rem;
   }
+}
+#topSide,
+#bottomSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
 
-  .nav-icon:not(.active):hover {
-    img {
-      width: 60%;
-      transition: .3s;
-    }
-    cursor: pointer;
+#topSide > .home-link {
+  width: 100%;
+  aspect-ratio: 1/1;
+  margin-bottom: 2rem;
+}
+.mini-logo-container {
+  width: 5rem;
+  height: 5rem;
+}
+#miniLogo {
+  width: 100%;
+  object-fit: contain;
+}
+
+.nav-icon {
+  width: 50%;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.nav-icon > img {
+  width: 50%;
+  aspect-ratio: 1/1;
+}
+.nav-icon:not(.active):hover {
+  img {
+    width: 60%;
+    transition: 0.3s;
   }
-  .active {
-    background-color: var(--peach);
-    border: 1px solid var(--black);
-    border-radius: 3px;
-  }
-  .active > img {
-    width: 80%;
-    transition: .3s;
-  }
+  cursor: pointer;
+}
+.active {
+  background-color: var(--peach);
+  border: 1px solid var(--black);
+  border-radius: 3px;
+}
+.active > img {
+  width: 80%;
+  transition: 0.3s;
+}
 
 /* Mobile Styles */
 @media (max-width: 890px) {
@@ -79,5 +93,3 @@
   }
   /* Clear Desktop Images */
 }
-
-

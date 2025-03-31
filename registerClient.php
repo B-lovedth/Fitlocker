@@ -1,16 +1,12 @@
 <?php
 // Start the session
 session_start();
+require_once 'db_connect.php';
 
-// If we reach here, the user has an active session
-require_once 'db_connect.php'; // Database connection file
-
-
-// Initialize edit mode and customer data
+// Initialize edit mode and customer data (for form population)
 $editMode = false;
 $customerData = [];
 
-// Check for edit mode
 if (isset($_GET['edit_id'])) {
   $editMode = true;
   $customer_id = $_GET['edit_id'];
@@ -36,12 +32,9 @@ if (isset($_GET['edit_id'])) {
 
 // Check if the user has an active session
 if (!isset($_SESSION['user_id'])) {
-  // No active session, redirect to login page
   header("Location: login.php");
-  exit(); // Stop further execution
+  exit();
 }
-
-
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -70,11 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'short_length' => !empty($_POST['short_length']) ? (float)$_POST['short_length'] : null,
   ];
 
-
-  // Get the user_id from the active session
-  $user_id = $_SESSION['user_id'];
-
-
   // Handle family logic
   $family_id = null;
   if ($add_to_family === 'yes' && !empty($family_name)) {
@@ -94,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
   }
 
-  // Prepare SQL based on edit mode
-  if ($editMode) {
+  // Determine if it's an update or insert based on POST data
+  if (isset($_POST['customer_id'])) {
     // UPDATE existing customer
     $customer_id = $_POST['customer_id'];
     $stmt = $conn->prepare("UPDATE customers SET
@@ -141,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $user_id
     );
   } else {
-    // Insert customer data into the database
+    // Insert new customer
     $stmt = $conn->prepare("INSERT INTO customers (first_name, last_name, address, phone, age, gender, height, length, chest, waist, hip, sleeve, inseam, outseam, shoulder, short_length, family_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param(
       "sssiisddddddddddii",
@@ -168,8 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Execute and handle results
   if ($stmt->execute()) {
-    $_SESSION['message'] = $editMode ? 'Customer updated successfully' : 'Customer registered successfully';
-    header("Location: " . ($editMode ? "search.php" : "registerClient.php"));
+    // Use the same condition to set the success message and redirect
+    $isUpdate = isset($_POST['customer_id']);
+    $_SESSION['message'] = $isUpdate ? 'Customer updated successfully' : 'Customer registered successfully';
+    header("Location: " . ($isUpdate ? "search.php" : "registerClient.php"));
   } else {
     $_SESSION['error'] = 'Database error: ' . $conn->error;
     header("Location: registerClient.php");
@@ -188,14 +178,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Customer</title>
   <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
-  <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
+  <link rel="stylesheet" href="./Styles/sidebar.css" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
 </head>
 
 <body>
-  <?php require_once "./sidebar.php"?>
-  <?php require_once "./accountsModal.php"?>
+  <?php require_once "./sidebar.php" ?>
+  <?php require_once "./accountsModal.php" ?>
   <div class="container">
     <?php require_once "./navbar.php" ?>
     <div id="overlay" class="hide"></div>
@@ -209,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="hidden" name="customer_id" value="<?= $customerData['customer_id'] ?>">
         <?php endif; ?>
 
-        
+
         <div class="personal panel sh-md">
           <h3>Personal Details</h3>
           <hr>
@@ -331,11 +321,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <?= $editMode ? 'Update Customer' : 'Register' ?>
         </button>
       </form>
-    </main>  
+    </main>
 
   </div>
 
-  <?php require_once "./success-failureModal.php" ?>
+  <?php require_once "success-failureModal.php" ?>
 
   <script src="./Scripts/script.js?v1.0"></script>
   <script src="./Scripts/navbar.js?v=1.0"></script>
