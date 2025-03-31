@@ -30,7 +30,7 @@ function toggleMenuBtn(isOpen) {
 window.addEventListener('resize', () => {
     if (window.innerWidth > 890) {
         hamburgerMenu.classList.add("hide");
-        hamburgerMenu.classList.remove("absolute");
+        header.classList.remove("absolute");
         hamburgerMenuOpen = false;
         hamburgerBtn.setAttribute("src", "./assets/icons/menu-hamburger.svg");
         header.classList.remove("add-border-bottom");

@@ -40,7 +40,7 @@ main {
   background-color: var(--gray);
 }
 
-.search-btn-main img {
+.search-btn-main #search-icon {
   height: 1rem;
   aspect-ratio: 1 / 1;
 }
@@ -48,6 +48,7 @@ main {
 .search-btn-main:hover {
   cursor: pointer;
   background-color: var(--peach);
+  color: var(--black);
   -webkit-transition: scale(1.1);
   transition: scale(1.1);
 }

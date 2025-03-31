@@ -2,7 +2,7 @@
 <header>
           <!-- Responsive Navbar for Logged In pages-->
           <div class="menu-head">
-            <span class="page-title sm"><img src="./assets/icons/expand.svg" alt="">Register Client</span>
+            <span class="page-title sm">Register Client</span>
             <img src="./assets/icons/menu-hamburger.svg" id="hamburger" class="hide" alt="hamburger-menu">
           </div>
           <hr>

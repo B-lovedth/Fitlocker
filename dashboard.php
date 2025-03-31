@@ -179,7 +179,7 @@ $empty_family_total_stmt->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitLocker: Dashboard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="./Styles/main.css?v=1.0">
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0">
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
@@ -199,8 +199,8 @@ $empty_family_total_stmt->close();
         
                     <div id="main-section-header">
                         <h2>Welcome <?php echo htmlspecialchars($username); ?></h2>
-                        <button class="btn btn-sm btn-outline sh-sm" type="button" onclick="window.location.href='./search.php'" class="search-btn-main">
-                            <img src="./assets/icons/search.svg" alt="search-button">
+                        <button class="search-btn-main btn btn-sm btn-outline sh-sm" type="button" onclick="window.location.href='./search.php'">
+                            <img src="./assets/icons/search.svg" alt="search-button" id="search-icon">
                             Search
                         </button>
                     </div>

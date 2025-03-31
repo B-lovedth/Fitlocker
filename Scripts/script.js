@@ -52,6 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+// Change Page Title 
+
+if (pageTitle) {
+    let currentPageTitle = document.title;
+    pageTitle.innerHTML = currentPageTitle;
+}
+
 // //Hide or Show filters
 // if (filterBtn) {
 //     filterBtn.addEventListener("click", () => {

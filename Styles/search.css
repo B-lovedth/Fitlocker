@@ -150,8 +150,6 @@ main #empty-search {
     align-items: center;
     gap: 2rem;
 }
-#empty-search img {
-}
 
 @media (max-width: 700px) {
     /* Navbar Mobile Responsive */

@@ -3,7 +3,7 @@
         <a href="homepage.php" class="home-link">
             <div></div>
         </a>
-        <button><img src="./assets/icons/dashboard-icon.svg" alt="dashboard-icon"></button>
+        <a href="./dashboard.php"><button><img src="./assets/icons/dashboard-icon.svg" alt="dashboard-icon"></button></a>
         <button
             type="button"
             class="nav-icon btn"
