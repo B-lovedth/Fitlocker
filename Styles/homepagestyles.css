@@ -87,51 +87,15 @@ main {
 
 #activityContainer {
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
 }
 
-#profileContainer {
-  display: flex;
-  align-items: center;
-  width: -moz-fit-content;
-  width: fit-content;
-  position: relative;
-}
-
-#profileContainer h5 {
-  right: 2.5rem;
-}
-
-.circle-profile {
-  position: relative;
-  width: 2rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 1px solid var(--black);
-}
-
-#circle1 {
-  background-color: green;
-}
-
-#circle2 {
-  background-color: purple;
-  right: 0.5rem;
-}
-
-#circle3 {
-  background-color: darkred;
-  right: 1rem;
-}
-
-#circle4 {
-  background-color: gray;
-  right: 1.5rem;
-}
-
-#circle5 {
-  background-color: pink;
-  right: 2rem;
+#activityContainer img {
+  height: 2rem;
+  width: auto;
 }
 
 #right-handside {
@@ -183,22 +147,25 @@ main {
   }
   main #right-handside {
     width: 100%;
-    gap: 2rem;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
-  main #right-handside img {
-    width: 60%;
+  main #right-handside #image {
+    width: 100%;
   }
   main #image-container {
-    width: -moz-fit-content;
-    width: fit-content;
+    width: 60%;
   }
   main .statContainer {
     display: flex;
   }
-  main footer img:nth-child(2) {
+  #footer img:nth-child(3) {
     display: none;
   }
-  /* Clear Desktop Images */
 }
 @media (max-width: 1080px) {
   main {

@@ -3,7 +3,8 @@
 }
 
 main {
-  padding: 30px 5% 30px 10%;
+  padding: 30px 10% 30px 10%;
+  max-height: 100vh;
 }
 main.sign-form {
   display: flex;
@@ -70,16 +71,21 @@ form .inputs-section {
   vertical-align: middle;
 }
 
-form,
-.other-info {
+form, .other-info {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-form .terms-container {
+form .terms-container, form #remember-container {
   display: flex;
+  align-items: center;
   gap: 7px;
+}
+
+input:focus, select:focus {
+  outline: 2px dashed var(--brown);
+  border-radius: 6px;
 }
 
 form .or {

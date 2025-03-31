@@ -30,10 +30,14 @@ body {
   background-repeat: no-repeat;
 }
 
+main {
+  padding: 0 10%;
+}
+
 /* Section styles */
 
 .page {
-  padding: 20vh 10%;
+  padding: 20vh 0;
   display: flex;
   scroll-snap-align: start;
   gap: 10%;
@@ -61,14 +65,15 @@ body {
 
 #largeContactButtons {
   display: flex;
-  flex-direction: row;
   gap: 1rem;
   width: 100%;
+  a {
+    flex-grow: 1;
+  }
+  button {
+    width: 100%;
+  }
 } 
-
-#largeContactButtons button{
-  flex-grow: 1;  
-}
 
 #smallContactButtons {
   display: flex;
@@ -76,6 +81,14 @@ body {
   justify-content: start;
   width: 100%;
   gap: 1rem;
+  button {
+    width: 2rem;
+    height: 2rem;
+  }
+  button:hover {
+    background-color: var(--nude);
+    transform: scale(1.1);
+  }
 }
 
 .social-icon {

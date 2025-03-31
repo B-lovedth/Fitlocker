@@ -123,20 +123,6 @@ if (isset($conn)) {
                     <label for="password">Password</label><br>
                     <input type="password" name="password" id="password" 
                            placeholder="********" required>
-                    <div class="password-status">
-                        <span class="sm password-parameters" id="length-parameter">
-                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
-                            8 characters
-                        </span>
-                        <span class="sm password-parameters" id="number-parameter">
-                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
-                            1 number
-                        </span>
-                        <span class="sm password-parameters" id="special-character-parameter">
-                            <img src="assets/icons/close-x-red.svg" alt="" class="password-status-icon">
-                            1 special character
-                        </span>
-                    </div>
                     <?php if (!empty($errors['password'])): ?>
                         <div class="error"><?= $errors['password'] ?></div>
                     <?php endif; ?>

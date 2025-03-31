@@ -30,9 +30,9 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitLocker</title>
-    <link rel="stylesheet" href="./Styles/main.css?v=1">
-    <link rel="stylesheet" href="./Styles/homepagestyles.css?v=1" />
-    <link rel="stylesheet" href="./Styles/menus.css">
+    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/homepagestyles.css?v=1.0" />
+    <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   </head>
   <body>
     <header>
@@ -47,18 +47,20 @@ if (isset($_SESSION['user_id'])) {
                 </ul>            
             </nav>
             <img src="./assets/icons/menu-hamburger.svg" id="hamburger" class="hide" alt="hamburger-menu">
-            <a class="btn btn-secondary btn-sm sign-in" type="button" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php'; ?>">
-              <?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?>
+            <a class="sign-in" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php';?>">
+              <button class="btn btn-secondary btn-sm"><?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?></button>
             </a>
           </div>
           <hr>
           <div class="hamburger-menu hide">
             <ul class="menu-items">
-            <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
-                      <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
-                      <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+              <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
+              <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
+              <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
             </ul>
-            <button class="btn btn-sm btn-secondary">Sign In</button>
+            <a class="" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php';?>">
+              <button class="btn btn-secondary btn-sm"><?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?></button>
+            </a>
           </div>
             
     </header> 
@@ -78,14 +80,8 @@ if (isset($_SESSION['user_id'])) {
         <button id="main-button" class="btn btn-md btn-primary sh-md" type="button" onclick="window.location.href='<?php echo $is_logged_in ? './registerClient.php' : './signup.php'; ?>'">Store your first measurement <img src="assets/icons/arrow-right.svg" alt="right-arrow"></button>
 
         <div id="activityContainer">
-          <div id="profileContainer">
-            <div class="circle-profile" id="circle1"></div>
-            <div class="circle-profile" id="circle2"></div>
-            <div class="circle-profile" id="circle3"></div>
-            <div class="circle-profile" id="circle4"></div>
-            <div class="circle-profile" id="circle5"></div>
-          </div>
-          <h5>1.5k Active Users</h5>
+          <img src="./assets/img/profile-images.png" alt="user-profiles-images">
+          <h5>1.5k+ Active Users</h5>
         </div>
       </div>
       
@@ -113,17 +109,15 @@ if (isset($_SESSION['user_id'])) {
     </main>
       
     <footer id="footer" class="footer">
-      <img src="./assets/img/Aj Stitches.png" alt="ajstitches" id="footerImage" />
-      <img src="./assets/img/armadi.png" alt="armadi" id="footerImage" />
+      <img src="./assets/img/Aj Stitches.png" alt="ajstitches-logo" />
+      <img src="./assets/img/armadi.png" alt="armadi-logo" id="armadi-img" />
       <img
         src="./assets/img/gentlemanly..png"
-        alt="gentlemanly"
-        id="footerImage"
+        alt="gentlemanly-logo"
       />
       <img
         src="./assets/img/Emperor wears.png"
-        alt="emperorwears"
-        id="footerImage"
+        alt="emperorwears-logo"
       />
     </footer>
 

@@ -122,45 +122,28 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Styles/style.css">
-    <link rel="stylesheet" href="./Styles/search.css">
+    <title>Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
+    <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/search.css?v=1.0">
     <title>FitLocker: Search</title>
     <style>
-        .searchbar {
-            position: relative;
-        }
-
         .clear-search {
             position: absolute;
-            right: 200px;
-            top: 50%;
-            transform: translateY(-50%);
+            right: 0.875rem;
+            top: 0.5rem;
+            height: 0.5rem;
+            aspect-ratio: 1/1;
             background: none;
             border: none;
             cursor: pointer;
+            opacity: 0.7;
             display: <?= !empty($searchTerm) ? 'block' : 'none' ?>;
         }
-
-        #account-switch {
-            width: 60px;
-            height: 30px;
-            background: #ddd;
-            border-radius: 15px;
-            position: relative;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-
-        #switch-button {
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            background: #fff;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
-        }
+        
 
         /* Modal Styles */
         .modal-overlay {
@@ -174,6 +157,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             display: none;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            gap: 3rem;
             z-index: 1000;
         }
 
@@ -186,200 +171,180 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             position: relative;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            cursor: pointer;
+        .modal-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .modal-section {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2rem;
+        }
+
+        #closeModal {
+            height: 3rem;
+            width: 3rem;            
         }
     </style>
 </head>
 
-<body id="dashboard">
-    <aside class="left-sidebar">
-        <div class="hide">
-            <button class="btn btn-sm btn-ghost"><img src="assets/img/dummy-image.svg" alt="logo">
-                <p class="sidebar-text hide sm">FitLocker</p>
-            </button>
-            <button class="btn btn-sm btn-ghost"><img src="assets/icons/dashboard-icon.svg" alt="dashboard-icon">
-                <p class="sidebar-text hide">Dashboard</p>
-            </button>
-            <button class="btn btn-sm btn-ghost"><img src="assets/icons/search.svg" alt="search-icon">
-                <p class="sidebar-text hide">Search</p>
-            </button>
-            <button class="btn btn-sm btn-ghost"><img src="assets/icons/stats.svg" alt="stats-icon">
-                <p class="sidebar-text hide">Stats</p>
-            </button>
-        </div>
-        <div>
-            <button class="btn btn-sm btn-ghost"><img src="assets/icons/question-circle.svg" alt="question-circle-icon">
-                <p class="sidebar-text hide">Help</p>
-            </button>
-            <button class="btn btn-sm btn-ghost"><img src="assets/icons/setting.svg" alt="settings">
-                <p class="sidebar-text hide">Settings</p>
-            </button>
-            <button class="btn btn-sm btn-ghost" id="expand"><img src="assets/icons/expand.svg" alt="expand" id="expand-icon">
-                <p class="sidebar-text hide">Expand</p>
-            </button>
-        </div>
-    </aside>
-
-    <main>
-        <header>
-            <!-- Responsive Navbar -->
-            <div class="page-title">
-                <a href="#"><img src="assets/icons/expand.svg" alt="expand-icon"></a>
-                <p class="sm">Search</p>
-            </div>
-            <div class="header-images">
-                <img src="assets/icons/heart-alt.svg" alt="favorites-icon">
-                <img src="assets/icons/menu-hamburger.svg" alt="" id="hamburger" class="hide">
-            </div>
-
-        </header>
-
-        <form class="search-container" method="GET">
-            <div class="searchbar">
-                <input type="text" name="search" placeholder="Search your registered customers"
-                    value="<?= htmlspecialchars($searchTerm) ?>" id="searchInput">
-                <!-- Add clear button -->
-                <button type="button" class="clear-search" id="clearSearch"
-                    onclick="resetSearch()"
-                    title="Clear search">
-                    <img src="assets/icons/close-x.svg" alt="Clear">
-                </button>
-                <button type="submit" class="btn btn-sm btn-secondary" id="entersearch">Search</button>
-                <button class="btn btn-sm btn-ghost" id="filter">Filters</button>
-            </div>
-            <div id="filter-section" class="hide">
-                <div class="input-container">
-                    <label for="age1 age2">Age</label>
-                    <div class="input-range">
-                        <input type="number" name="lower_age" id="age1" class="input-small" placeholder="18" min="0">
-                        -
-                        <input type="number" name="upper_age" id="age2" class="input-small" placeholder="35" min="0">
+<body>
+    <!-- sidebar import -->
+    <?php require_once "./sidebar.php" ?>
+    <!-- modal impport -->
+    <?php require_once "./accountsModal.php" ?>
+    
+    <div class="container">
+        <?php require_once "./navbar.php" ?>
+        <div id="overlay" class="hide"></div>
+        <main class="main-section-container">
+            <form class="clientForm" method="GET">
+                <div class="search-container">
+                    <div class="searchbar">
+                        <input type="text" name="search" placeholder="Search your registered customers"
+                            value="<?= htmlspecialchars($searchTerm) ?>" id="searchInput">
+                        <!-- Add clear button -->
+                        <button type="button" class="clear-search" id="clearSearch"
+                            onclick="resetSearch()"
+                            title="Clear search">
+                            <img src="assets/icons/clear-x-outline.svg" alt="Clear">
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-secondary" id="entersearch">Search</button>
+                    <button class="btn btn-sm btn-ghost" id="filter">Filters</button>
+                </div>
+                <div id="filter-section" class="fields wide">
+                    <div class="field">
+                        <label for="age1 age2">Age</label>
+                        <div class="input-range">
+                            <input type="number" name="lower_age" id="age1" class="input-small" placeholder="18" min="0">
+                            -
+                            <input type="number" name="upper_age" id="age2" class="input-small" placeholder="35" min="0">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="sex">Sex(M/F)</label>
+                        <input type="text" name="sex" id="sex" placeholder="M" class="input-small">
+                    </div>
+                    <div class="field">
+                        <label for="family">Family</label>
+                        <input type="text" name="family_name" id="family" placeholder="Otedola" class="input-small">
                     </div>
                 </div>
-                <div class="input-container">
-                    <label for="sex">Sex(M/F)</label>
-                    <input type="text" name="sex" id="sex" placeholder="M" class="input-small">
+            </form>
+            <?php
+          /*     if ($customers == [] || $customers == null) {
+                    echo
+                    ('
+                        <div id="empty-search">
+                            <img src="./assets/icons/no-search.svg" alt="">
+                            <h3>You havent searched anything</h3>
+                            <ul>t
+                                <li>Use the search bar to find your customers by name</li>
+                                <li>Add filters to narrow down your search</li>
+                                <li>Switch to family if youre looking for a family</li>
+                                <li>When you see results click on any customer to view details in full.</li>
+                            </ul>
+                        </div>
+                    ');
+                } else {
+                   echo  
+                   ('
+                   ');
+                   
+                   } */
+            ?>
+    
+    <section id="accounts" class="main-section-container">
+        <div id="main-section-header">
+            <h3>Accounts</h3>
+            <div class="mode">
+                <p class="sm">Individual</p>
+                <div id="account-switch">
+                    <div id="switch-button"></div>
                 </div>
-                <div class="input-container">
-                    <label for="family">Family</label>
-                    <input type="text" name="family_name" id="family" placeholder="Otedola" class="input-small">
-                </div>
+                <p class="sm">Family</p>
             </div>
-        </form>
-
-        <section id="accounts">
-            <div id="accounts-header">
-                <h3>Accounts</h3>
-                <div class="mode">
-                    <p class="sm">Individual</p>
-                    <div id="account-switch">
-                        <div id="switch-button"></div>
-                    </div>
-                    <p class="sm">Family</p>
-                </div>
-            </div>
-            <div id="accounts-table">
-                <div id="accounts-table">
-                    <?php if ($viewMode === 'family'): ?>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Family Name</th>
-                                    <th>Address</th>
-                                    <th>Members</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data as $family): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($family['family_name']) ?></td>
-                                        <td><?= htmlspecialchars($family['family_address']) ?></td>
-                                        <td><?= $family['member_count'] ?></td>
-                                        <td>
-                                            <button class="view-family btn btn-sm btn-outline"
-                                                data-family-id="<?= $family['family_id'] ?>">
-                                                View Family
-                                            </button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
-                                    <th class="col2">Surname</th>
-                                    <th class="col3">Age</th>
-                                    <th class="col4">Sex</th>
-                                    <th class="col5">Family Member</th>
-                                    <th class="col6"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data as $customer): ?>
-                                    <tr>
-                                        <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
-                                        <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
-                                        <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
-                                        <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
-                                        <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
-                                        <td class="col6">
-                                            <button class="view-details btn btn-sm btn-outline border-thick"
-                                                data-customer-id="<?= $customer['customer_id'] ?>">
-                                                View Details
-                                            </button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php endif; ?>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <div class="modal-overlay" id="customerModal">
-        <div class="modal-content">
-            <button class="modal-close" id="closeModal">
-                <img src="assets/icons/close-x.svg" alt="Close">
-            </button>
-            <div id="modalContent"></div>
         </div>
+        <div id="accounts-table">
+            <?php if ($viewMode === 'family'): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Family Name</th>
+                            <th>Address</th>
+                            <th>Members</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data as $family): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($family['family_name']) ?></td>
+                                <td><?= htmlspecialchars($family['family_address']) ?></td>
+                                <td><?= $family['member_count'] ?></td>
+                                <td>
+                                    <button class="view-family btn btn-sm btn-outline"
+                                        data-family-id="<?= $family['family_id'] ?>">
+                                        View Family
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <table class="sh-">
+                    <thead>
+                        <tr>
+                            <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
+                            <th class="col2">Surname</th>
+                            <th class="col3">Age</th>
+                            <th class="col4">Sex</th>
+                            <th class="col5">Family Member</th>
+                            <th class="col6"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data as $customer): ?>
+                            <tr>
+                                <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
+                                <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
+                                <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
+                                <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
+                                <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
+                                <td class="col6">
+                                    <button class="view-details btn btn-sm btn-outline border-thick"
+                                        data-customer-id="<?= $customer['customer_id'] ?>">
+                                        View Details
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
+        
+    </section>
+</main>
     </div>
 
-    <!-- Mobile Menu for dashboard-->
-    <aside class="hamburger-menu hide">
-        <div class="menu-head">
-            <div class="logo-lg"><a href="#"><img src="assets/img/dummy-image.svg" alt=""></a></div>
-            <img src="assets/icons/close-x.svg" alt="" id="close-menu">
+    
+    <div class="modal-overlay sh-md" id="customerModal">
+        <div class="modal-content">
+            <div id="modalContent"></div>
         </div>
-        <ul class="menu-items">
-            <li class="btn btn-sm btn-ghost"><a href="dashboard.css"><img src="assets/icons/dashboard-icon.svg" alt="dashboard-icon">Dashboard</a></li>
-            <li class="btn btn-sm btn-ghost"><a href="search.html"><img src="assets/icons/search.svg" alt="search-icon">Search</a></li>
-            <li class="btn btn-sm btn-ghost"><a href="stats.html"><img src="assets/icons/stats.svg" alt="stats-icon">Stats</a></li>
-            <li class="btn btn-sm btn-ghost"><a href="help.html"><img src="assets/icons/question-circle.svg" alt="question-circle">Help</a></li>
-            <li class="btn btn-sm btn-ghost"><a href="stats.html"><img src="assets/icons/setting.svg" alt="settings-icon">Settings</a></li>
-            <li class="btn btn-sm btn-ghost"><a href="favorites.html"><img src="assets/icons/heart-alt.svg" alt="heart-alt">Favorites</a></li>
-        </ul>
-        <button class="btn btn-sm btn-secondary">Sign In</button>
-    </aside>
-
-
-
-
-    <script src="scripts/script.js"></script>
+        
+    </div>
+    
+    <script src="./Scripts/navbar.js"></script>
+    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/dashboardscript.js"></script>
     <script>
         // Pass customer data to JS
         const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
@@ -390,24 +355,33 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 const customer = customers[button.dataset.customerId];
                 if (customer) {
                     const content = `
+                        <div class="modal-header">
                         <h2>${customer.first_name} ${customer.last_name}</h2>
+                        <button class="modal-close btn btn-sm btn-secondary sh-sm" id="closeModal">
+                        <img src="assets/icons/close-x.svg" alt="Close">
+                        </button>
+                        </div>
                         <p><strong>Age:</strong> ${customer.age}</p>
                         <p><strong>Gender:</strong> ${customer.gender}</p>
                         ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
                         
                         <div class="measurements">
-                            <h3>Body Measurements</h3>
+                            <div class="modal-section">
+                            <h4>Body Measurements</h4>
                             ${customer.height ? `<p>Height: ${customer.height}cm</p>` : ''}
                             ${customer.chest ? `<p>Chest: ${customer.chest}cm</p>` : ''}
                             ${customer.waist ? `<p>Waist: ${customer.waist}cm</p>` : ''}
                             ${customer.hip ? `<p>Hip: ${customer.hip}cm</p>` : ''}
+                            </div>
                             
-                            <h3>Garment Measurements</h3>
+                            <div class="modal-section">
+                            <h4>Garment Measurements</h4>
                             ${customer.sleeve ? `<p>Sleeve: ${customer.sleeve}cm</p>` : ''}
                             ${customer.inseam ? `<p>Inseam: ${customer.inseam}cm</p>` : ''}
                             ${customer.outseam ? `<p>Outseam: ${customer.outseam}cm</p>` : ''}
                             ${customer.shoulder ? `<p>Shoulder: ${customer.shoulder}cm</p>` : ''}
                             ${customer.short_length ? `<p>Short Length: ${customer.short_length}cm</p>` : ''}
+                            </div>
                         </div>
                     `;
                     document.getElementById('modalContent').innerHTML = content;

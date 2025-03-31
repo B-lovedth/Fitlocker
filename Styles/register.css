@@ -1,97 +1,32 @@
-.register-container {
-  height: 100%;
-  width: 100%;
-  padding: 5rem 5rem 3rem;
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  overflow-x: hidden;
-  flex-direction: column;
 }
 
-.register-container > header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 3rem;
-}
-
-.register-container > .subject {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+main {
+  padding: 3rem 10%;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   width: 100%;
 }
 
-.register-container > form {
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  margin-top: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2.5rem;
 }
 
-.subject > h1 {
-  font-size: 2rem;
-}
-
-.subject > a {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 0.9rem;
-  background-color: #D148A6;
-  box-shadow: 3px 4px 1px #000;
-}
-
-.panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border: 1px solid #000;
-  border-radius: 20px;
-  padding: 3rem;
-}
-
-.panel h3 {
-  font-size: 1.5rem;
-  border-bottom: 2px solid #000;
-  padding-bottom: 1rem;
-}
-
-.fields {
-  display: grid;
-}
-
-.fields.p-d {
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-}
-
-.fields.m-d {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-}
-
-.fields > .field {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.field :where(input:not([type=radio]), select) {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
-.field :where(input, select):focus {
-  outline: none;
-}
-
-.field > label:first-child {
-  font-size: 0.7rem;
-  font-weight: bold;
-  margin-bottom: 5px;
+button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .flex {
@@ -106,22 +41,6 @@
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
-}
-
-.small {
-  font-size: 0.6rem;
-}
-
-button[type=submit] {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 0.9rem;
-  background-color: #D148A6;
-  box-shadow: 3px 4px 1px #000;
-  cursor: pointer;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .modal {
