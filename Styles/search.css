@@ -68,6 +68,7 @@ main {
     gap: 6px;
     flex-grow: 1;
 }
+.input-container 
 
 #filter-section {
     display: flex;

@@ -194,6 +194,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             border: none;
             cursor: pointer;
         }
+
+        .modal-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 
@@ -264,7 +271,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="input-container">
                     <label for="sex">Sex(M/F)</label>
-                    <input type="text" name="sex" id="sex" placeholder="M" class="input-small">
+
+                    <select name="sex" id="sex" class="input-small" placeholder="male">
+                        <option disabled selected>Choose Sex</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
+                    </select>
                 </div>
                 <div class="input-container">
                     <label for="family">Family</label>
@@ -356,6 +369,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <img src="assets/icons/close-x.svg" alt="Close">
             </button>
             <div id="modalContent"></div>
+            <div class="modal-actions">
+                <button id="editCustomer" class="btn btn-primary">Edit</button>
+                <button id="deleteCustomer" class="btn btn-danger">Delete</button>
+            </div>
         </div>
     </div>
 
@@ -382,12 +399,18 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <script src="scripts/script.js"></script>
     <script>
         // Pass customer data to JS
+        let currentCustomerId = null;
         const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
+        const families = <?= json_encode(array_column($data, null, 'family_id')) ?>
+        
+
 
         // Modal handling
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', () => {
-                const customer = customers[button.dataset.customerId];
+
+                currentCustomerId = button.dataset.customerId; //Store customer ID
+                const customer = customers[currentCustomerId];
                 if (customer) {
                     const content = `
                         <h2>${customer.first_name} ${customer.last_name}</h2>
@@ -396,13 +419,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
                         
                         <div class="measurements">
-                            <h3>Body Measurements</h3>
                             ${customer.height ? `<p>Height: ${customer.height}cm</p>` : ''}
                             ${customer.chest ? `<p>Chest: ${customer.chest}cm</p>` : ''}
                             ${customer.waist ? `<p>Waist: ${customer.waist}cm</p>` : ''}
                             ${customer.hip ? `<p>Hip: ${customer.hip}cm</p>` : ''}
-                            
-                            <h3>Garment Measurements</h3>
                             ${customer.sleeve ? `<p>Sleeve: ${customer.sleeve}cm</p>` : ''}
                             ${customer.inseam ? `<p>Inseam: ${customer.inseam}cm</p>` : ''}
                             ${customer.outseam ? `<p>Outseam: ${customer.outseam}cm</p>` : ''}
@@ -414,6 +434,36 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     document.getElementById('customerModal').style.display = 'flex';
                 }
             });
+        });
+
+        document.querySelectorAll('.view-family').forEach(button => {
+            button.addEventListener('click', () => {
+                const family = families[button.dataset.familyId];
+                if (family) {
+                    const content = `
+                        <h2><strong>Family Name:</strong> ${family.family_name}</h2>
+                        <h3><strong>Family Address:</strong> ${family.family_address}</h3>
+
+                       
+                       
+                        
+                    `;
+                    document.getElementById('modalContent').innerHTML = content;
+                    document.getElementById('customerModal').style.display = 'flex';
+                }
+            });
+        });
+
+        document.getElementById('editCustomer').addEventListener('click', () => {
+            if (currentCustomerId) {
+                window.location.href = `registerClient.php?edit_id=${currentCustomerId}`;
+            }
+        });
+
+        document.getElementById('deleteCustomer').addEventListener('click', () => {
+            if (currentCustomerId && confirm('Are you sure you want to delete this customer?')) {
+                window.location.href = `deleteCustomer.php?customer_id=${currentCustomerId}`;
+            }
         });
 
         // Close modal handlers
