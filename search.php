@@ -143,7 +143,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             opacity: 0.7;
             display: <?= !empty($searchTerm) ? 'block' : 'none' ?>;
         }
-        
+
 
         /* Modal Styles */
         .modal-overlay {
@@ -171,7 +171,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             position: relative;
         }
 
-        .modal-header{
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -187,7 +187,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
         #closeModal {
             height: 3rem;
-            width: 3rem;            
+            width: 3rem;
         }
 
         .modal-actions {
@@ -204,23 +204,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <?php require_once "./sidebar.php" ?>
     <!-- modal impport -->
     <?php require_once "./accountsModal.php" ?>
-    
+
     <div class="container">
         <?php require_once "./navbar.php" ?>
         <div id="overlay" class="hide"></div>
         <main class="main-section-container">
-        <header>
-            <!-- Responsive Navbar -->
-            <div class="page-title">
-                <a href="#"><img src="assets/icons/expand.svg" alt="expand-icon"></a>
-                <p class="sm">Search</p>
-            </div>
-            <div class="header-images">
-                <img src="assets/icons/heart-alt.svg" alt="favorites-icon">
-                <img src="assets/icons/menu-hamburger.svg" alt="" id="hamburger" class="hide">
-            </div>
-
-        </header>
             <form class="clientForm" method="GET">
                 <div class="search-container">
                     <div class="searchbar">
@@ -248,11 +236,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="field">
                         <label for="sex">Sex(M/F)</label>
                         <select name="sex" id="sex" class="input-small" placeholder="male">
-                        <option disabled selected>Choose Sex</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Other</option>
-                    </select>
+                            <option disabled selected>Choose Sex</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                        </select>
                     </div>
                     <div class="field">
                         <label for="family">Family</label>
@@ -260,8 +248,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </form>
-            <?php
-          /*     if ($customers == [] || $customers == null) {
+            
+            <!-- /*     if ($customers == [] || $customers == null) {
                     echo
                     ('
                         <div id="empty-search">
@@ -281,84 +269,84 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                    ');
                    
                    } */
-            ?>
-    
-    <section id="accounts" class="main-section-container">
-        <div id="main-section-header">
-            <h3>Accounts</h3>
-            <div class="mode">
-                <p class="sm">Individual</p>
-                <div id="account-switch">
-                    <div id="switch-button"></div>
+             -->
+
+            <section id="accounts" class="main-section-container">
+                <div id="main-section-header">
+                    <h3>Accounts</h3>
+                    <div class="mode">
+                        <p class="sm">Individual</p>
+                        <div id="account-switch">
+                            <div id="switch-button"></div>
+                        </div>
+                        <p class="sm">Family</p>
+                    </div>
                 </div>
-                <p class="sm">Family</p>
-            </div>
-        </div>
-        <div id="accounts-table">
-            <?php if ($viewMode === 'family'): ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Family Name</th>
-                            <th>Address</th>
-                            <th>Members</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data as $family): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($family['family_name']) ?></td>
-                                <td><?= htmlspecialchars($family['family_address']) ?></td>
-                                <td><?= $family['member_count'] ?></td>
-                                <td>
-                                    <button class="view-family btn btn-sm btn-outline"
-                                        data-family-id="<?= $family['family_id'] ?>">
-                                        View Family
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <table class="sh-">
-                    <thead>
-                        <tr>
-                            <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
-                            <th class="col2">Surname</th>
-                            <th class="col3">Age</th>
-                            <th class="col4">Sex</th>
-                            <th class="col5">Family Member</th>
-                            <th class="col6"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data as $customer): ?>
-                            <tr>
-                                <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
-                                <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
-                                <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
-                                <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
-                                <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
-                                <td class="col6">
-                                    <button class="view-details btn btn-sm btn-outline border-thick"
-                                        data-customer-id="<?= $customer['customer_id'] ?>">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
-        </div>
-        
-    </section>
-</main>
+                <div id="accounts-table">
+                    <?php if ($viewMode === 'family'): ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Family Name</th>
+                                    <th>Address</th>
+                                    <th>Members</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data as $family): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($family['family_name']) ?></td>
+                                        <td><?= htmlspecialchars($family['family_address']) ?></td>
+                                        <td><?= $family['member_count'] ?></td>
+                                        <td>
+                                            <button class="view-family btn btn-sm btn-outline"
+                                                data-family-id="<?= $family['family_id'] ?>">
+                                                View Family
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <table class="sh-">
+                            <thead>
+                                <tr>
+                                    <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
+                                    <th class="col2">Surname</th>
+                                    <th class="col3">Age</th>
+                                    <th class="col4">Sex</th>
+                                    <th class="col5">Family Member</th>
+                                    <th class="col6"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data as $customer): ?>
+                                    <tr>
+                                        <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
+                                        <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
+                                        <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
+                                        <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
+                                        <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
+                                        <td class="col6">
+                                            <button class="view-details btn btn-sm btn-outline border-thick"
+                                                data-customer-id="<?= $customer['customer_id'] ?>">
+                                                View Details
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+
+            </section>
+        </main>
     </div>
 
-    
+
     <div class="modal-overlay sh-md" id="customerModal">
         <div class="modal-content">
             <div id="modalContent"></div>
@@ -367,9 +355,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <button id="deleteCustomer" class="btn btn-danger">Delete</button>
             </div>
         </div>
-        
+
     </div>
-    
+
     <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/script.js"></script>
     <script src="./Scripts/dashboardscript.js"></script>
@@ -378,7 +366,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         let currentCustomerId = null;
         const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
         const families = <?= json_encode(array_column($data, null, 'family_id')) ?>
-        
+
 
 
         // Modal handling
@@ -391,9 +379,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     const content = `
                         <div class="modal-header">
                         <h2>${customer.first_name} ${customer.last_name}</h2>
-                        <button class="modal-close btn btn-sm btn-secondary sh-sm" id="closeModal">
-                        <img src="assets/icons/close-x.svg" alt="Close">
-                        </button>
+                       
                         </div>
                         <p><strong>Age:</strong> ${customer.age}</p>
                         <p><strong>Gender:</strong> ${customer.gender}</p>
