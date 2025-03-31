@@ -29,7 +29,7 @@ form {
 form .inputs-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 .password-status {
@@ -102,6 +102,9 @@ button:disabled {
 form #remember-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 /* Mobile Styles */

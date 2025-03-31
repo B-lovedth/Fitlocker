@@ -146,7 +146,7 @@ label {
   font-size: var(--body-sm);
 }
 
-input {
+input:not([type="checkbox"]) {
   padding: 12px 14px;
   border-radius: 8px;
   border: var(--border-normal);

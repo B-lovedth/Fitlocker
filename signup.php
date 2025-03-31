@@ -100,7 +100,7 @@ if (isset($conn)) {
 
             <div class="inputs-section">
                 <div class="input-container">
-                    <label for="username">Name</label>
+                    <label for="username">Name</label><br>
                     <input type="text" name="username" id="username" 
                            value="<?= htmlspecialchars($form_data['username'] ?? '') ?>" 
                            placeholder="John Doe" required>
@@ -110,7 +110,7 @@ if (isset($conn)) {
                 </div>
 
                 <div class="input-container">
-                    <label for="email">Email Address</label>
+                    <label for="email">Email Address</label><br>
                     <input type="email" name="email" id="email" 
                            value="<?= htmlspecialchars($form_data['email'] ?? '') ?>" 
                            placeholder="johndoe8@gmail.com" required>
@@ -120,7 +120,7 @@ if (isset($conn)) {
                 </div>
 
                 <div class="input-container">
-                    <label for="password">Password</label>
+                    <label for="password">Password</label><br>
                     <input type="password" name="password" id="password" 
                            placeholder="********" required>
                     <div class="password-status">
