@@ -86,8 +86,8 @@ if (isset($conn)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Styles/style.css">
-    <link rel="stylesheet" href="./Styles/signup.css">
+    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/signup.css?v=1.0">
     <title>FitLocker: Get Started</title>
 </head>
 <body>
@@ -99,7 +99,7 @@ if (isset($conn)) {
             <?php endif; ?>
 
             <div class="inputs-section">
-                <div class="input-container">
+                <div class="field">
                     <label for="username">Name</label>
                     <input type="text" name="username" id="username" 
                            value="<?= htmlspecialchars($form_data['username'] ?? '') ?>" 
@@ -109,7 +109,7 @@ if (isset($conn)) {
                     <?php endif; ?>
                 </div>
 
-                <div class="input-container">
+                <div class="field">
                     <label for="email">Email Address</label>
                     <input type="email" name="email" id="email" 
                            value="<?= htmlspecialchars($form_data['email'] ?? '') ?>" 
@@ -119,7 +119,7 @@ if (isset($conn)) {
                     <?php endif; ?>
                 </div>
 
-                <div class="input-container">
+                <div class="field">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" 
                            placeholder="********" required>

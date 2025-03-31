@@ -166,7 +166,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             background: white;
             padding: 2rem;
             border-radius: 8px;
-            width: 90%;
+            width: 80%;
             max-width: 500px;
             position: relative;
         }
@@ -217,7 +217,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <button type="submit" class="btn btn-sm btn-secondary" id="entersearch">Search</button>
                     <button class="btn btn-sm btn-ghost" id="filter">Filters</button>
                 </div>
-                <div id="filter-section" class="fields wide">
+                <div id="filter-section" class="fields slim">
                     <div class="field">
                         <label for="age1 age2">Age</label>
                         <div class="input-range">
@@ -401,8 +401,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             }
         });
 
-
-        // Function to reset search
+        
+        // Clear Search btn
+        const searchInput = document.getElementById("searchInput");
+        const clearSearch = document.getElementById("clearSearch");
+        searchInput.addEventListener('input', () => {
+            clearSearch.classlis
+        })
+            // Function to reset search
         function resetSearch() {
             document.getElementById('searchInput').value = '';
             window.location.href = 'search.php'; // Reload without search parameters

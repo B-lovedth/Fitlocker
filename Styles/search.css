@@ -151,8 +151,19 @@ main #empty-search {
     gap: 2rem;
 }
 
+/* Smaller phones */
+@media (max-width: 400px) {
+    .left-sidebar {
+        display: none;
+    }
+
+    /* Hide column 2-5 */
+    .col2, .col3, .col4, .col5 {
+        display: none;
+    }
+}
+
 @media (max-width: 700px) {
-    /* Navbar Mobile Responsive */
     .left-sidebar {
         display: none;
     }
@@ -164,7 +175,6 @@ main #empty-search {
 }
 
 @media (max-width: 890px) {
-    /* Navbar Mobile Responsive */
     .left-sidebar {
         display: none;
     }
@@ -176,7 +186,6 @@ main #empty-search {
 }
 
 @media (max-width: 1020px) {
-    /* Navbar Mobile Responsive */
     .left-sidebar {
         display: none;
     }

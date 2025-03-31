@@ -35,8 +35,12 @@ window.addEventListener('resize', () => {
         hamburgerBtn.setAttribute("src", "./assets/icons/menu-hamburger.svg");
         header.classList.remove("add-border-bottom");
         overlay.classList.add("hide");
-        sideNav.classList.remove("hide");
+        if (sideNav) {
+            sideNav.classList.remove("hide");
+        }
     } else {
-        sideNav.classList.add("hide");
+        if (sideNav) {
+            sideNav.classList.add("hide");
+        }
     }
 })

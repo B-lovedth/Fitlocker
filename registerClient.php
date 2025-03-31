@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
       $family_id = $result->fetch_assoc()['family_id'];
     } else {
-      $stmt = $conn->prepare("INSERT INTO families (family_name, family_name, user_id) VALUES (?, ?, ?)");
+      $stmt = $conn->prepare("INSERT INTO families (family_name, family_address, user_id) VALUES (?, ?, ?)");
       $stmt->bind_param("ssi", $last_name, $family_address, $user_id);
       $stmt->execute();
       $family_id = $stmt->insert_id;
@@ -100,11 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register Customer</title>
+  <title>Register Client</title>
   <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
+  <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
 </head>
 
 <body>
@@ -146,20 +147,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <label for="gender">Gender</label>
               <select name="gender" id="gender" required>
-                <option disabled selected>select gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option class="sm" disabled selected>select gender</option>
+                <option class="sm" value="male">Male</option>
+                <option class="sm" value="female">Female</option>
+                <option class="sm" value="other">Other</option>
               </select>
             </div>
             <div class="field">
-              <label for="add_to_family">Add to family</label>
+              <p class="sm">Add to family<p>
               <div class="row">
-                <label class="flex small">
-                  <input type="radio" name="add_to_family" value="yes">Yes
+                <input type="radio" name="add_to_family" value="yes" id="yes">Yes
+                <label for="yes" class="flex sm">
                 </label>
-                <label class="flex small">
-                  <input type="radio" name="add_to_family" value="no" checked>No
+                <input type="radio" name="add_to_family" value="no" checked id="no">No
+                <label for="yes" class="flex sm">
                 </label>
               </div>
             </div>

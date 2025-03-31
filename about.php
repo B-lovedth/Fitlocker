@@ -71,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
     <div id="overlay" class="hide"></div>
 
   <main>
-    <section class="page" id="about">
+    <section class="page" id="aboutUs">
       <div class="page-info">
         <h1>Who we are?</h1>
         <p>We're just a bunch of CSC students that had to do this for good grades. That's all. <br> What? Were you expecting more? Sorry nothing for you. <br> Scroll, click the button or do something man, irdc.</p>

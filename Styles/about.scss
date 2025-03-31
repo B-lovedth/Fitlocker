@@ -37,7 +37,7 @@ main {
 /* Section styles */
 
 .page {
-  padding: 20vh 0;
+  padding: 10vw 0;
   display: flex;
   scroll-snap-align: start;
   gap: 10%;
@@ -73,6 +73,10 @@ main {
   button {
     width: 100%;
   }
+  img {
+    height: 1.2rem;
+    aspect-ratio: 1 / 1;
+  }
 } 
 
 #smallContactButtons {
@@ -103,9 +107,21 @@ footer {
   text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 660px) {
+  .page {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  #aboutUs {
+    flex-direction: column-reverse;
+  }
   .page-image {
-    display: none;
+    width: 100%;
+  }
+  .section-image {
+    height: 20rem;
+    aspect-ratio:  1/1;
   }
   .page-info {
     width: 100%;

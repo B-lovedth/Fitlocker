@@ -10,7 +10,7 @@
             <ul class="menu-items">
               <a href="./dashboard.php" class="bold sm"><li class="btn btn-sm btn-ghost">Dashboard</li></a>
               <a href="./search.php" class="sm"><li class="btn btn-sm btn-ghost">Search</li></a>
-              <a class="sm"><li class="btn btn-sm btn-ghost">Help</li></a>
+              <a href="./about.php" class="sm"><li class="btn btn-sm btn-ghost">Help</li></a>
               <a class="sm"><li class="btn btn-sm btn-ghost">Profile</li></a>
               <a class="sm"><li class="btn btn-sm btn-ghost">Settings</li></a>
             </ul>

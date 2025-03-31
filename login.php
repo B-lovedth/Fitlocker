@@ -106,7 +106,7 @@ if (isset($_GET['forgot_password'])) {
                 <?php endif; ?>
 
             <div class="inputs-section">
-               <div class="input-container">
+               <div class="field">
                     <label for="email">Email Address</label>
                     <input type="email" name="email" id="email" 
                            value="<?= htmlspecialchars($email ?? '') ?>" 
@@ -116,7 +116,7 @@ if (isset($_GET['forgot_password'])) {
                     <?php endif; ?>
                 </div>
 
-                <div class="input-container">
+                <div class="field">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" 
                            placeholder="********" required>

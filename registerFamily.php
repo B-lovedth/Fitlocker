@@ -230,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="./registerClient.php"><button class="btn btn-sm btn-secondary sh-sm">Register Client Instead</button></a>
             </div>
             <form class="clientForm" action="registerFamily.php" method="POST">
-                <div class="personal panel">
+                <div class="personal panel sh-lg">
                     <h3>Family Details</h3>
                     <hr>
                     <div class="fields slim">
@@ -248,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </div>
-                <div class="measurement panel">
+                <div class="measurement panel sh-md">
                     <h3>Select Customers to Add to Family</h3>
                     <hr>
                     <div class="fields wide">
