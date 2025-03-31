@@ -27,10 +27,10 @@ const passwordInput = document.getElementById('password');
             const icon = element.querySelector('img');
             if (passwordInput.value === '') {
                 element.style.color = '#000';
-                icon.src = 'assets/icons/close-x-red.svg';
+                icon.src = './assets/icons/close-x-red.svg';
             } else {
                 element.style.color = isValid ? '#28a745' : '#dc3545';
-                icon.src = isValid ? 'assets/icons/check-green.svg' : 'assets/icons/close-x-red.svg';
+                icon.src = isValid ? './assets/icons/check-green.svg' : 'assets/icons/close-x-red.svg';
             }
         }
 

@@ -2,6 +2,9 @@ const expandBtn = document.getElementById("expand");
 const expandIcon = document.getElementById("expand-icon");
 const leftSideBar = document.querySelector(".left-sidebar");
 const leftSideBarTexts = document.getElementsByClassName("sidebar-text");
+const filterBtn = document.getElementById("filter"); 
+const filterSection = document.getElementById("filter-section"); 
+const pageTitle = document.querySelector(".page-title");
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page is fully loaded');
@@ -49,17 +52,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// //Hide or Show filters
+// if (filterBtn) {
+//     filterBtn.addEventListener("click", () => {
+//         console.log("working");
+//         filterSection.classList.toggle("hide");
+//     });
+// }
 
 //Expand Sidebar
-expandBtn.addEventListener("click", () => {
-  for (let i = 0; i < leftSideBarTexts.length; i++) {
-    const text = leftSideBarTexts[i];
-    text.classList.toggle("hide");
-    console.log(text);
-  }
-  if (expandBtn.classList.contains("hide")) {
-    expandIcon.setAttribute("src", "assets/icons/expand.svg");
-  } else {
-    expandIcon.setAttribute("src", "assets/icons/collapse.svg");
-  }
-});
+if (expandBtn) {
+    expandBtn.addEventListener("click", () => {
+      for (let i = 0; i < leftSideBarTexts.length; i++) {
+        const text = leftSideBarTexts[i];
+        text.classList.toggle("hide");
+        console.log(text);
+      }
+      if (expandBtn.classList.contains("hide")) {
+        expandIcon.setAttribute("src", "assets/icons/expand.svg");
+      } else {
+        expandIcon.setAttribute("src", "assets/icons/collapse.svg");
+      }
+    });
+}
+

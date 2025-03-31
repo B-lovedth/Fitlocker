@@ -21,14 +21,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     background-color: var(--deeppink);
     img {
-      height: 1.5em;
+      height: 1.5rem;
       aspect-ratio: 1/1;
       transition: .3s;
     }  
+    button {
+      :hover {
+        background-color: var(--peach);
+        border: 1px solid var(--black);
+      }
+      height: 3rem;
+      width: 3rem;
+    }
   }
   #topSide, #bottomSide {
     display: flex;
@@ -42,8 +51,9 @@
     width: 100%;
     aspect-ratio: 1/1;
     background-color: #FFFFFF;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
+
   .nav-icon:not(.active):hover {
     img {
       width: 60%;

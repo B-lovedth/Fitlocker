@@ -12,6 +12,7 @@
             onclick="switchActive(this), window.location.href='registerClient.php'">
             <img src="./assets/icons/stats.svg" alt="">
         </button>
+        <a href="./search.php"><button><img src="./assets/icons/search.svg" alt="search-icon"></button></a>
     </div>
     <div id="bottomSide">
         <button type="button" class="nav-icon" id="helpIcon" onclick="window.location.href='./about.php#contactUs'">
