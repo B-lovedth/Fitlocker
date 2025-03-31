@@ -140,9 +140,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitLocker: Register Family</title>
+    <title>Register Family</title>
     <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
+    <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
     <style>
         .customer-list {
@@ -217,24 +218,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <?php require_once "./sidebar.php" ?>
+    <?php require_once "./accountsModal.php" ?>
     <div class="container">
-        <?php require_once "./sidebar.php" ?>
-        <?php require_once "./accountsModal.php" ?>
-
+        <?php require_once "./navbar.php" ?>
+        <div id="overlay" class="hide"></div>
         <!-- Main body -->
-        <div class="register-container">
-            <header class="top">
-                <div>Register Family</div>
-                -
-            </header>
-            <div class="subject">
-                <h1>Register Family</h1>
-                <a href="./registerClient.php">Register Client</a>
+        <main class="main-section-container">
+            <div id="main-section-header">
+                <h2>Register Family</h2>
+                <a href="./registerClient.php"><button class="btn btn-sm btn-secondary sh-sm">Register Client Instead</button></a>
             </div>
             <form class="clientForm" action="registerFamily.php" method="POST">
                 <div class="personal panel">
                     <h3>Family Details</h3>
-                    <div class="fields p-d">
+                    <hr>
+                    <div class="fields slim">
                         <div class="field">
                             <label for="family_name">Family Name</label>
                             <input type="text" id="family_name" name="family_name" required />
@@ -251,9 +250,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="measurement panel">
                     <h3>Select Customers to Add to Family</h3>
-                    <div class="fields m-d">
+                    <hr>
+                    <div class="fields wide">
                         <div class="field">
-                            <input type="text" id="customerSearch" class="search-box" placeholder="Search customers..." />
+                            <input type="search" id="customerSearch" class="search-box" placeholder="Search customers..." />
                             <div class="customer-list" id="customerList">
                                 <?php foreach ($customers as $customer): ?>
                                 <div class="customer-item">
@@ -273,14 +273,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </div>
-                <button type="submit">Register</button>
+                <button class="btn btn-sm btn-primary sh-sm" type="submit">Register</button>
             </form>
-        </div>
+        </main>
     </div>
 
     <?php require_once "./success-failureModal.php" ?>
 
     <script src="./Scripts/script.js?v=1.0"></script>
+    <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
     <script>
         // Helper functions for modals

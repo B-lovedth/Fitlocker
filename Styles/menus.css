@@ -10,10 +10,6 @@
 }
 
 /* Navbar Styles */
-h2 {
-    font-size: 5rem;
-}
-
 header {
     position: sticky;
     top: 0;
@@ -23,12 +19,22 @@ header {
     width: 100%;
     background-color: var(--nude);
     z-index: 1;
+    box-shadow: 10px 0.5 var(--black);
 }
 
 .add-border-bottom {
     padding-bottom: 2rem;
     border-bottom: 2px solid var(--black);
     border-radius:  0 0 1rem 1rem;
+}
+
+.page-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.page-title img{
+    height: 1rem;
 }
 
 #logo {
@@ -69,7 +75,7 @@ header {
     margin-bottom: 1rem;
 }
 
-.hamburger-menu .menu-items+.btn-secondary {
+.hamburger-menu a>.btn-secondary, .hamburger-menu .menu-items+a {
     width: 100%;
 }
 
@@ -100,7 +106,7 @@ header {
   
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 890px) {
     /* Navbar Mobile Responsive */
     .nav-items, .navbar>button {
         display: none;
@@ -111,8 +117,7 @@ header {
     #hamburger {
         display: inline-block;
     }
-    /* Clear Desktop Images */
-  
+    /* Clear Desktop Images */  
 }
 
 /* JS Classes */

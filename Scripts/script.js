@@ -1,14 +1,10 @@
-const hamburgerBtn = document.getElementById("hamburger");
-const hamburgerMenu = document.getElementsByClassName("hamburger-menu")[0];
-const closeMenu = document.getElementById("close-menu");
-const body = document.querySelector("body");
-const overlay = document.getElementById("overlay");
-const signInBtn = document.querySelector(".sign-in");
-
 const expandBtn = document.getElementById("expand");
 const expandIcon = document.getElementById("expand-icon");
 const leftSideBar = document.querySelector(".left-sidebar");
 const leftSideBarTexts = document.getElementsByClassName("sidebar-text");
+const filterBtn = document.getElementById("filter"); 
+const filterSection = document.getElementById("filter-section"); 
+const pageTitle = document.querySelector(".page-title");
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page is fully loaded');
@@ -56,32 +52,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-  // Responsive navbar menu
-hamburgerBtn.addEventListener("click", () => {
-  hamburgerMenu.classList.toggle("hide");
-  overlay.classList.toggle("hide");
-});
-closeMenu.addEventListener("click", () => {
-  hamburgerMenu.classList.toggle("hide");
-});
 
-// Clear menu when you scale out
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 700) {
-    hamburgerMenu.classList.add("hide");
-  }
-});
+// Change Page Title 
+
+if (pageTitle) {
+    let currentPageTitle = document.title;
+    pageTitle.innerHTML = currentPageTitle;
+}
+
+// //Hide or Show filters
+// if (filterBtn) {
+//     filterBtn.addEventListener("click", () => {
+//         console.log("working");
+//         filterSection.classList.toggle("hide");
+//     });
+// }
 
 //Expand Sidebar
-expandBtn.addEventListener("click", () => {
-  for (let i = 0; i < leftSideBarTexts.length; i++) {
-    const text = leftSideBarTexts[i];
-    text.classList.toggle("hide");
-    console.log(text);
-  }
-  if (expandBtn.classList.contains("hide")) {
-    expandIcon.setAttribute("src", "assets/icons/expand.svg");
-  } else {
-    expandIcon.setAttribute("src", "assets/icons/collapse.svg");
-  }
-});
+if (expandBtn) {
+    expandBtn.addEventListener("click", () => {
+      for (let i = 0; i < leftSideBarTexts.length; i++) {
+        const text = leftSideBarTexts[i];
+        text.classList.toggle("hide");
+        console.log(text);
+      }
+      if (expandBtn.classList.contains("hide")) {
+        expandIcon.setAttribute("src", "assets/icons/expand.svg");
+      } else {
+        expandIcon.setAttribute("src", "assets/icons/collapse.svg");
+      }
+    });
+}
+

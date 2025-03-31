@@ -5,6 +5,7 @@ let hamburgerMenuOpen = false;
 const body = document.querySelector("body");
 const overlay = document.getElementById("overlay");
 const signInBtn = document.querySelector(".sign-in");
+const sideNav = document.querySelector("aside");
 
 // Responsive navbar menu
 hamburgerBtn.addEventListener('click', () => {
@@ -27,9 +28,15 @@ function toggleMenuBtn(isOpen) {
 
 // Clear menu when you scale out
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 700) {
-        hamburgerMenu.classList.add("hide")
+    if (window.innerWidth > 890) {
+        hamburgerMenu.classList.add("hide");
+        header.classList.remove("absolute");
         hamburgerMenuOpen = false;
         hamburgerBtn.setAttribute("src", "./assets/icons/menu-hamburger.svg");
+        header.classList.remove("add-border-bottom");
+        overlay.classList.add("hide");
+        sideNav.classList.remove("hide");
+    } else {
+        sideNav.classList.add("hide");
     }
 })
