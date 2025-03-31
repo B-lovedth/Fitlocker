@@ -59,7 +59,7 @@ CREATE TABLE `customers` (
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `phone` int(12) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `gender` enum('male','female','other') NOT NULL,
   `height` decimal(5,2) DEFAULT NULL,

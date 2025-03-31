@@ -1,30 +1,55 @@
 <?php
 // Start the session
 session_start();
+require_once 'db_connect.php';
+
+// Initialize edit mode and customer data (for form population)
+$editMode = false;
+$customerData = [];
+
+if (isset($_GET['edit_id'])) {
+  $editMode = true;
+  $customer_id = $_GET['edit_id'];
+  $user_id = $_SESSION['user_id'];
+
+  $stmt = $conn->prepare("SELECT customers.*, families.family_name 
+                          FROM customers 
+                          LEFT JOIN families ON customers.family_id = families.family_id
+                          WHERE customers.customer_id = ? AND customers.user_id = ?");
+  $stmt->bind_param("ii", $customer_id, $user_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $customerData = $result->fetch_assoc();
+  } else {
+    $_SESSION['error'] = 'Customer not found';
+    header("Location: search.php");
+    exit();
+  }
+  $stmt->close();
+}
 
 // Check if the user has an active session
 if (!isset($_SESSION['user_id'])) {
-  // No active session, redirect to login page
   header("Location: login.php");
-  exit(); // Stop further execution
+  exit();
 }
 
-// If we reach here, the user has an active session
-require_once 'db_connect.php'; // Database connection file
-
-// Handle form submission (only for authenticated users)
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Collect form data
+  // Collect common data
   $first_name = $_POST['first_name'];
   $last_name = $_POST['last_name'];
-  $address = $_POST['address'] ?? null; // Address is optional
+  $address = $_POST['address'] ?? null;
   $phone = !empty($_POST['phone']) ? (int)$_POST['phone'] : null;
   $age = !empty($_POST['age']) ? (int)$_POST['age'] : null;
   $gender = $_POST['gender'];
-  $add_to_family = $_POST['add_to_family'];
+  $add_to_family = $_POST['add_to_family'] ?? 'no';
   $family_name = $_POST['family_name'] ?? null;
+  $user_id = $_SESSION['user_id'];
 
-  // Measurements (convert empty fields to null)
+  // Collect measurements
   $measurements = [
     'height' => !empty($_POST['height']) ? (float)$_POST['height'] : null,
     'length' => !empty($_POST['length']) ? (float)$_POST['length'] : null,
@@ -38,58 +63,109 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'short_length' => !empty($_POST['short_length']) ? (float)$_POST['short_length'] : null,
   ];
 
-  // Get the user_id from the active session
-  $user_id = $_SESSION['user_id'];
-
-  // Handle family logic (if applicable)
+  // Handle family logic
   $family_id = null;
-  if ($add_to_family === 'yes') {
-    $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND family_name = ? AND user_id = ?");
-    $stmt->bind_param("ssi", $last_name, $family_name, $user_id);
+  if ($add_to_family === 'yes' && !empty($family_name)) {
+    $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND user_id = ?");
+    $stmt->bind_param("si", $family_name, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
+
     if ($result->num_rows > 0) {
       $family_id = $result->fetch_assoc()['family_id'];
     } else {
-      $stmt = $conn->prepare("INSERT INTO families (family_name, family_address, user_id) VALUES (?, ?, ?)");
-      $stmt->bind_param("ssi", $last_name, $family_address, $user_id);
+      $stmt = $conn->prepare("INSERT INTO families (family_address, family_name, user_id) VALUES (?, ?, ?)");
+      $stmt->bind_param("ssi", $address, $family_name, $user_id);
       $stmt->execute();
       $family_id = $stmt->insert_id;
     }
     $stmt->close();
   }
 
-  // Insert customer data into the database
-  $stmt = $conn->prepare("INSERT INTO customers (first_name, last_name, address, phone, age, gender, height, length, chest, waist, hip, sleeve, inseam, outseam, shoulder, short_length, family_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param(
-    "sssiisddddddddddii",
-    $first_name,
-    $last_name,
-    $address,
-    $phone,
-    $age,
-    $gender,
-    $measurements['height'],
-    $measurements['length'],
-    $measurements['chest'],
-    $measurements['waist'],
-    $measurements['hip'],
-    $measurements['sleeve'],
-    $measurements['inseam'],
-    $measurements['outseam'],
-    $measurements['shoulder'],
-    $measurements['short_length'],
-    $family_id,
-    $user_id
-  );
+  // Determine if it's an update or insert based on POST data
+  if (isset($_POST['customer_id'])) {
+    // UPDATE existing customer
+    $customer_id = $_POST['customer_id'];
+    $stmt = $conn->prepare("UPDATE customers SET
+      first_name = ?,
+      last_name = ?,
+      address = ?,
+      phone = ?,
+      age = ?,
+      gender = ?,
+      height = ?,
+      length = ?,
+      chest = ?,
+      waist = ?,
+      hip = ?,
+      sleeve = ?,
+      inseam = ?,
+      outseam = ?,
+      shoulder = ?,
+      short_length = ?,
+      family_id = ?
+      WHERE customer_id = ? AND user_id = ?");
 
-  if ($stmt->execute()) {
-    $_SESSION['registration_status'] = 'success';
+    $stmt->bind_param(
+      "sssiisddddddddddiii",
+      $first_name,
+      $last_name,
+      $address,
+      $phone,
+      $age,
+      $gender,
+      $measurements['height'],
+      $measurements['length'],
+      $measurements['chest'],
+      $measurements['waist'],
+      $measurements['hip'],
+      $measurements['sleeve'],
+      $measurements['inseam'],
+      $measurements['outseam'],
+      $measurements['shoulder'],
+      $measurements['short_length'],
+      $family_id,
+      $customer_id,
+      $user_id
+    );
   } else {
-    $_SESSION['registration_status'] = 'failure';
+    // Insert new customer
+    $stmt = $conn->prepare("INSERT INTO customers (first_name, last_name, address, phone, age, gender, height, length, chest, waist, hip, sleeve, inseam, outseam, shoulder, short_length, family_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param(
+      "sssiisddddddddddii",
+      $first_name,
+      $last_name,
+      $address,
+      $phone,
+      $age,
+      $gender,
+      $measurements['height'],
+      $measurements['length'],
+      $measurements['chest'],
+      $measurements['waist'],
+      $measurements['hip'],
+      $measurements['sleeve'],
+      $measurements['inseam'],
+      $measurements['outseam'],
+      $measurements['shoulder'],
+      $measurements['short_length'],
+      $family_id,
+      $user_id
+    );
   }
+
+  // Execute and handle results
+  if ($stmt->execute()) {
+    // Use the same condition to set the success message and redirect
+    $isUpdate = isset($_POST['customer_id']);
+    $_SESSION['message'] = $isUpdate ? 'Customer updated successfully' : 'Customer registered successfully';
+    header("Location: " . ($isUpdate ? "search.php" : "registerClient.php"));
+  } else {
+    $_SESSION['error'] = 'Database error: ' . $conn->error;
+    header("Location: registerClient.php");
+  }
+
   $stmt->close();
-  header("Location: registerClient.php"); // Redirect to show modal
   exit();
 }
 ?>
@@ -102,15 +178,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Client</title>
   <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
-  <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
+  <link rel="stylesheet" href="./Styles/sidebar.css" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
 </head>
 
 <body>
-  <?php require_once "./sidebar.php"?>
-  <?php require_once "./accountsModal.php"?>
+  <?php require_once "./sidebar.php" ?>
+  <?php require_once "./accountsModal.php" ?>
   <div class="container">
     <?php require_once "./navbar.php" ?>
     <div id="overlay" class="hide"></div>
@@ -120,37 +196,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="./registerFamily.php"><button class="btn btn-sm btn-secondary sh-sm">Register Family Instead</button></a>
       </div>
       <form class="clientForm" action="registerClient.php" method="POST">
+        <?php if ($editMode): ?>
+          <input type="hidden" name="customer_id" value="<?= $customerData['customer_id'] ?>">
+        <?php endif; ?>
+
+
         <div class="personal panel sh-md">
           <h3>Personal Details</h3>
           <hr>
           <div class="fields slim">
             <div class="field">
               <label for="first_name">First Name</label>
-              <input type="text" id="first_name" name="first_name" required />
+              <input type="text" id="first_name" name="first_name"
+                value="<?= $editMode ? htmlspecialchars($customerData['first_name']) : '' ?>" required>
             </div>
             <div class="field">
               <label for="last_name">Last Name</label>
-              <input type="text" id="last_name" name="last_name" required />
+              <input type="text" id="last_name" name="last_name"
+                value="<?= $editMode ? htmlspecialchars($customerData['last_name']) : '' ?>" required>
             </div>
             <div class="field">
               <label for="address">Address</label>
-              <input type="text" id="address" name="address" />
+              <input type="text" id="address" name="address"
+                value="<?= $editMode ? htmlspecialchars($customerData['address']) : '' ?>">
             </div>
             <div class="field">
               <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" />
+              <input type="tel" id="phone" name="phone"
+                value="<?= $editMode ? htmlspecialchars($customerData['phone']) : '' ?>">
             </div>
             <div class="field">
               <label for="age">Age</label>
-              <input type="number" min="1" id="age" name="age" />
+              <input type="number" min="1" id="age" name="age"
+                value="<?= $editMode ? htmlspecialchars($customerData['age']) : '' ?>">
             </div>
             <div class="field">
               <label for="gender">Gender</label>
               <select name="gender" id="gender" required>
-                <option class="sm" disabled selected>select gender</option>
-                <option class="sm" value="male">Male</option>
-                <option class="sm" value="female">Female</option>
-                <option class="sm" value="other">Other</option>
+                <option class="sm" disabled <?= !$editMode ? 'selected' : '' ?>>select gender</option>
+                <option class="sm" value="male" <?= ($editMode && $customerData['gender'] === 'male') ? 'selected' : '' ?>>Male</option>
+                <option class="sm" value="female" <?= ($editMode && $customerData['gender'] === 'female') ? 'selected' : '' ?>>Female</option>
+                <option class="sm" zvalue="other" <?= ($editMode && $customerData['gender'] === 'other') ? 'selected' : '' ?>>Other</option>
               </select>
             </div>
             <div class="field">
@@ -161,12 +247,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </label>
                 <input type="radio" name="add_to_family" value="no" checked id="no">No
                 <label for="yes" class="flex sm">
+                <label class="flex small">
+                  <input type="radio" name="add_to_family" value="yes"
+                    <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                  Yes
+                </label>
+                <label class="flex small">
+                  <input type="radio" name="add_to_family" value="no"
+                    <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                  No
                 </label>
               </div>
             </div>
-            <div class="field" id="family_address_field" style="display:none;">
-              <label for="family_address">Family Name</label>
-              <input type="text" id="family_name" name="family_name" />
+            <div class="field" id="family_name_field" style="display:<?= ($editMode && !empty($customerData['family_id'])) ? 'block' : 'none' ?>;">
+              <label for="family_name">Family Name</label>
+              <input type="text" id="family_name" name="family_name"
+                value="<?= $editMode ? htmlspecialchars($customerData['family_name']) : '' ?>">
             </div>
           </div>
         </div>
@@ -175,54 +271,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <hr>
           <div class="fields wide">
             <div class="field">
-              <label for="height">Height (cm)</label>
-              <input type="number" step="1" id="height" name="height" />
+              <label for="height">Height</label>
+              <input type="number" step="0.01" id="height" name="height"
+                value="<?= $editMode && !empty($customerData['height']) ? htmlspecialchars($customerData['height']) : '' ?>">
             </div>
             <div class="field">
-              <label for="length">Length (cm)</label>
-              <input type="number" step="1" id="length" name="length" />
+              <label for="length">Length</label>
+              <input type="number" step="0.01" id="length" name="length"
+                value="<?= $editMode && !empty($customerData['length']) ? htmlspecialchars($customerData['length']) : '' ?>">
             </div>
             <div class="field">
-              <label for="chest">Chest (cm)</label>
-              <input type="number" step="1" id="chest" name="chest" />
+              <label for="chest">Chest</label>
+              <input type="number" step="0.01" id="chest" name="chest"
+                value="<?= $editMode && !empty($customerData['chest']) ? htmlspecialchars($customerData['chest']) : '' ?>">
             </div>
             <div class="field">
-              <label for="waist">Waist (cm)</label>
-              <input type="number" step="1" id="waist" name="waist" />
+              <label for="waist">Waist</label>
+              <input type="number" step="0.01" id="waist" name="waist"
+                value="<?= $editMode && !empty($customerData['waist']) ? htmlspecialchars($customerData['waist']) : '' ?>">
             </div>
             <div class="field">
-              <label for="hip">Hip (cm)</label>
-              <input type="number" step="1" id="hip" name="hip" />
+              <label for="hip">Hip</label>
+              <input type="number" step="0.01" id="hip" name="hip"
+                value="<?= $editMode && !empty($customerData['hip']) ? htmlspecialchars($customerData['hip']) : '' ?>">
             </div>
             <div class="field">
-              <label for="sleeve">Sleeve (cm)</label>
-              <input type="number" step="1" id="sleeve" name="sleeve" />
+              <label for="sleeve">Sleeve</label>
+              <input type="number" step="0.01" id="sleeve" name="sleeve"
+                value="<?= $editMode && !empty($customerData['sleeve']) ? htmlspecialchars($customerData['sleeve']) : '' ?>">
             </div>
             <div class="field">
-              <label for="inseam">Inseam (cm)</label>
-              <input type="number" step="1" id="inseam" name="inseam" />
+              <label for="inseam">Inseam</label>
+              <input type="number" step="0.01" id="inseam" name="inseam"
+                value="<?= $editMode && !empty($customerData['inseam']) ? htmlspecialchars($customerData['inseam']) : '' ?>">
             </div>
             <div class="field">
-              <label for="outseam">Outseam (cm)</label>
-              <input type="number" step="1" id="outseam" name="outseam" />
+              <label for="outseam">Outseam</label>
+              <input type="number" step="0.01" id="outseam" name="outseam"
+                value="<?= $editMode && !empty($customerData['outseam']) ? htmlspecialchars($customerData['outseam']) : '' ?>">
             </div>
             <div class="field">
-              <label for="shoulder">Shoulder (cm)</label>
-              <input type="number" step="1" id="shoulder" name="shoulder" />
+              <label for="shoulder">Shoulder</label>
+              <input type="number" step="0.01" id="shoulder" name="shoulder"
+                value="<?= $editMode && !empty($customerData['shoulder']) ? htmlspecialchars($customerData['shoulder']) : '' ?>">
             </div>
             <div class="field">
-              <label for="short_length">Short Length (cm)</label>
-              <input type="number" step="1" id="short_length" name="short_length" />
+              <label for="short_length">Short Length</label>
+              <input type="number" step="0.01" id="short_length" name="short_length"
+                value="<?= $editMode && !empty($customerData['short_length']) ? htmlspecialchars($customerData['short_length']) : '' ?>">
             </div>
           </div>
         </div>
-        <button class="btn btn-sm btn-primary sh-sm" type="submit">Register</button>
+
+        <button class="btn btn-sm btn-primary sh-sm" type="submit">
+          <?= $editMode ? 'Update Customer' : 'Register' ?>
+        </button>
       </form>
-    </main>  
+    </main>
 
   </div>
 
-  <?php require_once "./success-failureModal.php" ?>
+  <?php require_once "success-failureModal.php" ?>
 
   <script src="./Scripts/script.js?v1.0"></script>
   <script src="./Scripts/navbar.js?v=1.0"></script>
@@ -262,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php unset($_SESSION['registration_status']); ?>
     <?php endif; ?>
 
-    // Show/hide family address field based on "Add to family" selection
+    // Show/hide family name field based on "Add to family" selection
     document.querySelectorAll('input[name="add_to_family"]').forEach(radio => {
       radio.addEventListener('change', function() {
         document.getElementById('family_name_field').style.display = this.value === 'yes' ? 'block' : 'none';

@@ -2,6 +2,11 @@
 session_start();
 require_once 'db_connect.php';
 
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
 $errors = [];
 $remember = false;
 
@@ -88,6 +93,10 @@ if (isset($_GET['forgot_password'])) {
         .wrapper { display: flex; gap: 2rem; }
         .left img { max-width: 600px; }
         form { display: flex; flex-direction: column; gap: 1rem; }
+
+        hr {
+            width: 50%;
+        }
     </style>
     <link rel="stylesheet" href="./Styles/main.css?v=1.0">
     <link rel="stylesheet" href="./Styles/signup.css?v=1.0">
@@ -127,14 +136,15 @@ if (isset($_GET['forgot_password'])) {
             </div>
             
             <div class="other-info">
-                <span  class="terms-container">
-                    <input type="checkbox" name="remember" id="remember">
-                    <label for="remember"><a href="#">Remember me</a></label>
-                </span>                
                 <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account">
                     Sign In
                 </button>
-                <a href="reset-password.php">Forgot password?</a>
+                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account" >
+                    Create Account
+                </button>
+                <div class="or">
+                    
+                <a href="#">Forgot password?</a>
             </div>
         </form>
         

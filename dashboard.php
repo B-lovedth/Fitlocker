@@ -73,7 +73,7 @@ $male_current_stmt->close();
 $male_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE gender = 'male' AND user_id = ? AND created_at >= ? AND created_at <= ?");
 $male_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $male_previous_stmt->execute();
-$male_previous = 0; // $male_previous_stmt->get_result()->fetch_assoc()['count'];
+$male_previous =  $male_previous_stmt->get_result()->fetch_assoc()['count'];
 $male_previous_stmt->close();
 
 $male_change = calculate_change($male_current, $male_previous);
@@ -181,7 +181,7 @@ $empty_family_total_stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./Styles/main.css?v=1.0">
-    <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/sidebar.css">
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/dashboardstyles.css?v=1.0">
 </head>
@@ -319,7 +319,7 @@ $empty_family_total_stmt->close();
             </div>
         </div>
 
-    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/script.js?v=1.0"></script>
     <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
 

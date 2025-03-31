@@ -8,6 +8,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Add after session_start()
+if (isset($_SESSION['message'])) {
+    $successMessage = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['error'])) {
+    $errorMessage = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
 // Initialize variables
 $searchTerm = '';
 $viewMode = $_GET['view'] ?? 'individual';
@@ -25,13 +35,14 @@ $user_id = $_SESSION['user_id'];
 // Build base query based on view mode
 if ($viewMode === 'family') {
     $query = "SELECT f.family_id, f.family_name, f.family_address, 
-                     COUNT(c.customer_id) AS member_count
+                     COUNT(c.customer_id) AS member_count,
+                     GROUP_CONCAT(CONCAT(c.first_name, ' ', c.last_name) SEPARATOR ', ') AS member_names
               FROM families f
               LEFT JOIN customers c ON f.family_id = c.family_id
               WHERE f.user_id = ?";
 } else {
-    $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender,
-                     c.height, c.chest, c.waist, c.hip, c.sleeve, 
+    $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender, c.address,
+                     c.phone, c.height, c.chest, c.waist, c.hip, c.sleeve, 
                      c.inseam, c.outseam, c.shoulder, c.short_length,
                      f.family_name
               FROM customers c
@@ -143,7 +154,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             opacity: 0.7;
             display: <?= !empty($searchTerm) ? 'block' : 'none' ?>;
         }
-        
+
 
         /* Modal Styles */
         .modal-overlay {
@@ -171,7 +182,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             position: relative;
         }
 
-        .modal-header{
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -187,7 +198,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
         #closeModal {
             height: 3rem;
-            width: 3rem;            
+            width: 3rem;
+        }
+
+        .modal-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
         }
     </style>
 </head>
@@ -197,7 +215,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <?php require_once "./sidebar.php" ?>
     <!-- modal impport -->
     <?php require_once "./accountsModal.php" ?>
-    
+
     <div class="container">
         <?php require_once "./navbar.php" ?>
         <div id="overlay" class="hide"></div>
@@ -228,7 +246,12 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="field">
                         <label for="sex">Sex(M/F)</label>
-                        <input type="text" name="sex" id="sex" placeholder="M" class="input-small">
+                        <select name="sex" id="sex" class="input-small" placeholder="male">
+                            <option disabled selected>Choose Sex</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                        </select>
                     </div>
                     <div class="field">
                         <label for="family">Family</label>
@@ -236,8 +259,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
             </form>
-            <?php
-          /*     if ($customers == [] || $customers == null) {
+
+            <!-- /*     if ($customers == [] || $customers == null) {
                     echo
                     ('
                         <div id="empty-search">
@@ -257,112 +280,125 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                    ');
                    
                    } */
-            ?>
-    
-    <section id="accounts" class="main-section-container">
-        <div id="main-section-header">
-            <h3>Accounts</h3>
-            <div class="mode">
-                <p class="sm">Individual</p>
-                <div id="account-switch">
-                    <div id="switch-button"></div>
+             -->
+
+            <section id="accounts" class="main-section-container">
+                <div id="main-section-header">
+                    <h3>Accounts</h3>
+                    <div class="mode">
+                        <p class="sm">Individual</p>
+                        <div id="account-switch">
+                            <div id="switch-button"></div>
+                        </div>
+                        <p class="sm">Family</p>
+                    </div>
                 </div>
-                <p class="sm">Family</p>
-            </div>
-        </div>
-        <div id="accounts-table">
-            <?php if ($viewMode === 'family'): ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Family Name</th>
-                            <th>Address</th>
-                            <th>Members</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data as $family): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($family['family_name']) ?></td>
-                                <td><?= htmlspecialchars($family['family_address']) ?></td>
-                                <td><?= $family['member_count'] ?></td>
-                                <td>
-                                    <button class="view-family btn btn-sm btn-outline"
-                                        data-family-id="<?= $family['family_id'] ?>">
-                                        View Family
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <table class="sh-">
-                    <thead>
-                        <tr>
-                            <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
-                            <th class="col2">Surname</th>
-                            <th class="col3">Age</th>
-                            <th class="col4">Sex</th>
-                            <th class="col5">Family Member</th>
-                            <th class="col6"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data as $customer): ?>
-                            <tr>
-                                <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
-                                <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
-                                <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
-                                <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
-                                <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
-                                <td class="col6">
-                                    <button class="view-details btn btn-sm btn-outline border-thick"
-                                        data-customer-id="<?= $customer['customer_id'] ?>">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
-        </div>
-        
-    </section>
-</main>
+                <div id="accounts-table">
+                    <?php if ($viewMode === 'family'): ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Family Name</th>
+                                    <th>Address</th>
+                                    <th>Members</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data as $family): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($family['family_name']) ?></td>
+                                        <td><?= htmlspecialchars($family['family_address']) ?></td>
+                                        <td><?= $family['member_count'] ?></td>
+                                        <td>
+                                            <button class="view-family btn btn-sm btn-outline"
+                                                data-family-id="<?= $family['family_id'] ?>">
+                                                View Family
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <table class="sh-">
+                            <thead>
+                                <tr>
+                                    <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
+                                    <th class="col2">Surname</th>
+                                    <th class="col3">Age</th>
+                                    <th class="col4">Sex</th>
+                                    <th class="col5">Family Member</th>
+                                    <th class="col6"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data as $customer): ?>
+                                    <tr>
+                                        <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
+                                        <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
+                                        <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
+                                        <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
+                                        <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
+                                        <td class="col6">
+                                            <button class="view-details btn btn-sm btn-outline border-thick"
+                                                data-customer-id="<?= $customer['customer_id'] ?>">
+                                                View Details
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+
+            </section>
+        </main>
     </div>
 
-    
+
     <div class="modal-overlay sh-md" id="customerModal">
         <div class="modal-content">
             <div id="modalContent"></div>
+            <div class="modal-actions">
+                <button id="editCustomer" class="btn btn-primary">Edit</button>
+                <button id="deleteCustomer" class="btn btn-danger">Delete</button>
+            </div>
         </div>
-        
     </div>
-    
+
+
+
+
+
     <script src="./Scripts/navbar.js"></script>
-    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/script.js?v=1.0"></script>
     <script src="./Scripts/dashboardscript.js"></script>
     <script>
         // Pass customer data to JS
+        let currentCustomerId = null;
         const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
+        const families = <?= json_encode(array_column($data, null, 'family_id')) ?>
+
+
 
         // Modal handling
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', () => {
-                const customer = customers[button.dataset.customerId];
+
+                currentCustomerId = button.dataset.customerId; //Store customer ID
+                const customer = customers[currentCustomerId];
                 if (customer) {
                     const content = `
                         <div class="modal-header">
                         <h2>${customer.first_name} ${customer.last_name}</h2>
-                        <button class="modal-close btn btn-sm btn-secondary sh-sm" id="closeModal">
-                        <img src="assets/icons/close-x.svg" alt="Close">
-                        </button>
+                       
                         </div>
-                        <p><strong>Age:</strong> ${customer.age}</p>
-                        <p><strong>Gender:</strong> ${customer.gender}</p>
+                        <p><strong>Age:</strong> ${customer.age || 'N/A'}</p>
+                        <p><strong>Gender:</strong> ${customer.gender || 'N/A'}</p>
+                        <p><strong>Address:</strong> ${customer.address || 'N/A'}</p>
+                        <p><strong>Phone:</strong> ${customer.phone || 'N/A'}</p>
                         ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
                         
                         <div class="measurements">
@@ -386,15 +422,42 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     `;
                     document.getElementById('modalContent').innerHTML = content;
                     document.getElementById('customerModal').style.display = 'flex';
+                    document.querySelector('.modal-actions').style.display = 'flex';
                 }
             });
         });
 
-        // Close modal handlers
-        document.getElementById('closeModal').addEventListener('click', () => {
-            document.getElementById('customerModal').style.display = 'none';
+        document.querySelectorAll('.view-family').forEach(button => {
+            button.addEventListener('click', () => {
+                const family = families[button.dataset.familyId];
+                if (family) {
+                    const content = `
+                        <h2><strong>Family Name:</strong> ${family.family_name}</h2>
+                        <h3><strong>Family Address:</strong> ${family.family_address}</h3>
+                        <p><strong>Members Count:</strong> ${family.member_count || 'N/A'}</p>
+                        <h3><strong>Family Members:</strong></h3>
+                        <p>${family.member_names || 'This Family is empty'}</p> 
+                    `;
+                    document.getElementById('modalContent').innerHTML = content;
+                    document.getElementById('customerModal').style.display = 'flex';
+                    document.querySelector('.modal-actions').style.display = 'none';
+                }
+            });
         });
 
+        document.getElementById('editCustomer').addEventListener('click', () => {
+            if (currentCustomerId) {
+                window.location.href = `registerClient.php?edit_id=${currentCustomerId}`;
+            }
+        });
+
+        document.getElementById('deleteCustomer').addEventListener('click', () => {
+            if (currentCustomerId && confirm('Are you sure you want to delete this customer?')) {
+                window.location.href = `deleteCustomer.php?customer_id=${currentCustomerId}`;
+            }
+        });
+
+        // Close modal handlers
         document.getElementById('customerModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('customerModal')) {
                 document.getElementById('customerModal').style.display = 'none';
@@ -440,6 +503,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             });
         });
     </script>
+
 </body>
 
 </html>

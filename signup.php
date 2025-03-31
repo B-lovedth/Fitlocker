@@ -2,6 +2,11 @@
 session_start();
 require_once 'db_connect.php';
 
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
 // Initialize session data
 $errors = $_SESSION['errors'] ?? [
     'username' => '',
@@ -134,7 +139,7 @@ if (isset($conn)) {
                     <input type="checkbox" name="terms" id="terms" required>
                     <label for="terms">I have read the <a href="#">Terms and Conditions</a></label>
                 </span>
-                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account" disabled>
+                <button type="submit" class="btn btn-primary sh-md btn-md" id="create-account" >
                     Create Account
                 </button>
                 <div class="or">
@@ -150,7 +155,7 @@ if (isset($conn)) {
     </main>
 
 
-    <script src="./Scripts/signup.js"></script>
-    <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/signup.js?v=1.0"></script>
+    <script src="./Scripts/script.js?v=1.0"></script>
 </body>
 </html>

@@ -135,6 +135,20 @@ a {
   font-size: var(--body-sm);
 }
 
+/* Each label with input should be in a div wrapper */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--body-sm);
+}
+
+input:not([type="checkbox"]) {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: var(--border-normal);
+  width: 100%;
+}
+
 /* Buttons */
 /* Button Sizes */
 .btn {
@@ -320,7 +334,7 @@ input[type="radio"] {
 
 /* Accounts modal styles */
 
-.modal-overlay {
+.account-modal-overlay {
   display: none; /* Hidden by default */
   position: fixed; /* Cover the entire viewport */
   top: 0;
@@ -334,7 +348,7 @@ input[type="radio"] {
   align-items: center; /* Center vertically */
 }
 
-.modal {
+.account-modal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -347,7 +361,7 @@ input[type="radio"] {
   height: 45%;
 }
 
-.modal h2 {
+.account-modal h2 {
   margin-bottom: 1rem;
   font-family: var(--headingfont);
   text-align: center;
@@ -359,8 +373,8 @@ input[type="radio"] {
   margin-top: 1rem;
 }
 
-.modal-btn,
-#closeModal {
+.account-modal-btn,
+#closeAccountModal {
   padding: 0.5rem 1rem;
   border: 2px solid var(--black);
   border-radius: 0.5rem;
@@ -373,15 +387,15 @@ input[type="radio"] {
   height: 5vh;
   transition: .2s;
 }
-#closeModal {  
+#closeAccountModal {  
   background-color: var(--deeppink);
 }
 
-#closeModal:hover {
+#closeAccountModal:hover {
   scale: 1.05;
   background-color: var(--peach);
 }
-.modal-btn:hover {
+.account-modal-btn:hover {
   scale: 1.05;
   background-color: var(--lilac);
 }

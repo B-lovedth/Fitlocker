@@ -10,8 +10,8 @@ $user = $result->fetch_assoc();
 $stmt->close();
 ?>
 
-<div class="modal-overlay" id="accountInfoOverlay">
-    <div class="modal">
+<div class="account-modal-overlay" id="accountInfoOverlay">
+    <div class="account-modal">
         <h2>Account Information</h2>
         <div id="accountInfo">
             <p class="lg">Account Name: <?php echo htmlspecialchars($user['username']); ?></p>
@@ -20,9 +20,7 @@ $stmt->close();
 
         </div>
         <div id="accountInfoButtons">
-            <button type="button" class="modal-btn">Delete Account</button>
-            <button type="button" class="modal-btn">Change Password</button>
-            <button type="button" class="modal-btn" id="closeModal">Close</button>
+            <button type="button" class="account-modal-btn" id="closeAccountModal">Close</button>
         </div>
     </div>
 </div>
