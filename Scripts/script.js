@@ -27,24 +27,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
     
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const accountIcon = document.getElementById("accountsIcon");
-    const closeModal = document.getElementById("closeModal");
-    const modalOverlay = document.getElementById("accountInfoOverlay");
-
-    if (accountIcon && closeModal && modalOverlay) {
-        // Show modal when account icon is clicked
-        accountIcon.addEventListener("click", function() {
-            modalOverlay.style.display = "flex";
-        });
-
-        // Hide modal when close button is clicked
-        closeModal.addEventListener("click", function() {
-            modalOverlay.style.display = "none";
-        });
+    const closeAccountModal = document.getElementById("closeAccountModal");
+    const accountModalOverlay = document.getElementById("accountInfoOverlay");
+  
+    if (accountIcon && closeAccountModal && accountModalOverlay) {
+      // Show modal when account icon is clicked
+      accountIcon.addEventListener("click", function () {
+        accountModalOverlay.style.display = "flex";
+      });
+  
+      // Hide modal when close button is clicked
+      closeAccountModal.addEventListener("click", function () {
+        accountModalOverlay.style.display = "none";
+      });
+    } else {
+      console.error("Modal elements not found");
     }
-});
+  });
 
+
+  // Change Page Title
+
+if (pageTitle) {
+    let currentPageTitle = document.title;
+    pageTitle.innerHTML = currentPageTitle;
+  }
 
 
 // //Hide or Show filters

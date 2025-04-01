@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Client</title>
-  <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
+  <link rel="stylesheet" href="./Styles/main.css" />
   <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
