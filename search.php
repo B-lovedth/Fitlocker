@@ -136,7 +136,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <title>Search</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/main.css">
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/search.css?v=1.0">
@@ -465,12 +465,12 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         });
 
         
-        // Clear Search btn
-        const searchInput = document.getElementById("searchInput");
-        const clearSearch = document.getElementById("clearSearch");
-        searchInput.addEventListener('input', () => {
-            clearSearch.classlis
-        })
+        // // Clear Search btn
+        // const searchInput = document.getElementById("searchInput");
+        // const clearSearch = document.getElementById("clearSearch");
+        // searchInput.addEventListener('input', () => {
+        //     clearSearch.classlis
+        // })
             // Function to reset search
         function resetSearch() {
             document.getElementById('searchInput').value = '';

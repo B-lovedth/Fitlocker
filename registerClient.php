@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Client</title>
-  <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
+  <link rel="stylesheet" href="./Styles/main.css" />
   <link rel="stylesheet" href="./Styles/sidebar.css" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
@@ -242,11 +242,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <p class="sm">Add to family<p>
               <div class="row">
-                <input type="radio" name="add_to_family" value="yes" id="yes">Yes
-                <label for="yes" class="flex sm">
-                </label>
-                <input type="radio" name="add_to_family" value="no" checked id="no">No
-                <label for="yes" class="flex sm">
                 <label class="flex small">
                   <input type="radio" name="add_to_family" value="yes"
                     <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
