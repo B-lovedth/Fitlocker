@@ -48,17 +48,69 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  background-color: #f9ecee;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 30px;
   max-width: 500px;
   text-align: center;
+  box-shadow: var(--large-shadow);
 }
 
 .modal-content button {
   margin: 10px;
   padding: 8px 16px;
+}
+
+#tryAgain, #regAgain {
+  background-color: var(--nude);
+  color: #000;
+  padding: 10px 20px;
+  border: var(--border-thick);
+  border-radius: 5px;
+  box-shadow: var(--medium-shadow);
+  cursor: pointer;
+}
+
+#tryAgain:hover, #regAgain:hover {
+  background-color: var(--grey);
+  color: #000;
+  border: var(--border-thick);
+  border-radius: 5px;
+  box-shadow: var(--medium-shadow);
+}
+
+#goDashboard {
+  background-color: var(--yellow);
+  color: #000;
+  padding: 10px 20px;
+  border: var(--border-thick);
+  border-radius: 5px;
+  box-shadow: var(--medium-shadow);
+  cursor: pointer;
+}
+
+#goDashboard:hover {
+  background-color: var(--grey);
+  color: #000;
+  border: var(--border-thick);
+  border-radius: 5px;
+  box-shadow: var(--medium-shadow);
 }/*# sourceMappingURL=register.css.map */
