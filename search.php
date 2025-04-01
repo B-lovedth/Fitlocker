@@ -181,7 +181,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             max-width: 500px;
             position: relative;
         }
+        .modal-content strong {
+            font-weight: 500;
+        }
 
+        .modal-content hr {
+            margin: .5rem 0 .5rem;
+        }
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -296,7 +302,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <p class="sm">Family</p>
                     </div>
                 </div>
-                <div id="accounts-table" class="sh-md">
+                <div id="accounts-table">
                     <?php if ($viewMode === 'family'): ?>
                         <table>
                             <thead>
@@ -393,6 +399,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                             <img src="./assets/icons/close-x.svg" alt="close-search">
                         </button>
                         </div>
+                        <hr>
                         <p><strong>Age:</strong> ${customer.age || 'N/A'}</p>
                         <p><strong>Gender:</strong> ${customer.gender || 'N/A'}</p>
                         <p><strong>Address:</strong> ${customer.address || 'N/A'}</p>
@@ -402,19 +409,21 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="measurements">
                             <div class="modal-section">
                             <h4>Body Measurements</h4>
-                            ${customer.height ? `<p>Height: ${customer.height}cm</p>` : ''}
-                            ${customer.chest ? `<p>Chest: ${customer.chest}cm</p>` : ''}
-                            ${customer.waist ? `<p>Waist: ${customer.waist}cm</p>` : ''}
-                            ${customer.hip ? `<p>Hip: ${customer.hip}cm</p>` : ''}
+                            <hr>
+                            ${customer.height ? `<strong><p>Height:</strong> ${customer.height}cm</p>` : ''}
+                            ${customer.chest ? `<strong><p>Chest:</strong> ${customer.chest}cm</p>` : ''}
+                            ${customer.waist ? `<strong><p>Waist:</strong> ${customer.waist}cm</p>` : ''}
+                            ${customer.hip ? `<strong><p>Hip:</strong> ${customer.hip}cm</p>` : ''}
                             </div>
                             
                             <div class="modal-section">
                             <h4>Garment Measurements</h4>
-                            ${customer.sleeve ? `<p>Sleeve: ${customer.sleeve}cm</p>` : ''}
-                            ${customer.inseam ? `<p>Inseam: ${customer.inseam}cm</p>` : ''}
-                            ${customer.outseam ? `<p>Outseam: ${customer.outseam}cm</p>` : ''}
-                            ${customer.shoulder ? `<p>Shoulder: ${customer.shoulder}cm</p>` : ''}
-                            ${customer.short_length ? `<p>Short Length: ${customer.short_length}cm</p>` : ''}
+                            <hr>
+                            ${customer.sleeve ? `<strong><p>Sleeve:</strong> ${customer.sleeve}cm</p>` : ''}
+                            ${customer.inseam ? `<strong><p>Inseam:</strong> ${customer.inseam}cm</p>` : ''}
+                            ${customer.outseam ? `<strong><p>Outseam:</strong> ${customer.outseam}cm</p>` : ''}
+                            ${customer.shoulder ? `<strong><p>Shoulder:</strong> ${customer.shoulder}cm</p>` : ''}
+                            ${customer.short_length ? `<strong><p>Short Length:</strong> ${customer.short_length}cm</p>` : ''}
                             </div>
                         </div>
                     `;
@@ -441,6 +450,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                             <img src="./assets/icons/close-x.svg" alt="close-search">
                         </button>
                         </div>
+                        <hr>
                         <p><strong>Family Address:</strong> ${family.family_address}</p>
                         <p><strong>Members Count:</strong> ${family.member_count || 'N/A'}</p>
                         <h3><strong>Family Members:</strong></h3>
