@@ -184,15 +184,15 @@ main {
   margin-bottom: 0.3rem;
 }
 .green {
-  background-color: gr;
+  background-color: var(--green);
 }
 
 .red {
-  background-color: red;
+  background-color: var(--red);
 }
 
 .gray {
-  background-color: gray;
+  background-color: var(--gray);
 }
 #countChangeInfo {
   font-size: calc(0.5rem + 0.1vw);

@@ -32,13 +32,13 @@ function calculate_change($current, $previous)
 }
 
 // **Individual Accounts**
-$individual_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE family_id IS NULL AND user_id = ? AND created_at >= ?");
+$individual_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE user_id = ? AND created_at >= ?");
 $individual_current_stmt->bind_param("is", $user_id, $current_month_start);
 $individual_current_stmt->execute();
 $individual_current = $individual_current_stmt->get_result()->fetch_assoc()['count'];
 $individual_current_stmt->close();
 
-$individual_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE family_id IS NULL AND user_id = ? AND created_at >= ? AND created_at <= ?");
+$individual_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE user_id = ? AND created_at >= ? AND created_at <= ?");
 $individual_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $individual_previous_stmt->execute();
 $individual_previous = $individual_previous_stmt->get_result()->fetch_assoc()['count'];
@@ -73,7 +73,7 @@ $male_current_stmt->close();
 $male_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE gender = 'male' AND user_id = ? AND created_at >= ? AND created_at <= ?");
 $male_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $male_previous_stmt->execute();
-$male_previous =  $male_previous_stmt->get_result()->fetch_assoc()['count'];
+$male_previous = $male_previous_stmt->get_result()->fetch_assoc()['count'];
 $male_previous_stmt->close();
 
 $male_change = calculate_change($male_current, $male_previous);
@@ -89,7 +89,7 @@ $female_current_stmt->close();
 $female_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE gender = 'female' AND user_id = ? AND created_at >= ? AND created_at <= ?");
 $female_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $female_previous_stmt->execute();
-$female_previous = 0; // $female_previous_stmt->get_result()->fetch_assoc()['count'];
+$female_previous = $female_previous_stmt->get_result()->fetch_assoc()['count'];
 $female_previous_stmt->close();
 
 $female_change = calculate_change($female_current, $female_previous);
@@ -105,7 +105,7 @@ $orphan_current_stmt->close();
 $orphan_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE family_id IS NULL AND user_id = ? AND created_at >= ? AND created_at <= ?");
 $orphan_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $orphan_previous_stmt->execute();
-$orphan_previous = 0; // $orphan_previous_stmt->get_result()->fetch_assoc()['count'];
+$orphan_previous = $orphan_previous_stmt->get_result()->fetch_assoc()['count'];
 $orphan_previous_stmt->close();
 
 $orphan_change = calculate_change($orphan_current, $orphan_previous);
@@ -121,7 +121,7 @@ $empty_family_current_stmt->close();
 $empty_family_previous_stmt = $conn->prepare("SELECT COUNT(*) as count FROM families f LEFT JOIN customers c ON f.family_id = c.family_id WHERE f.user_id = ? AND c.customer_id IS NULL AND f.created_at >= ? AND f.created_at <= ?");
 $empty_family_previous_stmt->bind_param("iss", $user_id, $previous_month_start, $previous_month_end);
 $empty_family_previous_stmt->execute();
-$empty_family_previous = 0; // $empty_family_previous_stmt->get_result()->fetch_assoc()['count'];
+$empty_family_previous = $empty_family_previous_stmt->get_result()->fetch_assoc()['count'];
 $empty_family_previous_stmt->close();
 
 $empty_family_change = calculate_change($empty_family_current, $empty_family_previous);
@@ -157,14 +157,14 @@ $female_total_stmt->execute();
 $female_total = $female_total_stmt->get_result()->fetch_assoc()['count'];
 $female_total_stmt->close();
 
-// Total Orphans (same as Individual Accounts, reflecting current total)
+// Total Orphans 
 $orphan_total_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE family_id IS NULL AND user_id = ?");
 $orphan_total_stmt->bind_param("i", $user_id);
 $orphan_total_stmt->execute();
 $orphan_total = $orphan_total_stmt->get_result()->fetch_assoc()['count'];
 $orphan_total_stmt->close();
 
-
+// Total Empty Famillies
 $empty_family_total_stmt = $conn->prepare("SELECT COUNT(*) as count FROM families f LEFT JOIN customers c ON f.family_id = c.family_id WHERE f.user_id = ? AND c.customer_id IS NULL");
 $empty_family_total_stmt->bind_param("i", $user_id);
 $empty_family_total_stmt->execute();
@@ -180,7 +180,7 @@ $empty_family_total_stmt->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="./Styles/main.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/main.css">
     <link rel="stylesheet" href="./Styles/sidebar.css">
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/dashboardstyles.css?v=1.0">
