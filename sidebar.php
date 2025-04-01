@@ -1,9 +1,7 @@
 <aside class="dashboard-navbar" id="sideNav">
     <div id="topSide">
         <a href="homepage.php" class="home-link">
-            <div class="mini-logo-container">
-                <img src="./assets/Logos/mini-logo (2).png" alt="mini-logo" id="miniLogo">
-            </div>
+            <img src="./assets/Logos/mini-logo (2).png" alt="mini-logo" id="miniLogo">
         </a>
         <a>
             <button
@@ -22,7 +20,7 @@
                 data-page="registerClient"
                 id="registerIcon"
                 onclick="switchActive(this), window.location.href='registerClient.php'">
-                <img src="./assets/icons/stats.svg" alt="">
+                <img src="./assets/icons/edit.svg" alt="">
             </button>
         </a>
         <a>
@@ -43,7 +41,7 @@
         <button type="button" class="nav-icon" id="accountsIcon">
             <img src="./assets/icons/avatar.svg" alt="profile-icon">
         </button>
-        <button type="button" class="nav-icon" id="logoutIcon">
+        <button type="button" class="nav-icon logoutIcon" id="logoutIcon">
             <img src="./assets/icons/expand.svg" alt="profile-icon">
         </button>
 

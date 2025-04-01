@@ -27,12 +27,17 @@ button {
 }
 .row{
     display:flex;
-    gap:1rem;
+    gap:.5rem;
     align-items:center;
-    justify-content:space-between;
+}
+
+.radio-option {
+    display: flex;
+    gap: .5rem;
 }
 
 
+// Selected Customers
 // modal styles
 
 .modal {

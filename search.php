@@ -145,7 +145,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         .clear-search {
             position: absolute;
             right: 0.875rem;
-            top: 0.5rem;
+            top: 0.6rem;
             height: 0.5rem;
             aspect-ratio: 1/1;
             background: none;
@@ -190,6 +190,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             margin-bottom: 1rem;
         }
 
+        .modal-header img {
+            height: 1rem;
+        }
         .modal-section {
             display: flex;
             flex-direction: column;
@@ -246,11 +249,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="field">
                         <label for="sex">Sex(M/F)</label>
-                        <select name="sex" id="sex" class="input-small" placeholder="male">
-                            <option disabled selected>Choose Sex</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                            <option value="O">Other</option>
+                        <select name="sex" id="sex" placeholder="male">
+                            <option class="sm" disabled selected>Choose Sex</option>
+                            <option class="sm" value="M">Male</option>
+                            <option class="sm" value="F">Female</option>
+                            <option class="sm" value="O">Other</option>
                         </select>
                     </div>
                     <div class="field">
@@ -293,7 +296,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <p class="sm">Family</p>
                     </div>
                 </div>
-                <div id="accounts-table">
+                <div id="accounts-table" class="sh-md">
                     <?php if ($viewMode === 'family'): ?>
                         <table>
                             <thead>
@@ -321,10 +324,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                             </tbody>
                         </table>
                     <?php else: ?>
-                        <table class="sh-">
+                        <table class="">
                             <thead>
                                 <tr>
-                                    <th class="col1">Name <span class="sort"><img src="assets/icons/chevron-up.svg" alt=""><img src="assets/icons/chevron-down.svg" alt=""></span></th>
+                                    <th class="col1">Name</th>
                                     <th class="col2">Surname</th>
                                     <th class="col3">Age</th>
                                     <th class="col4">Sex</th>
@@ -356,33 +359,26 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             </section>
         </main>
     </div>
-
-
-    <div class="modal-overlay sh-md" id="customerModal">
-        <div class="modal-content">
+    
+    <div class="modal-overlay" id="customerModal">
+        <div class="modal-content sh-lg">
             <div id="modalContent"></div>
             <div class="modal-actions">
-                <button id="editCustomer" class="btn btn-primary">Edit</button>
-                <button id="deleteCustomer" class="btn btn-danger">Delete</button>
+                <button id="editCustomer" class="btn btn-sm btn-primary sh-sm">Edit</button>
+                <button id="deleteCustomer" class="btn btn-sm btn-danger sh-sm">Delete</button>
             </div>
         </div>
     </div>
 
-
-
-
-
-    <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/script.js?v=1.0"></script>
-    <script src="./Scripts/dashboardscript.js"></script>
+    <script src="./Scripts/navbar.js?"></script>
+    <script src="./Scripts/dashboardscript.js?v=1.0"></script>
     <script>
         // Pass customer data to JS
         let currentCustomerId = null;
         const customers = <?= json_encode(array_column($data, null, 'customer_id')) ?>;
         const families = <?= json_encode(array_column($data, null, 'family_id')) ?>
-
-
-
+                                          
         // Modal handling
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', () => {
@@ -393,7 +389,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     const content = `
                         <div class="modal-header">
                         <h2>${customer.first_name} ${customer.last_name}</h2>
-                       
+                        <button class="btn btn-sm btn-secondary sh-sm close-search" id="close-search">
+                            <img src="./assets/icons/close-x.svg" alt="close-search">
+                        </button>
                         </div>
                         <p><strong>Age:</strong> ${customer.age || 'N/A'}</p>
                         <p><strong>Gender:</strong> ${customer.gender || 'N/A'}</p>
@@ -423,7 +421,12 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     document.getElementById('modalContent').innerHTML = content;
                     document.getElementById('customerModal').style.display = 'flex';
                     document.querySelector('.modal-actions').style.display = 'flex';
-                }
+
+                    //Close Search with the button
+                    document.getElementById("close-search").addEventListener('click', () => {
+                        document.getElementById('customerModal').style.display = 'none';
+                    });
+                    }
             });
         });
 
@@ -432,8 +435,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 const family = families[button.dataset.familyId];
                 if (family) {
                     const content = `
-                        <h2><strong>Family Name:</strong> ${family.family_name}</h2>
-                        <h3><strong>Family Address:</strong> ${family.family_address}</h3>
+                        <div class="modal-header">
+                        <h2>${family.family_name} Family</h2>
+                        <button class="btn btn-sm btn-secondary sh-sm close-search" id="close-search">
+                            <img src="./assets/icons/close-x.svg" alt="close-search">
+                        </button>
+                        </div>
+                        <p><strong>Family Address:</strong> ${family.family_address}</p>
                         <p><strong>Members Count:</strong> ${family.member_count || 'N/A'}</p>
                         <h3><strong>Family Members:</strong></h3>
                         <p>${family.member_names || 'This Family is empty'}</p> 
@@ -441,6 +449,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     document.getElementById('modalContent').innerHTML = content;
                     document.getElementById('customerModal').style.display = 'flex';
                     document.querySelector('.modal-actions').style.display = 'none';
+                    
+                    //Close Search with the button
+                    document.getElementById("close-search").addEventListener('click', () => {
+                        document.getElementById('customerModal').style.display = 'none';
+                    });
                 }
             });
         });
@@ -458,20 +471,15 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         });
 
         // Close modal handlers
-        document.getElementById('customerModal').addEventListener('click', (e) => {
+        document.getElementById('customerModal').addEventListener('click', (e) => { //Close by touching anywhere outside the modal
             if (e.target === document.getElementById('customerModal')) {
                 document.getElementById('customerModal').style.display = 'none';
             }
         });
+        console.log(document.getElementById("close-search"));
+            
 
-        
-        // Clear Search btn
-        const searchInput = document.getElementById("searchInput");
-        const clearSearch = document.getElementById("clearSearch");
-        searchInput.addEventListener('input', () => {
-            clearSearch.classlis
-        })
-            // Function to reset search
+        // Function to reset search
         function resetSearch() {
             document.getElementById('searchInput').value = '';
             window.location.href = 'search.php'; // Reload without search parameters

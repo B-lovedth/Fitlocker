@@ -1,63 +1,51 @@
-const expandBtn = document.getElementById("expand");
-const expandIcon = document.getElementById("expand-icon");
-const leftSideBar = document.querySelector(".left-sidebar");
-const leftSideBarTexts = document.getElementsByClassName("sidebar-text");
-const filterBtn = document.getElementById("filter");
-const filterSection = document.getElementById("filter-section");
-const pageTitle = document.querySelector(".page-title");
+const filterBtn = document.getElementById("filter"); 
+const filterSection = document.getElementById("filter-section"); 
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Page is fully loaded");
-  const logoutButton = document.getElementById("logoutIcon");
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page is fully loaded');
+    const logoutButton = document.querySelectorAll('.logoutIcon'); //Changed to cover mobile button
+    
+    if (logoutButton) {
+        logoutButton.forEach(button => { 
+            button.addEventListener('click', function() {
+                if (confirm('Are you sure you want to Log Out?')) {
+                    fetch('logout.php')
+                        .then(response => response.text())
+                        .then(data => {
+                            if (data === 'success') {
+                                window.location.href = 'homepage.php';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error during logout:', error);
+                        });
+                }
+            });
+        });
+    } else {
+        console.error('Logout button not found');
+    }
+});
+    
+  document.addEventListener("DOMContentLoaded", function() {
+    const accountIcon = document.getElementById("accountsIcon");
+    const closeModal = document.getElementById("closeModal");
+    const modalOverlay = document.getElementById("accountInfoOverlay");
 
-  if (logoutButton) {
-    console.log("Logout button found");
-    logoutButton.addEventListener("click", function () {
-      console.log("Logout button clicked");
-      if (confirm("Are you sure you want to Log Out?")) {
-        fetch("logout.php")
-          .then((response) => response.text())
-          .then((data) => {
-            if (data === "success") {
-              window.location.href = "homepage.php";
-            }
-          })
-          .catch((error) => {
-            console.error("Error during logout:", error);
-          });
-      }
-    });
-  } else {
-    console.error("Logout button not found");
-  }
+    if (accountIcon && closeModal && modalOverlay) {
+        // Show modal when account icon is clicked
+        accountIcon.addEventListener("click", function() {
+            modalOverlay.style.display = "flex";
+        });
+
+        // Hide modal when close button is clicked
+        closeModal.addEventListener("click", function() {
+            modalOverlay.style.display = "none";
+        });
+    }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const accountIcon = document.getElementById("accountsIcon");
-  const closeAccountModal = document.getElementById("closeAccountModal");
-  const accountModalOverlay = document.getElementById("accountInfoOverlay");
 
-  if (accountIcon && closeAccountModal && accountModalOverlay) {
-    // Show modal when account icon is clicked
-    accountIcon.addEventListener("click", function () {
-      accountModalOverlay.style.display = "flex";
-    });
-
-    // Hide modal when close button is clicked
-    closeAccountModal.addEventListener("click", function () {
-      accountModalOverlay.style.display = "none";
-    });
-  } else {
-    console.error("Modal elements or delete button not found");
-  }
-});
-
-// Change Page Title
-
-if (pageTitle) {
-  let currentPageTitle = document.title;
-  pageTitle.innerHTML = currentPageTitle;
-}
 
 // //Hide or Show filters
 // if (filterBtn) {
@@ -66,19 +54,3 @@ if (pageTitle) {
 //         filterSection.classList.toggle("hide");
 //     });
 // }
-
-//Expand Sidebar
-if (expandBtn) {
-  expandBtn.addEventListener("click", () => {
-    for (let i = 0; i < leftSideBarTexts.length; i++) {
-      const text = leftSideBarTexts[i];
-      text.classList.toggle("hide");
-      console.log(text);
-    }
-    if (expandBtn.classList.contains("hide")) {
-      expandIcon.setAttribute("src", "assets/icons/expand.svg");
-    } else {
-      expandIcon.setAttribute("src", "assets/icons/collapse.svg");
-    }
-  });
-}

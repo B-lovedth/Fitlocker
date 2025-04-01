@@ -79,7 +79,9 @@ body {
   width: 100vw;
   min-height: 100vh;
   background-color: var(--nude);
-  background-image: url("./assets/img/background-net.svg");
+  background-image: url('./assets/img/background-net.svg');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
   overflow-x: hidden;
 }
 
@@ -135,18 +137,8 @@ a {
   font-size: var(--body-sm);
 }
 
-/* Each label with input should be in a div wrapper */
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: var(--body-sm);
-}
-
-input:not([type="checkbox"]) {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: var(--border-normal);
-  width: 100%;
+.tn {
+  font-size: var(--body-tn);
 }
 
 /* Buttons */
@@ -154,11 +146,11 @@ input:not([type="checkbox"]) {
 .btn {
   border: var(--border-thick);
   color: var(--black);
-  border-radius: 8px;
+  border-radius: .5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .btn:hover {
@@ -168,23 +160,26 @@ input:not([type="checkbox"]) {
 .btn-lg {
   font-size: var(--btn-lg);
   padding: 1.125rem 1.5rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
 }
+
 
 .btn-md {
   font-size: var(--btn-md);
   padding: 0.875rem 1.25rem;
-  border: var(--border-thick);
+  border: var(--border-normal);
 }
 
 .btn-sm {
   font-size: var(--btn-sm);
   padding: 0.5rem 2rem;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   border: var(--border-thin);
 }
 
 .btn-tn {
+  border: var(--border-thin);
+  border-radius: 0.25rem;
   font-size: var(--btn-tn);
   padding: 0.3rem 0.625rem;
 }
@@ -218,6 +213,10 @@ input:not([type="checkbox"]) {
 .btn-ghost:hover {
   background-color: var(--brown);
   color: white;
+}
+
+.btn-danger{ 
+  background-color: var(--red);
 }
 
 .btn a {
@@ -281,13 +280,15 @@ input[type="checkbox"] {
   align-items: center;
 }
 
-input[type="checkbox"]+label {
-  margin-bottom: 0;
-}
-
 input[type="radio"] {
   width: 1rem;
   height: 1rem;
+}
+
+input:focus {
+  outline: 1px dashed var(--black);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
 }
 
 .input-range {
@@ -296,10 +297,6 @@ input[type="radio"] {
   align-items: center;
 }
 
-.input-small {
-  font-size: var(--body-sm);
-  padding: 8px 12px;
-}
 .panel {
   display:flex;
   flex-direction:column;
@@ -326,10 +323,6 @@ input[type="radio"] {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.field :where(input,select):focus {
-    outline: none;
 }
 
 /* Accounts modal styles */

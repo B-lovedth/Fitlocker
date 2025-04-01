@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Client</title>
   <link rel="stylesheet" href="./Styles/main.css?v=1.0" />
-  <link rel="stylesheet" href="./Styles/sidebar.css" />
+  <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
   <link rel="stylesheet" href="./Styles/register.css?v=1.0" />
   <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
@@ -242,21 +242,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <p class="sm">Add to family<p>
               <div class="row">
-                <input type="radio" name="add_to_family" value="yes" id="yes">Yes
-                <label for="yes" class="flex sm">
-                </label>
-                <input type="radio" name="add_to_family" value="no" checked id="no">No
-                <label for="yes" class="flex sm">
-                <label class="flex small">
-                  <input type="radio" name="add_to_family" value="yes"
-                    <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
-                  Yes
-                </label>
-                <label class="flex small">
-                  <input type="radio" name="add_to_family" value="no"
-                    <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
-                  No
-                </label>
+                <div class="radio-option">
+                  <input id="yes" type="radio" name="add_to_family" value="yes"
+                  <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                  <label for="yes" class="flex sm">Yes</label>
+                </div>
+                <div class="radio-option">
+                  <input id="no" type="radio" name="add_to_family" value="no"
+                  <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                  <label for="yes" class="flex sm">No</label>
+                </div>
               </div>
             </div>
             <div class="field" id="family_name_field" style="display:<?= ($editMode && !empty($customerData['family_id'])) ? 'block' : 'none' ?>;">
@@ -272,52 +267,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="fields wide">
             <div class="field">
               <label for="height">Height</label>
-              <input type="number" step="0.01" id="height" name="height"
+              <input type="number" step="0.1" id="height" name="height" 
                 value="<?= $editMode && !empty($customerData['height']) ? htmlspecialchars($customerData['height']) : '' ?>">
             </div>
             <div class="field">
               <label for="length">Length</label>
-              <input type="number" step="0.01" id="length" name="length"
+              <input type="number" step="0.1" id="length" name="length"
                 value="<?= $editMode && !empty($customerData['length']) ? htmlspecialchars($customerData['length']) : '' ?>">
             </div>
             <div class="field">
               <label for="chest">Chest</label>
-              <input type="number" step="0.01" id="chest" name="chest"
+              <input type="number" step="0.1" id="chest" name="chest"
                 value="<?= $editMode && !empty($customerData['chest']) ? htmlspecialchars($customerData['chest']) : '' ?>">
             </div>
             <div class="field">
               <label for="waist">Waist</label>
-              <input type="number" step="0.01" id="waist" name="waist"
+              <input type="number" step="0.1" id="waist" name="waist"
                 value="<?= $editMode && !empty($customerData['waist']) ? htmlspecialchars($customerData['waist']) : '' ?>">
             </div>
             <div class="field">
               <label for="hip">Hip</label>
-              <input type="number" step="0.01" id="hip" name="hip"
+              <input type="number" step="0.1" id="hip" name="hip"
                 value="<?= $editMode && !empty($customerData['hip']) ? htmlspecialchars($customerData['hip']) : '' ?>">
             </div>
             <div class="field">
               <label for="sleeve">Sleeve</label>
-              <input type="number" step="0.01" id="sleeve" name="sleeve"
+              <input type="number" step="0.1" id="sleeve" name="sleeve"
                 value="<?= $editMode && !empty($customerData['sleeve']) ? htmlspecialchars($customerData['sleeve']) : '' ?>">
             </div>
             <div class="field">
               <label for="inseam">Inseam</label>
-              <input type="number" step="0.01" id="inseam" name="inseam"
+              <input type="number" step="0.1" id="inseam" name="inseam"
                 value="<?= $editMode && !empty($customerData['inseam']) ? htmlspecialchars($customerData['inseam']) : '' ?>">
             </div>
             <div class="field">
               <label for="outseam">Outseam</label>
-              <input type="number" step="0.01" id="outseam" name="outseam"
+              <input type="number" step="0.1" id="outseam" name="outseam"
                 value="<?= $editMode && !empty($customerData['outseam']) ? htmlspecialchars($customerData['outseam']) : '' ?>">
             </div>
             <div class="field">
               <label for="shoulder">Shoulder</label>
-              <input type="number" step="0.01" id="shoulder" name="shoulder"
+              <input type="number" step="0.1" id="shoulder" name="shoulder"
                 value="<?= $editMode && !empty($customerData['shoulder']) ? htmlspecialchars($customerData['shoulder']) : '' ?>">
             </div>
             <div class="field">
               <label for="short_length">Short Length</label>
-              <input type="number" step="0.01" id="short_length" name="short_length"
+              <input type="number" step="0.1" id="short_length" name="short_length"
                 value="<?= $editMode && !empty($customerData['short_length']) ? htmlspecialchars($customerData['short_length']) : '' ?>">
             </div>
           </div>

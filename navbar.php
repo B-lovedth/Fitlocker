@@ -8,12 +8,14 @@
           <hr>
           <div class="hamburger-menu hide">
             <ul class="menu-items">
-              <a href="./dashboard.php" class="bold sm"><li class="btn btn-sm btn-ghost">Dashboard</li></a>
-              <a href="./search.php" class="sm"><li class="btn btn-sm btn-ghost">Search</li></a>
-              <a href="./about.php" class="sm"><li class="btn btn-sm btn-ghost">Help</li></a>
-              <a class="sm"><li class="btn btn-sm btn-ghost">Profile</li></a>
-              <a class="sm"><li class="btn btn-sm btn-ghost">Settings</li></a>
+              <a href="./dashboard.php" class="bold sm"><li class="btn btn-sm btn-ghost menu-item">Dashboard</li></a>
+              <a href="./registerClient.php" class="sm"><li class="btn btn-sm btn-ghost menu-item">Register</li></a>
+              <a href="./search.php" class="sm"><li class="btn btn-sm btn-ghost menu-item">Search</li></a>
+
+              <a href="./about.php" class="sm"><li class="btn btn-sm btn-ghost menu-item">Help</li></a>
+              <a class="sm"><li class="btn btn-sm btn-ghost menu-item">Profile</li></a>
+              <a class="sm"><li class="btn btn-sm btn-ghost menu-item">Settings</li></a>
             </ul>
-            <button class="btn btn-sm btn-secondary fill">Log Out</button>
+            <button class="btn btn-sm btn-secondary fill logoutIcon">Log Out</button>
           </div>
 </header>

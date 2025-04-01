@@ -32,8 +32,8 @@ header {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    font-weight: bold;
 }
+
 .page-title img{
     height: 1rem;
 }

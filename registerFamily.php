@@ -150,69 +150,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-height: 300px;
             overflow-y: auto;
             border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 15px;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin: 1rem 0 1rem;
         }
         
         .customer-item {
             display: flex;
             align-items: center;
-            margin-bottom: 5px;
-            padding: 5px;
-            border-bottom: 1px solid #eee;
+            gap: 1rem;
         }
-        
+
+        .customer-item:hover {
+            transform: scale(1.01);
+        }
         .customer-item:last-child {
             border-bottom: none;
         }
         
         .customer-item label {
-            margin-left: 10px;
             cursor: pointer;
         }
         
-        .search-box {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        
         .selected-customers {
-            margin-top: 15px;
-            padding: 10px;
+            padding: 1rem;
             background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border:0.5px solid #1b1b1b;
+            border-radius: 0.5rem;
         }
         
         .selected-customers h4 {
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
         }
         
+        #selectedCustomersList {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 0.5rem;
+        }
+
+        .selected-customer-tag:hover {
+            background-color: transparent;
+            color: #1b1b1b;
+        }
         .selected-customer-tag {
-            display: inline-block;
-            background-color: #e0e0e0;
-            padding: 5px 10px;
-            margin: 3px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            background-color: transparent;
         }
         
         .existing-members {
-            margin-top: 10px;
-            padding: 10px;
+            margin-top: 1rem;
+            padding: 1rem;
             background-color: #f0f8ff;
             border: 1px solid #b0c4de;
-            border-radius: 4px;
+            border-radius: 0.25rem;
             display: none;
         }
         
         .existing-members h4 {
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
             color: #4682b4;
         }
     </style>
@@ -268,8 +269,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="selected-customers">
                                 <h4>Selected Customers</h4>
-                                <div id="selectedCustomersList"></div>
+                                <div id="selectedCustomersList" ></div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -377,7 +379,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     });
                     
                     if (filteredCustomers.length === 0) {
-                        html = '<p>No customers found matching your search.</p>';
+                        html = '<p class="sm">No customers found matching your search.</p>';
                     }
                     
                     customerList.innerHTML = html;
@@ -400,11 +402,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             let html = '';
             
             if (selectedCheckboxes.length === 0) {
-                html = '<p>No customers selected</p>';
+                html = '<p class="sm">No customers selected</p>';
             } else {
                 selectedCheckboxes.forEach(checkbox => {
                     const label = checkbox.nextElementSibling.textContent.trim();
-                    html += `<span class="selected-customer-tag">${label}</span>`;
+                    html += `<span class="selected-customer-tag btn btn-tn btn-outline">${label}</span>`;
                 });
             }
             
@@ -444,11 +446,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     .then(data => {
                         const existingMembersDiv = document.getElementById('existingMembers');
                         const existingMembersList = document.getElementById('existingMembersList');
+                        console.log(existingMembersDiv);
+                        console.log(existingMembersList);
+                        
+                        
                         
                         if (data.exists && data.members.length > 0) {
                             let html = '';
                             data.members.forEach(member => {
-                                html += `<span class="selected-customer-tag">${member.first_name} ${member.last_name}</span>`;
+                                html += `<span class="selected-customer-tag btn btn-tn btn-outline">${member.first_name} ${member.last_name}</span>`;
                                 
                                 // Auto-check the corresponding checkbox
                                 const checkbox = document.getElementById(`customer_${member.customer_id}`);

@@ -14,17 +14,30 @@
 
 .dashboard-navbar {
   height: 100vh;
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 3rem 1.75rem;
+  padding: 3rem 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   background-color: var(--deeppink);
+  border-right: 2px solid var(--black);
 }
+
 .dashboard-navbar button {
   height: 3rem;
   width: 3rem;
@@ -32,11 +45,20 @@
 
 #topSide,
 #bottomSide {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
 }
 
 #topSide > .home-link {
@@ -45,15 +67,9 @@
   margin-bottom: 2rem;
 }
 
-.mini-logo-container {
-  width: 5rem;
-  height: 5rem;
-}
-
 #miniLogo {
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  height: 5rem;
+  aspect-ratio: 1/1;
 }
 
 .nav-icon {
@@ -61,22 +77,31 @@
   aspect-ratio: 1/1;
   background-color: transparent;
   border: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
 .nav-icon > img {
-  width: 50%;
+  width: 1.5rem;
   aspect-ratio: 1/1;
 }
 
 .nav-icon:not(.active):hover {
   cursor: pointer;
 }
+
 .nav-icon:not(.active):hover img {
   width: 60%;
+  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
@@ -88,6 +113,7 @@
 
 .active > img {
   width: 80%;
+  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
@@ -98,4 +124,5 @@
     display: none;
   }
   /* Clear Desktop Images */
-}/*# sourceMappingURL=sidebar.css.map */
+}
+/*# sourceMappingURL=sidebar.css.map */

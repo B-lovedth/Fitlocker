@@ -114,8 +114,10 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
 }
 
 #activityContainer img {
@@ -198,8 +200,12 @@ main {
   }
   main #right-handside {
     width: 100%;
-    justify-content: flex-start;
-    align-items: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
   main #right-handside #image {
     width: 100%;
