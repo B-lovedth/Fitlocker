@@ -226,6 +226,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 1rem;
             color: #4682b4;
         }
+
+        #existingMembersList {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: .5rem;
+        }
     </style>
 </head>
 
@@ -299,7 +306,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         // Helper functions for modals
         function showModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
+            document.getElementById(modalId).style.display = 'flex';
         }
 
         function hideModal(modalId) {

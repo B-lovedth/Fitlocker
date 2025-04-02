@@ -180,7 +180,7 @@ $empty_family_total_stmt->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="./Styles/main.css">
+    <link rel="stylesheet" href="./Styles/main.css?v=1">
     <link rel="stylesheet" href="./Styles/sidebar.css">
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/dashboardstyles.css?v=1.0">
@@ -198,7 +198,7 @@ $empty_family_total_stmt->close();
                 <main class="main-section-container">
         
                     <div id="main-section-header">
-                        <h2>Welcome <?php echo htmlspecialchars($username); ?></h2>
+                        <h2>Welcome, <span class="highlight"><?php echo htmlspecialchars($username); ?></span></h2>
                         <button class="search-btn-main btn btn-sm btn-outline sh-sm" type="button" onclick="window.location.href='./search.php'">
                             <img src="./assets/icons/search.svg" alt="search-button" id="search-icon">
                             Search

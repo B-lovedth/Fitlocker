@@ -121,6 +121,14 @@ h5 {
   line-height: 100%;
 }
 
+.highlight {
+  color: var(--deeppink);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 700;
+}
+
 a {
   color: inherit;
 }
@@ -350,8 +358,8 @@ input:focus {
   border: 1px solid #000000;
   border-radius: 2rem;
   box-shadow: 5px 5px 1px 1px rgb(0, 0, 0);
-  width: 40%;
-  height: 45%;
+  width: 30%;
+  height: 40%;
 }
 
 .account-modal h2 {

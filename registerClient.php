@@ -341,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script src="./Scripts/dashboardscript.js?v=1.0"></script>
   <script>
     function showModal(modalId) {
-        document.getElementById(modalId).style.display = 'block';
+        document.getElementById(modalId).style.display = 'flex';
     }
 
     function hideModal(modalId) {

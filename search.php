@@ -42,9 +42,9 @@ if ($viewMode === 'family') {
               WHERE f.user_id = ?";
 } else {
     $query = "SELECT c.customer_id, c.first_name, c.last_name, c.age, c.gender, c.address,
-                     c.phone, c.height, c.chest, c.waist, c.hip, c.sleeve, 
+                     c.phone, c.height, c.length, c.chest, c.waist, c.hip, c.sleeve, 
                      c.inseam, c.outseam, c.shoulder, c.short_length,
-                     f.family_name
+                     c.created_at, f.family_name
               FROM customers c
               LEFT JOIN families f ON c.family_id = f.family_id
               WHERE c.user_id = ?";
@@ -405,12 +405,14 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <p><strong>Address:</strong> ${customer.address || 'N/A'}</p>
                         <p><strong>Phone:</strong> ${customer.phone || 'N/A'}</p>
                         ${customer.family_name ? `<p><strong>Family:</strong> ${customer.family_name}</p>` : ''}
-                        
+                        <p><strong>Date Created:</strong> ${new Date(customer.created_at).toLocaleDateString() || 'N/A'}</p>
+
                         <div class="measurements">
                             <div class="modal-section">
                             <h4>Body Measurements</h4>
                             <hr>
                             ${customer.height ? `<strong><p>Height:</strong> ${customer.height}cm</p>` : ''}
+                            ${customer.length ? `<strong><p>Length:</strong> ${customer.length}cm</p>` : ''}
                             ${customer.chest ? `<strong><p>Chest:</strong> ${customer.chest}cm</p>` : ''}
                             ${customer.waist ? `<strong><p>Waist:</strong> ${customer.waist}cm</p>` : ''}
                             ${customer.hip ? `<strong><p>Hip:</strong> ${customer.hip}cm</p>` : ''}
