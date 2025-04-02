@@ -63,6 +63,12 @@ button {
   margin-bottom: 1rem;
 }
 
+.modal-header img {
+  width: 40%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .modal-content {
   background-color: #f9ecee;
   padding: 20px;
