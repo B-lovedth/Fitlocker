@@ -154,15 +154,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
   }
 
+
+
   // Execute and handle results
   if ($stmt->execute()) {
-    // Use the same condition to set the success message and redirect
     $isUpdate = isset($_POST['customer_id']);
+    $_SESSION['registration_status'] = 'success'; // Set status explicitly
     $_SESSION['message'] = $isUpdate ? 'Customer updated successfully' : 'Customer registered successfully';
+    session_write_close(); // Save session data
     header("Location: " . ($isUpdate ? "search.php" : "registerClient.php"));
+    exit(); // Ensure no further code executes
   } else {
+    $_SESSION['registration_status'] = 'failure'; // Set status explicitly
     $_SESSION['error'] = 'Database error: ' . $conn->error;
+    session_write_close(); // Save session data
     header("Location: registerClient.php");
+    exit(); // Ensure no further code executes
   }
 
   $stmt->close();
@@ -240,16 +247,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </select>
             </div>
             <div class="field">
-              <p class="sm">Add to family<p>
+              <p class="sm">Add to family
+              <p>
               <div class="row">
                 <div class="radio-option">
                   <input id="yes" type="radio" name="add_to_family" value="yes"
-                  <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                    <?= ($editMode && !empty($customerData['family_id'])) ? 'checked' : '' ?>>
                   <label for="yes" class="flex sm">Yes</label>
                 </div>
                 <div class="radio-option">
                   <input id="no" type="radio" name="add_to_family" value="no"
-                  <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
+                    <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
                   <label for="yes" class="flex sm">No</label>
                 </div>
               </div>
@@ -267,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="fields wide">
             <div class="field">
               <label for="height">Height</label>
-              <input type="number" step="0.1" id="height" name="height" 
+              <input type="number" step="0.1" id="height" name="height"
                 value="<?= $editMode && !empty($customerData['height']) ? htmlspecialchars($customerData['height']) : '' ?>">
             </div>
             <div class="field">
@@ -326,53 +334,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </div>
 
-  <?php require_once "success-failureModal.php" ?>
+  <?php require_once "./success-failureModal.php" ?>
 
   <script src="./Scripts/script.js?v1.0"></script>
   <script src="./Scripts/navbar.js?v=1.0"></script>
   <script src="./Scripts/dashboardscript.js?v=1.0"></script>
   <script>
     function showModal(modalId) {
-      document.getElementById(modalId).style.display = 'block';
+        document.getElementById(modalId).style.display = 'block';
     }
 
     function hideModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
+        document.getElementById(modalId).style.display = 'none';
     }
 
     function registerAgain() {
-      hideModal('successModal');
-      document.querySelector('.clientForm').reset();
-      // Reset visibility of toggled fields
-      document.getElementById('family_name_field').style.display = 'none';
+        hideModal('successModal');
+        document.querySelector('.clientForm').reset();
+        document.getElementById('family_name_field').style.display = 'none';
     }
 
     function tryAgain() {
-      hideModal('errorModal');
-      document.getElementById('first_name').focus();
+        hideModal('errorModal');
+        document.getElementById('first_name').focus();
     }
 
     function goToDashboard() {
-      window.location.href = 'dashboard.php';
+        window.location.href = 'dashboard.php';
     }
 
     // Show modal based on registration status
     <?php if (isset($_SESSION['registration_status'])): ?>
-      <?php if ($_SESSION['registration_status'] === 'success'): ?>
-        showModal('successModal');
-      <?php else: ?>
-        showModal('errorModal');
-      <?php endif; ?>
-      <?php unset($_SESSION['registration_status']); ?>
+        <?php if ($_SESSION['registration_status'] === 'success'): ?>
+            document.getElementById('successModalMessage').textContent = <?php echo json_encode($_SESSION['message'] ?? 'Customer registered successfully'); ?>;
+            showModal('successModal');
+        <?php elseif ($_SESSION['registration_status'] === 'failure'): ?>
+            document.getElementById('errorModalMessage').textContent = <?php echo json_encode($_SESSION['error'] ?? 'An error occurred during registration.'); ?>;
+            showModal('errorModal');
+        <?php endif; ?>
+        <?php unset($_SESSION['registration_status'], $_SESSION['message'], $_SESSION['error']); ?>
     <?php endif; ?>
 
     // Show/hide family name field based on "Add to family" selection
     document.querySelectorAll('input[name="add_to_family"]').forEach(radio => {
-      radio.addEventListener('change', function() {
-        document.getElementById('family_name_field').style.display = this.value === 'yes' ? 'block' : 'none';
-      });
+        radio.addEventListener('change', function() {
+            document.getElementById('family_name_field').style.display = this.value === 'yes' ? 'block' : 'none';
+        });
     });
-  </script>
+</script>
 </body>
 
 </html>
