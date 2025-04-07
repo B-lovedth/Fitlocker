@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
 $dbname = 'fitlockerdb';
-$db_username = 'root'; // Changed to avoid conflict with signup.php
-$db_password = '';     // Changed for consistency
+$db_username = 'root';
+$db_password = '';  
 
 try {
     $conn = new mysqli($host, $db_username, $db_password, $dbname);
