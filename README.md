@@ -34,11 +34,17 @@ bash
 /fitlocker
 │
 ├── /assets          # Images, fonts, etc.
+
 ├── /css             # Stylesheets
+
 ├── /js              # JavaScript files
+
 ├── /php             # Backend scripts (registration, login, CRUD, etc.)
+
 ├── /views           # HTML templates or views
+
 ├── /db              # Database connection and setup files
+
 └── index.php       # Entry point
 
 
