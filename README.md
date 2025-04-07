@@ -32,7 +32,7 @@ Database: MySQL
 📁 Project Structure
 bash
 /fitlocker
-│
+
 ├── /assets          # Images, fonts, etc.
 
 ├── /css             # Stylesheets
