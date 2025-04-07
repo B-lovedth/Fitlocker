@@ -1,122 +1,141 @@
 body {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 main {
   padding: 3rem 10%;
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   width: 100%;
 }
 
 form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 2.5rem;
 }
 
 button {
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
 
 .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 2px;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  gap: .5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .radio-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  gap: 0.5rem;
+  gap: .5rem;
 }
 
 .modal {
   display: none;
   position: fixed;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
   background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  /* Blur the background */
+  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .modal.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.modal-header img {
-  width: 40%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .modal-content {
   background-color: #f9ecee;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  border-radius: 30px;
-  max-width: 500px;
+  padding: 2rem 4rem;
+  border: 2px solid #1b1b1b;
+  border-radius: 2rem;
   text-align: center;
-  box-shadow: var(--large-shadow);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-width: 80%;
 }
 
-.modal-content button {
-  margin: 10px;
-  padding: 8px 16px;
+.modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-#tryAgain, #regAgain {
-  background-color: var(--nude);
-  color: #000;
-  padding: 10px 20px;
-  border: var(--border-thick);
-  border-radius: 5px;
-  box-shadow: var(--medium-shadow);
-  cursor: pointer;
+.btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
 }
 
-#tryAgain:hover, #regAgain:hover {
-  background-color: var(--grey);
-  color: #000;
-  border: var(--border-thick);
-  border-radius: 5px;
-  box-shadow: var(--medium-shadow);
+.modal-header img {
+  height: 10rem;
+  width: auto;
 }
 
-#goDashboard {
-  background-color: var(--yellow);
-  color: #000;
-  padding: 10px 20px;
-  border: var(--border-thick);
-  border-radius: 5px;
-  box-shadow: var(--medium-shadow);
-  cursor: pointer;
+#successModal h2 {
+  color: #467A1F;
 }
 
-#goDashboard:hover {
-  background-color: var(--grey);
-  color: #000;
-  border: var(--border-thick);
-  border-radius: 5px;
-  box-shadow: var(--medium-shadow);
-}/*# sourceMappingURL=register.css.map */
+#errorModal h2 {
+  color: #E51A1A;
+}
+/*# sourceMappingURL=register.css.map */

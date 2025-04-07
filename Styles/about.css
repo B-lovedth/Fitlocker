@@ -3,6 +3,7 @@
   font-family: "Neue Haas Grotesque";
   src: url(../assets/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayLight.ttf) format("truetype");
 }
+
 :root {
   /* colors */
   --nude: #f9ecee;
@@ -20,13 +21,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  min-height: 100vh;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 main {
   padding: 0 10%;
 }
@@ -34,11 +28,17 @@ main {
 /* Section styles */
 .page {
   padding: 10vw 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   scroll-snap-align: start;
   gap: 10%;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .section-image {
@@ -49,8 +49,13 @@ main {
 }
 
 .page-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 2rem;
   width: 50%;
 }
@@ -61,35 +66,52 @@ main {
 }
 
 #largeContactButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 1rem;
   width: 100%;
 }
+
 #largeContactButtons a {
-  flex-grow: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
+
 #largeContactButtons button {
   width: 100%;
 }
+
 #largeContactButtons img {
   height: 1.2rem;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
 }
 
 #smallContactButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   width: 100%;
   gap: 1rem;
 }
+
 #smallContactButtons button {
   width: 2rem;
   height: 2rem;
 }
+
 #smallContactButtons button:hover {
   background-color: var(--nude);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .social-icon {
@@ -104,11 +126,17 @@ footer {
 
 @media (max-width: 660px) {
   .page {
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     gap: 2rem;
   }
   #aboutUs {
-    flex-direction: column-reverse;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
   }
   .page-image {
     width: 100%;
@@ -120,4 +148,5 @@ footer {
   .page-info {
     width: 100%;
   }
-}/*# sourceMappingURL=about.css.map */
+}
+/*# sourceMappingURL=about.css.map */

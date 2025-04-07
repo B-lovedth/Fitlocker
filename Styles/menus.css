@@ -15,7 +15,7 @@ header {
     top: 0;
     display: flex;
     flex-direction: column;
-    padding: 50px 10% 1rem;
+    padding: 3rem 10% 1rem;
     width: 100%;
     background-color: var(--nude);
     z-index: 1;
@@ -68,7 +68,12 @@ header {
     background-color: var(--nude);
     box-shadow: var(--blur-shadow);
 }
-  
+
+#hamburger {
+    height: 2rem;
+    aspect-ratio: 1 / 1;
+}
+
 .menu-head {
     display: flex;
     align-items: center;

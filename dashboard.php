@@ -237,8 +237,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $individual_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $individual_color; ?>"><?php echo $individual_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $individual_color; ?>"><?php echo $individual_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>
@@ -249,8 +249,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $family_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $family_color; ?>"><?php echo $family_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $family_color; ?>"><?php echo $family_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +261,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $male_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $male_color; ?>"><?php echo $male_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $male_color; ?>"><?php echo $male_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>
@@ -273,8 +273,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $female_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $female_color; ?>"><?php echo $female_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $female_color; ?>"><?php echo $female_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>
@@ -285,8 +285,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $orphan_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $orphan_color; ?>"><?php echo $orphan_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $orphan_color; ?>"><?php echo $orphan_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>
@@ -297,8 +297,8 @@ $empty_family_total_stmt->close();
                             <div id="boxBottomside">
                                 <div id="boxCount"><?php echo $empty_family_total; ?></div>
                                 <div id="countChangeBox">
-                                    <div id="countChange" class="<?php echo $empty_family_color; ?>"><?php echo $empty_family_change; ?>%</div>
-                                    <span id="countChangeInfo">vs last month</span>
+                                    <div id="countChange" class="btn btn-sm <?php echo $empty_family_color; ?>"><?php echo $empty_family_change; ?>%</div>
+                                    <span id="countChangeInfo" class="tn">vs last month</span>
                                 </div>
                             </div>
                         </div>

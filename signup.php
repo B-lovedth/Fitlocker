@@ -95,7 +95,7 @@ if (isset($conn)) {
     <link rel="stylesheet" href="./Styles/signup.css?v=1.0">
     <title>FitLocker: Get Started</title>
 </head>
-<body>
+<body id="signup">
     <main class="sign-form">
         <form method="post" class="column">
             <h2>Get Started!</h2>
@@ -151,8 +151,9 @@ if (isset($conn)) {
                 </button>
             </div>
         </form>
-        <img src="assets/img/measuring-img.png" alt="" class="get-started-img sh-lg">
     </main>
+    <div class="img-container">
+    </div>
 
 
     <script src="./Scripts/signup.js?v=1.0"></script>

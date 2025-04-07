@@ -199,7 +199,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="overlay" class="hide"></div>
     <main class="main-section-container">
       <div id="main-section-header">
-        <h2>Register Client</h2>
+        <h2>
+        <?= $editMode ? 'Edit Client' : 'Register Client' ?>
+        </h2>
         <a href="./registerFamily.php"><button class="btn btn-sm btn-secondary sh-sm">Register Family Instead</button></a>
       </div>
       <form class="clientForm" action="registerClient.php" method="POST">

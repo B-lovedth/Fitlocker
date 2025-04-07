@@ -2,29 +2,59 @@
   width: 100%;
 }
 
-main {
-  padding: 30px 10% 30px 10%;
-  max-height: 100vh;
+body {
+  display: flex;
+  gap: 7%;
 }
+main {
+  min-height: 100vh;
+}
+
+#login main {
+  padding: 3rem 10% 3rem 0;
+}
+
+#signup main {
+  padding: 3rem 0 3rem 10%;
+}
+
 main.sign-form {
   display: flex;
+  flex-grow: 1;
   align-items: center;
-  gap: 10%;
   justify-content: space-between;
   min-height: 100vh;
 }
 
-.get-started-img {
-  border: 2px solid #1b1b1b;
-  border-radius: 25px;
-  height: 100%;
-  max-width: 50%;
+input:checked + label {
+  text-decoration: line-through;
+}
+
+label a {
+  text-decoration: underline;
+}
+
+#login .img-container {
+  border-right: 3px solid #1b1b1b;
+  background-position: left;
+  background-image: url('../assets/img/sewing-img.png');
+}
+#signup .img-container {
+  border-left: 3px solid #1b1b1b;
+  background-position: left;
+  background-image: url('../assets/img/measuring-img.png');
+}
+
+.img-container {
+  height: min(100% 100vh);
+  width: 45%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 form {
   flex-grow: 1;
   min-width: fit-content;
-  width: 40%;
 }
 
 form .inputs-section {
@@ -62,8 +92,9 @@ form .inputs-section {
 }
 .error {
   color: #dc3545;
-  font-size: 0.875em;
+  font-size: 0.75rem;
   margin-top: 4px;
+  max-width: 100%;
 }
 .password-status-icon {
   width: 12px;
@@ -115,12 +146,12 @@ form #remember-container {
 
 /* Mobile Styles */
 @media (max-width: 700px) {
-  main {
-    padding: 50px 10%;
+  #login main, #signup main {
+    padding: 3rem 10%;
   }
 
   /* Clear Desktop Images */
-  .get-started-img {
+  .img-container {
     display: none;
   }
 }

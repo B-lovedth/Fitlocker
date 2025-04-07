@@ -82,10 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($family_name)) {
             throw new Exception("Family name is required.");
         }
-        if (empty($family_address)) {
-            throw new Exception("Family address is required.");
-        }
-
         // Check if family already exists
         $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND family_address = ? AND user_id = ?");
         $stmt->bind_param("ssi", $family_name, $family_address, $user_id);
@@ -249,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="./registerClient.php"><button class="btn btn-sm btn-secondary sh-sm">Register Client Instead</button></a>
             </div>
             <form class="clientForm" action="registerFamily.php" method="POST">
-                <div class="personal panel sh-lg">
+                <div class="personal panel sh-md">
                     <h3>Family Details</h3>
                     <hr>
                     <div class="fields slim">
@@ -259,7 +255,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="field">
                             <label for="family_address">Family Address</label>
-                            <input type="text" id="family_address" name="family_address" required />
+                            <input type="text" id="family_address" name="family_address" />
                         </div>
                         <div class="existing-members" id="existingMembers">
                             <h4>Existing Family Members</h4>

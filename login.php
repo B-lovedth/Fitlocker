@@ -118,9 +118,10 @@ if (isset($_GET['forgot_password'])) {
     <link rel="stylesheet" href="./Styles/signup.css?v=1.0">
 </head>
 
-<body>
+<body id="login">
+    <div class="img-container ">
+    </div>
     <main class="sign-form">
-        <img src="./assets/img/measuring-img.png" alt="" class="get-started-img sh-lg">
         <form method="post" class="column">
             <h2>Welcome Back!</h2>
             <?php if (!empty($errors)): ?>
@@ -168,7 +169,6 @@ if (isset($_GET['forgot_password'])) {
                     <a href="#">Forgot password?</a>
                 </div>
         </form>
-
     </main>
 </body>
 

@@ -100,7 +100,7 @@ if (!empty($filterClauses)) {
 if ($viewMode === 'family') {
     $query .= " GROUP BY f.family_id ORDER BY f.family_name";
 } else {
-    $query .= " ORDER BY c.last_name, c.first_name";
+    $query .= " ORDER BY c.first_name, c.last_name";
 }
 
 // Prepare and execute
@@ -144,10 +144,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <style>
         .clear-search {
             position: absolute;
+            height: 1.5rem;
             right: 0.875rem;
-            top: 0.6rem;
-            height: 0.5rem;
-            aspect-ratio: 1/1;
+            top: 50%;
+            transform: translateY(-50%);
             background: none;
             border: none;
             cursor: pointer;
@@ -155,6 +155,10 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             display: <?= !empty($searchTerm) ? 'block' : 'none' ?>;
         }
 
+        .clear-search img {
+            height: 100%;
+            aspect-ratio: 1/1;
+        }
 
         /* Modal Styles */
         .modal-overlay {
@@ -188,6 +192,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         .modal-content hr {
             margin: .5rem 0 .5rem;
         }
+
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -202,7 +207,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         .modal-section {
             display: flex;
             flex-direction: column;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         #closeModal {
@@ -307,20 +312,20 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Family Name</th>
-                                    <th>Address</th>
-                                    <th>Members</th>
-                                    <th></th>
+                                    <th class="col1">Family Name</th>
+                                    <th class="col2">Address</th>
+                                    <th class="col3">Members</th>
+                                    <th class="col6"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($data as $family): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($family['family_name']) ?></td>
-                                        <td><?= htmlspecialchars($family['family_address']) ?></td>
-                                        <td><?= $family['member_count'] ?></td>
-                                        <td>
-                                            <button class="view-family btn btn-sm btn-outline"
+                                        <td class="col1"><?= htmlspecialchars($family['family_name'])?></td>
+                                        <td class="col2"><?= htmlspecialchars($family['family_address'])? : '-' ?></td>
+                                        <td class="col3"><?= $family['member_count']?></td>
+                                        <td class="col6">
+                                            <button class="view-family btn btn-sm btn-outline col6"
                                                 data-family-id="<?= $family['family_id'] ?>">
                                                 View Family
                                             </button>
@@ -346,7 +351,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                     <tr>
                                         <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
                                         <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
-                                        <td class="col3"><?= htmlspecialchars($customer['age']) ?></td>
+                                        <td class="col3"><?= htmlspecialchars($customer['age'])? : '-' ?></td>
                                         <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
                                         <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
                                         <td class="col6">
@@ -377,7 +382,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     </div>
 
     <script src="./Scripts/script.js?v=1.0"></script>
-    <script src="./Scripts/navbar.js?"></script>
+    <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
     <script>
         // Pass customer data to JS
@@ -394,7 +399,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 if (customer) {
                     const content = `
                         <div class="modal-header">
-                        <h2>${customer.first_name} ${customer.last_name}</h2>
+                        <h3>${customer.first_name} ${customer.last_name}</h3>
                         <button class="btn btn-sm btn-secondary sh-sm close-search" id="close-search">
                             <img src="./assets/icons/close-x.svg" alt="close-search">
                         </button>
@@ -409,7 +414,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
                         <div class="measurements">
                             <div class="modal-section">
-                            <h4>Body Measurements</h4>
+                            <h5>Body Measurements</h5>
                             <hr>
                             ${customer.height ? `<strong><p>Height:</strong> ${customer.height}cm</p>` : ''}
                             ${customer.length ? `<strong><p>Length:</strong> ${customer.length}cm</p>` : ''}
@@ -419,7 +424,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                             </div>
                             
                             <div class="modal-section">
-                            <h4>Garment Measurements</h4>
+                            <h5>Garment Measurements</h5>
                             <hr>
                             ${customer.sleeve ? `<strong><p>Sleeve:</strong> ${customer.sleeve}cm</p>` : ''}
                             ${customer.inseam ? `<strong><p>Inseam:</strong> ${customer.inseam}cm</p>` : ''}
@@ -453,7 +458,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                         </button>
                         </div>
                         <hr>
-                        <p><strong>Family Address:</strong> ${family.family_address}</p>
+                        <p><strong>Family Address:</strong> ${family.family_address || 'N/A'}</p>
                         <p><strong>Members Count:</strong> ${family.member_count || 'N/A'}</p>
                         <h3><strong>Family Members:</strong></h3>
                         <p>${family.member_names || 'This Family is empty'}</p> 
@@ -511,7 +516,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
             // Initialize switch position
             if (currentView === 'family') {
-                switchButton.style.transform = 'translateX(100%)';
+                accountSwitch.classList.toggle("flex-end");
             }
 
             // Handle switch click

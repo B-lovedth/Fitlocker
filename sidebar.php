@@ -1,7 +1,7 @@
 <aside class="dashboard-navbar" id="sideNav">
     <div id="topSide">
         <a href="homepage.php" class="home-link">
-            <img src="./assets/Logos/mini-logo (2).png" alt="mini-logo" id="miniLogo">
+            <img src="./assets/Logos/fitlocker-mini-logo.png" alt="mini-logo" id="miniLogo">
         </a>
         <a>
             <button

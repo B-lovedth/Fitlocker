@@ -1,27 +1,27 @@
 <svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="119.5" y1="1080" x2="119.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="239.5" y1="1080" x2="239.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="359.5" y1="1080" x2="359.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="479.5" y1="1080" x2="479.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="599.5" y1="1080" x2="599.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="719.5" y1="1080" x2="719.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="839.5" y1="1080" x2="839.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="959.5" y1="1080" x2="959.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1079.5" y1="1080" x2="1079.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1199.5" y1="1080" x2="1199.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1319.5" y1="1080" x2="1319.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1439.5" y1="1080" x2="1439.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1559.5" y1="1080" x2="1559.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1679.5" y1="1080" x2="1679.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1799.5" y1="1080" x2="1799.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="119.5" x2="1920" y2="119.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="239.5" x2="1920" y2="239.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="359.5" x2="1920" y2="359.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="479.5" x2="1920" y2="479.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="599.5" x2="1920" y2="599.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="719.5" x2="1920" y2="719.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="839.5" x2="1920" y2="839.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="959.5" x2="1920" y2="959.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line y1="1079.5" x2="1920" y2="1079.5" stroke="#660033" stroke-dasharray="50 10"/>
-<line x1="1919.5" y1="1080" x2="1919.5" stroke="#660033" stroke-dasharray="50 10"/>
+<line x1="119.5" y1="1080" x2="119.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="239.5" y1="1080" x2="239.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="359.5" y1="1080" x2="359.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="479.5" y1="1080" x2="479.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="599.5" y1="1080" x2="599.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="719.5" y1="1080" x2="719.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="839.5" y1="1080" x2="839.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="959.5" y1="1080" x2="959.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1079.5" y1="1080" x2="1079.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1199.5" y1="1080" x2="1199.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1319.5" y1="1080" x2="1319.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1439.5" y1="1080" x2="1439.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1559.5" y1="1080" x2="1559.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1679.5" y1="1080" x2="1679.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1799.5" y1="1080" x2="1799.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="119.5" x2="1920" y2="119.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="239.5" x2="1920" y2="239.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="359.5" x2="1920" y2="359.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="479.5" x2="1920" y2="479.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="599.5" x2="1920" y2="599.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="719.5" x2="1920" y2="719.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="839.5" x2="1920" y2="839.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="959.5" x2="1920" y2="959.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line y1="1079.5" x2="1920" y2="1079.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
+<line x1="1919.5" y1="1080" x2="1919.5" stroke="#660033" stroke-opacity="0.15" stroke-dasharray="50 10"/>
 </svg>

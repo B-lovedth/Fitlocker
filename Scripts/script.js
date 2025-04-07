@@ -1,5 +1,8 @@
 const filterBtn = document.getElementById("filter"); 
 const filterSection = document.getElementById("filter-section"); 
+let menuItems = document.querySelectorAll(".menu-item");
+let aboutItems = document.querySelectorAll(".about-item");
+let contactItems = document.querySelectorAll(".contact-item");
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page is fully loaded');
@@ -42,18 +45,23 @@ document.addEventListener("DOMContentLoaded", function () {
       closeAccountModal.addEventListener("click", function () {
         accountModalOverlay.style.display = "none";
       });
-    } else {
-      console.error("Modal elements not found");
     }
   });
 
+//About and contact share the same page. This ensures the contact is also bold when navigated to
+contactItems.forEach(contact => {
+  contact.addEventListener("click", () => {
+    contact.classList.add("bold");
+    const currentLocation = window.location.href;
+    if (currentLocation.includes('contact')) {
+        console.log("YEAH");   
+        aboutItems.forEach(about => {
+          about.classList.remove("bold");
+        });
+    }
+  });
+});
 
-  // Change Page Title
-
-if (pageTitle) {
-    let currentPageTitle = document.title;
-    pageTitle.innerHTML = currentPageTitle;
-  }
 
 
 // //Hide or Show filters

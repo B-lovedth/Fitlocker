@@ -42,12 +42,12 @@ if (isset($_SESSION['user_id'])) {
 <header>
           <!-- Responsive Navbar -->
           <div class="menu-head">
-            <div id="logo"><a href="homepage.php"><img src="assets/Logos/FitLocker lightbg.png" alt="Fitlocker Logo"></a></div>
+            <div id="logo"><a href="homepage.php"><img src="assets/Logos/fitlocker-logo.svg" alt="Fitlocker Logo"></a></div>
             <nav class="navbar">
                 <ul class="nav-items">
-                    <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class=" sm">Home</a></li>
-                    <li class="btn btn-sm btn-ghost"><a href="./about.php" class="bold sm">About</a></li>
-                    <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+                    <a href="./homepage.php" class=" sm"><li class="btn btn-sm btn-ghost">Home</li></a>
+                    <a href="./about.php" class="sm"><li class="btn btn-sm btn-ghost about-item bold">About</li></a>
+                    <a href="./about.php#contactUs" class="sm"><li class="btn btn-sm btn-ghost contact-item">Contact</li></a>
                 </ul>            
             </nav>
             <img src="./assets/icons/menu-hamburger.svg" id="hamburger" class="hide" alt="hamburger-menu">
@@ -58,17 +58,17 @@ if (isset($_SESSION['user_id'])) {
           <hr>
           <div class="hamburger-menu hide">
             <ul class="menu-items">
-              <li class="btn btn-sm btn-ghost"><a href="./homepage.php" class="bold sm">Home</a></li>
-              <li class="btn btn-sm btn-ghost"><a href="./about.php" class="sm">About</a></li>
-              <li class="btn btn-sm btn-ghost"><a href="./about.php#contactUs" class="sm">Contact</a></li>
+              <a href="./homepage.php" class=" sm"><li class="btn btn-sm btn-ghost">Home</li></a>
+              <a href="./about.php" class="sm"><li class="btn btn-sm btn-ghost about-item bold">About</li></a>
+              <a href="./about.php#contactUs" class="sm"><li class="btn btn-sm btn-ghost contact-item">Contact</li></a>
             </ul>
             <a class="" href="<?php echo $is_logged_in ? './dashboard.php' : './login.php';?>">
               <button class="btn btn-secondary btn-sm"><?php echo $is_logged_in ? 'Dashboard' : 'Log In'; ?></button>
             </a>
           </div>
             
-    </header> 
-    <div id="overlay" class="hide"></div>
+  </header> 
+  <div id="overlay" class="hide"></div>
 
   <main>
     <section class="page" id="aboutUs">
@@ -109,7 +109,7 @@ if (isset($_SESSION['user_id'])) {
   <footer>
     <p class="sm">COPYRIGHT © FitLocker, 2025</p>
   </footer>
-
+  <script src="./Scripts/script.js"></script>
   <script src="./Scripts/navbar.js"></script>
 </body>
 
