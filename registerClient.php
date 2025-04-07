@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <label for="last_name">Last Name</label>
               <input type="text" id="last_name" name="last_name"
-                value="<?= $editMode ? htmlspecialchars($customerData['last_name']) : '' ?>" required>
+                value="<?= $editMode ? htmlspecialchars($customerData['last_name']) : '' ?>">
             </div>
             <div class="field">
               <label for="address">Address</label>
@@ -355,6 +355,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         document.querySelector('.clientForm').reset();
         document.getElementById('family_name_field').style.display = 'none';
     }
+    registerAgain();
 
     function tryAgain() {
         hideModal('errorModal');

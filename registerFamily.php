@@ -322,7 +322,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             updateSelectedCustomers();
         }
-
+        registerAgain();
+        
         function tryAgain() {
             hideModal('errorModal');
             document.getElementById('family_name').focus();

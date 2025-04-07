@@ -140,6 +140,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/search.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
+
     <title>FitLocker: Search</title>
     <style>
         .clear-search {
@@ -350,7 +352,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 <?php foreach ($data as $customer): ?>
                                     <tr>
                                         <td class="col1"><?= htmlspecialchars($customer['first_name']) ?></td>
-                                        <td class="col2"><?= htmlspecialchars($customer['last_name']) ?></td>
+                                        <td class="col2"><?= htmlspecialchars($customer['last_name'])? : '-' ?></td>
                                         <td class="col3"><?= htmlspecialchars($customer['age'])? : '-' ?></td>
                                         <td class="col4"><?= strtoupper($customer['gender'][0] ?? '') ?></td>
                                         <td class="col5"><?= $customer['family_name'] ? 'Yes' : 'No' ?></td>
@@ -452,7 +454,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 if (family) {
                     const content = `
                         <div class="modal-header">
-                        <h2>${family.family_name} Family</h2>
+                        <h3>${family.family_name} Family</h3>
                         <button class="btn btn-sm btn-secondary sh-sm close-search" id="close-search">
                             <img src="./assets/icons/close-x.svg" alt="close-search">
                         </button>

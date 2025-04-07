@@ -11,16 +11,16 @@ $stmt->close();
 ?>
 
 <div class="account-modal-overlay" id="accountInfoOverlay">
-    <div class="account-modal">
+    <div class="account-modal sh-lg">
         <h2>Account Information</h2>
+        <hr>
         <div id="accountInfo">
-            <p class="lg">Account Name: <?php echo htmlspecialchars($user['username']); ?></p>
+            <h4>Account Name: <?php echo htmlspecialchars($user['username']); ?></h4>
             <p class="md">Email: <?php echo htmlspecialchars($user['email']); ?></p>
             <p class="md">Date created: <?php echo date('d/m/Y', strtotime($user['created_at'])); ?></p>
 
         </div>
-        <div id="accountInfoButtons">
-            <button type="button" class="account-modal-btn" id="closeAccountModal">Close</button>
-        </div>
+        <button type="button" class="account-modal-btn btn btn-sm btn-secondary sh-sm fill" id="closeAccountModal">Close</button>
+        
     </div>
 </div>

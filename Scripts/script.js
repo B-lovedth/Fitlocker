@@ -1,6 +1,5 @@
 const filterBtn = document.getElementById("filter"); 
 const filterSection = document.getElementById("filter-section"); 
-let menuItems = document.querySelectorAll(".menu-item");
 let aboutItems = document.querySelectorAll(".about-item");
 let contactItems = document.querySelectorAll(".contact-item");
 
@@ -32,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 document.addEventListener("DOMContentLoaded", function () {
     const accountIcon = document.getElementById("accountsIcon");
+    const accountIconMobile = document.getElementById("accountsIconMobile");
     const closeAccountModal = document.getElementById("closeAccountModal");
     const accountModalOverlay = document.getElementById("accountInfoOverlay");
   
@@ -40,6 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
       accountIcon.addEventListener("click", function () {
         accountModalOverlay.style.display = "flex";
       });
+      accountIconMobile.addEventListener("click", function () {
+        accountModalOverlay.style.display = "flex";
+      });
+
+
   
       // Hide modal when close button is clicked
       closeAccountModal.addEventListener("click", function () {

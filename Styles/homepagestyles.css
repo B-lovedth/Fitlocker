@@ -20,6 +20,7 @@
 body {
   min-height: 100vh;
   /* Ensure the body takes the full viewport height */
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -165,7 +166,7 @@ main {
 
 /* Footer Styles */
 #footer {
-  padding: 20px 10%;
+  padding: 1.5rem 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -181,6 +182,24 @@ main {
 
 #footer img {
   height: 2rem;
+}
+
+@media (max-width: 1080px) {
+  main {
+    gap: 3rem;
+  }
+  #left-handside {
+    width: 50%;
+  }
+  #right-handside {
+    width: 50%;
+  }
+  #image-container {
+    width: 100%;
+  }
+  .statContainer {
+    display: none;
+  }
 }
 
 @media (max-width: 890px) {
@@ -220,21 +239,34 @@ main {
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 450px) {
   main {
-    gap: 3rem;
+    gap: 4rem;
   }
-  #left-handside {
-    width: 50%;
+  main #right-handside {
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
-  #right-handside {
-    width: 50%;
-  }
-  #image-container {
+  main #right-handside #image {
     width: 100%;
   }
+  #left-handside {
+    gap: 2rem;
+  }
+  #image-container {
+    width: 80%;
+  }
   .statContainer {
-    display: none;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
 }
 /*# sourceMappingURL=homepagestyles.css.map */

@@ -184,6 +184,8 @@ $empty_family_total_stmt->close();
     <link rel="stylesheet" href="./Styles/sidebar.css">
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
     <link rel="stylesheet" href="./Styles/dashboardstyles.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
+
 </head>
 
 <body>

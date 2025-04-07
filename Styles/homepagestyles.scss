@@ -20,6 +20,7 @@
 
 body {
   min-height: 100vh;  /* Ensure the body takes the full viewport height */
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -129,7 +130,7 @@ main {
 /* Footer Styles */
 
 #footer {
-  padding: 20px 10%;
+  padding: 1.5rem 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -137,6 +138,24 @@ main {
   background-color: var(--deeppink);
   img {
     height: 2rem;
+  }
+}
+
+@media (max-width: 1080px) {
+  main {
+    gap: 3rem;
+  }
+  #left-handside {
+    width: 50%;
+  }
+  #right-handside {
+    width: 50%;
+  }
+  #image-container {
+    width: 100%;
+  }
+  .statContainer {
+    display: none;
   }
 }
 
@@ -170,20 +189,29 @@ main {
   
 }
 
-@media (max-width: 1080px) {
+
+@media (max-width: 450px) {
   main {
-    gap: 3rem;
+    gap: 4rem;
+    #right-handside {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      #image {
+        width: 100%;
+      }
+    }
   }
-  #left-handside {
-    width: 50%;
+
+  #left-handside  {
+    gap: 2rem;
   }
-  #right-handside {
-    width: 50%;
-  }
+
   #image-container {
-    width: 100%;
+    width: 80%;
   }
   .statContainer {
-    display: none;
+    flex-direction: row;
   }
 }
+
