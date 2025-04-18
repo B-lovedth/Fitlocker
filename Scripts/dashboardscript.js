@@ -14,7 +14,7 @@ function switchActive(clickedButton) {
 
 function setActiveBasedOnPage() {
   console.log("setActiveBasedOnPage is running");
-  // Get the current page name from the URL (e.g., "dashboard" from "dashboard.php")
+  // Get the current page name from the URL
   const currentPage = window.location.pathname
     .split("/")
     .pop()

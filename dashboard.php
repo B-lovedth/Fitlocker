@@ -1,13 +1,13 @@
 <?php
 session_start();
-require_once 'db_connect.php'; // Assumes a file that establishes $conn (database connection)
+require_once 'db_connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Fetch username
+// Code to fetch username
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
@@ -31,7 +31,7 @@ function calculate_change($current, $previous)
     return round((($current - $previous) / $previous) * 100, 2);
 }
 
-// **Individual Accounts**
+// Individual Accounts
 $individual_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE user_id = ? AND created_at >= ?");
 $individual_current_stmt->bind_param("is", $user_id, $current_month_start);
 $individual_current_stmt->execute();
@@ -47,7 +47,7 @@ $individual_previous_stmt->close();
 $individual_change = calculate_change($individual_current, $individual_previous);
 $individual_color = $individual_change > 0 ? 'green' : ($individual_change < 0 ? 'red' : 'gray');
 
-// **Family Accounts**
+// Family Accounts
 $family_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM families WHERE user_id = ? AND created_at >= ?");
 $family_current_stmt->bind_param("is", $user_id, $current_month_start);
 $family_current_stmt->execute();
@@ -63,7 +63,7 @@ $family_previous_stmt->close();
 $family_change = calculate_change($family_current, $family_previous);
 $family_color = $family_change > 0 ? 'green' : ($family_change < 0 ? 'red' : 'gray');
 
-// **Males**
+// Males
 $male_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE gender = 'male' AND user_id = ? AND created_at >= ?");
 $male_current_stmt->bind_param("is", $user_id, $current_month_start);
 $male_current_stmt->execute();
@@ -79,7 +79,7 @@ $male_previous_stmt->close();
 $male_change = calculate_change($male_current, $male_previous);
 $male_color = $male_change > 0 ? 'green' : ($male_change < 0 ? 'red' : 'gray');
 
-// **Females**
+// Females
 $female_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE gender = 'female' AND user_id = ? AND created_at >= ?");
 $female_current_stmt->bind_param("is", $user_id, $current_month_start);
 $female_current_stmt->execute();
@@ -95,7 +95,7 @@ $female_previous_stmt->close();
 $female_change = calculate_change($female_current, $female_previous);
 $female_color = $female_change > 0 ? 'green' : ($female_change < 0 ? 'red' : 'gray');
 
-// **Orphans (customers without a family)**
+// Orphans (customers without a family)
 $orphan_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE family_id IS NULL AND user_id = ? AND created_at >= ?");
 $orphan_current_stmt->bind_param("is", $user_id, $current_month_start);
 $orphan_current_stmt->execute();
@@ -111,7 +111,7 @@ $orphan_previous_stmt->close();
 $orphan_change = calculate_change($orphan_current, $orphan_previous);
 $orphan_color = $orphan_change > 0 ? 'green' : ($orphan_change < 0 ? 'red' : 'gray');
 
-// **Empty Families (families with no customers)**
+// Empty Families (families with no customers)
 $empty_family_current_stmt = $conn->prepare("SELECT COUNT(*) as count FROM families f LEFT JOIN customers c ON f.family_id = c.family_id WHERE f.user_id = ? AND c.customer_id IS NULL AND f.created_at >= ?");
 $empty_family_current_stmt->bind_param("is", $user_id, $current_month_start);
 $empty_family_current_stmt->execute();
@@ -127,7 +127,7 @@ $empty_family_previous_stmt->close();
 $empty_family_change = calculate_change($empty_family_current, $empty_family_previous);
 $empty_family_color = $empty_family_change > 0 ? 'green' : ($empty_family_change < 0 ? 'red' : 'gray');
 
-// **Total Counts Section**
+// Total Counts Section
 
 // Total Individual Accounts (All Customers)
 $individual_total_stmt = $conn->prepare("SELECT COUNT(*) as count FROM customers WHERE user_id = ?");

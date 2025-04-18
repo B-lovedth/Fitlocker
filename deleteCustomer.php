@@ -11,7 +11,6 @@ if (isset($_GET['customer_id'])) {
     $customer_id = $_GET['customer_id'];
     $user_id = $_SESSION['user_id'];
     
-    // Verify customer belongs to user
     $stmt = $conn->prepare("DELETE FROM customers WHERE customer_id = ? AND user_id = ?");
     $stmt->bind_param("ii", $customer_id, $user_id);
     

@@ -58,27 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
-// Handle "Forgot Password" request
-if (isset($_GET['forgot_password'])) {
-    $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_EMAIL);
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-
-        if ($stmt->get_result()->num_rows === 1) {
-            // Implement password reset logic here
-            // Generate token, send email, etc.
-            $errors[] = "Password reset link sent to your email";
-        } else {
-            $errors[] = "Email not found";
-        }
-    } else {
-        $errors[] = "Invalid email address";
-    }
-}
 ?>
 
 <!DOCTYPE html>

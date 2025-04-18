@@ -3,7 +3,7 @@
 session_start();
 require_once 'db_connect.php';
 
-// Initialize edit mode and customer data (for form population)
+// Input form fields with info for editing
 $editMode = false;
 $customerData = [];
 
@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Collect common data
+  // Collect personal data
   $first_name = $_POST['first_name'];
   $last_name = $_POST['last_name'];
   $address = $_POST['address'] ?? null;
@@ -159,15 +159,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Execute and handle results
   if ($stmt->execute()) {
     $isUpdate = isset($_POST['customer_id']);
-    $_SESSION['registration_status'] = 'success'; // Set status explicitly
+    $_SESSION['registration_status'] = 'success';
     $_SESSION['message'] = $isUpdate ? 'Customer updated successfully' : 'Customer registered successfully';
-    session_write_close(); // Save session data
-    header("Location: " . ($isUpdate ? "search.php" : "registerClient.php"));
+    session_write_close();
+    header("Location: registerClient.php");
     exit(); // Ensure no further code executes
   } else {
-    $_SESSION['registration_status'] = 'failure'; // Set status explicitly
+    $_SESSION['registration_status'] = 'failure';
     $_SESSION['error'] = 'Database error: ' . $conn->error;
-    session_write_close(); // Save session data
+    session_write_close();
     header("Location: registerClient.php");
     exit(); // Ensure no further code executes
   }
@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <label for="last_name">Last Name</label>
               <input type="text" id="last_name" name="last_name"
-                value="<?= $editMode ? htmlspecialchars($customerData['last_name']) : '' ?>">
+                value="<?= $editMode ? htmlspecialchars($customerData['last_name']) : '' ?>" required>
             </div>
             <div class="field">
               <label for="address">Address</label>
@@ -242,10 +242,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field">
               <label for="gender">Gender</label>
               <select name="gender" id="gender" required>
-                <option class="sm" disabled <?= !$editMode ? 'selected' : '' ?>>select gender</option>
+                <option class="sm" disabled selected value="" <?= !$editMode ? 'selected' : '' ?>>select gender</option>
                 <option class="sm" value="male" <?= ($editMode && $customerData['gender'] === 'male') ? 'selected' : '' ?>>Male</option>
                 <option class="sm" value="female" <?= ($editMode && $customerData['gender'] === 'female') ? 'selected' : '' ?>>Female</option>
-                <option class="sm" zvalue="other" <?= ($editMode && $customerData['gender'] === 'other') ? 'selected' : '' ?>>Other</option>
+                <option class="sm" value="other" <?= ($editMode && $customerData['gender'] === 'other') ? 'selected' : '' ?>>Other</option>
               </select>
             </div>
             <div class="field">
@@ -260,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="radio-option">
                   <input id="no" type="radio" name="add_to_family" value="no"
                     <?= (!$editMode || empty($customerData['family_id'])) ? 'checked' : '' ?>>
-                  <label for="yes" class="flex sm">No</label>
+                  <label for="no" class="flex sm">No</label>
                 </div>
               </div>
             </div>
@@ -355,7 +355,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         document.querySelector('.clientForm').reset();
         document.getElementById('family_name_field').style.display = 'none';
     }
-    registerAgain();
 
     function tryAgain() {
         hideModal('errorModal');

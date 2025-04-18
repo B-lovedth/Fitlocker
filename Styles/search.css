@@ -9,6 +9,11 @@ main {
     width: 100%;
 }
 
+h3, h5 {
+    font-weight: 700;
+}
+
+
 .page-title {
     display: flex; 
     align-items: center;

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 // Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
 
-// Prepare and execute the deletion query
+// Deletion query
 $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 if ($stmt->execute()) {

@@ -3,9 +3,9 @@
 session_start();
 
 // Include database connection
-require_once 'db_connect.php'; // Assuming you have this file or will create it
+require_once 'db_connect.php';
 
-// Check if user is logged in and fetch user data (optional, for validation)
+// Check if user is logged in and fetch user data
 $is_logged_in = false;
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
@@ -117,7 +117,6 @@ if (isset($_SESSION['user_id'])) {
 
 
 <?php
-// Close database connection (optional, depending on your setup)
 if (isset($conn)) {
   $conn->close();
 }

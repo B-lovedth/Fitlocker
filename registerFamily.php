@@ -78,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $family_address = trim($_POST['family_address'] ?? '');
         $selected_customers = $_POST['customers'] ?? [];
 
-        // Basic validation
         if (empty($family_name)) {
             throw new Exception("Family name is required.");
         }
+
         // Check if family already exists
         $stmt = $conn->prepare("SELECT family_id FROM families WHERE family_name = ? AND family_address = ? AND user_id = ?");
         $stmt->bind_param("ssi", $family_name, $family_address, $user_id);
@@ -89,16 +89,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $family_id = $result->fetch_assoc()['family_id'];
+
+            // Get existing family members
+            $member_stmt = $conn->prepare("SELECT customer_id FROM customers WHERE family_id = ? AND user_id = ?");
+            $member_stmt->bind_param("ii", $family_id, $user_id);
+            $member_stmt->execute();
+            $members_result = $member_stmt->get_result();
+            $existing_members = array_column($members_result->fetch_all(MYSQLI_ASSOC), 'customer_id');
+            $member_stmt->close();
         } else {
             // Create new family
             $stmt = $conn->prepare("INSERT INTO families (family_name, family_address, user_id, created_at) VALUES (?, ?, ?, NOW())");
             $stmt->bind_param("ssi", $family_name, $family_address, $user_id);
             $stmt->execute();
             $family_id = $stmt->insert_id;
+            $existing_members = [];
         }
         $stmt->close();
 
-        // First, clear any existing family associations for the selected customers
+        // Convert selected_customers to integers for comparison
+        $selected_customers = array_map('intval', $selected_customers);
+
+        // Determine customers to remove (in existing_members but not in selected_customers)
+        $customers_to_remove = array_diff($existing_members, $selected_customers);
+
+        // Remove unselected customers from the family
+        if (!empty($customers_to_remove)) {
+            $placeholders = implode(',', array_fill(0, count($customers_to_remove), '?'));
+            $types = str_repeat('i', count($customers_to_remove));
+            $stmt = $conn->prepare("UPDATE customers SET family_id = NULL WHERE customer_id IN ($placeholders) AND user_id = ?");
+            $params = array_merge($customers_to_remove, [$user_id]);
+            $stmt->bind_param($types . "i", ...$params);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        // Assign selected customers to the family
         if (!empty($selected_customers)) {
             $placeholders = implode(',', array_fill(0, count($selected_customers), '?'));
             $types = str_repeat('i', count($selected_customers));
@@ -121,19 +147,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Set success message
         $_SESSION['registration_status'] = 'success';
         $_SESSION['is_empty_family'] = empty($selected_customers);
-        session_write_close(); // Save session data
+        session_write_close();
         header("Location: registerFamily.php");
-        exit(); // Ensure no further code executes
+        exit();
     } catch (Exception $e) {
         error_log("Family Registration Error: " . $e->getMessage());
         $_SESSION['registration_status'] = 'failure';
         $_SESSION['error_message'] = $e->getMessage();
-        session_write_close(); // Save session data
+        session_write_close();
         header("Location: registerFamily.php");
-        exit(); // Ensure no further code executes
+        exit();
     }
-    header("Location: registerFamily.php");
-    exit();
 }
 ?>
 
@@ -299,8 +323,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="./Scripts/script.js?v=1.0"></script>
     <script src="./Scripts/navbar.js"></script>
     <script src="./Scripts/dashboardscript.js?v=1.0"></script>
+
     <script>
-        // Helper functions for modals
+        const customerSearch = document.getElementById('customerSearch');
+        const customerList = document.getElementById('customerList');
+        const customers = <?php echo json_encode($customers); ?>;
+        let selectedCustomerIds = [];
+
+        // Modal helper functions
         function showModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
         }
@@ -314,16 +344,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.querySelector('.clientForm').reset();
             document.getElementById('selectedCustomersList').innerHTML = '';
             document.getElementById('existingMembers').style.display = 'none';
-
-            // Uncheck all checkboxes
             document.querySelectorAll('.customer-checkbox').forEach(checkbox => {
                 checkbox.checked = false;
             });
-
-            updateSelectedCustomers();
+            selectedCustomerIds = [];
+            updateSelectedCustomersDisplay();
         }
-        registerAgain();
-        
+
         function tryAgain() {
             hideModal('errorModal');
             document.getElementById('family_name').focus();
@@ -332,7 +359,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function goToDashboard() {
             window.location.href = 'dashboard.php';
         }
-
 
         // Show modal based on registration status
         <?php if (isset($_SESSION['registration_status'])): ?>
@@ -348,154 +374,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php unset($_SESSION['registration_status'], $_SESSION['error_message'], $_SESSION['is_empty_family']); ?>
         <?php endif; ?>
 
-        // Customer search functionality
-        const customerSearch = document.getElementById('customerSearch');
-        const customerList = document.getElementById('customerList');
-        const originalCustomerList = customerList.innerHTML;
-
-        // Store customer data for client-side filtering
-        const customers = [
-            <?php foreach ($customers as $customer): ?>, {
-                    id: <?php echo $customer['customer_id']; ?>,
-                    name: "<?php echo htmlspecialchars($customer['first_name'] . ' ' . $customer['last_name']); ?>"
-                },
-            <?php endforeach; ?>
-        ];
-
-        // Handle search box input - client-side implementation
-        customerSearch.addEventListener('keyup', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-
-            if (searchTerm.length < 2) {
-                // If search term is too short, restore original list
-                customerList.innerHTML = originalCustomerList;
-                return;
-            }
-
-            // Send request for server-side search
-            fetch(`registerFamily.php?search_customers=1&search_term=${encodeURIComponent(searchTerm)}`)
-                .then(response => response.json())
-                .then(filteredCustomers => {
-                    let html = '';
-
-                    filteredCustomers.forEach(customer => {
-                        // Preserve checked state from the current checkboxes
-                        const isChecked = document.getElementById(`customer_${customer.customer_id}`)?.checked || false;
-
-                        html += `
-                            <div class="customer-item">
-                                <input type="checkbox" id="customer_${customer.customer_id}" 
-                                       name="customers[]" value="${customer.customer_id}" 
-                                       class="customer-checkbox" ${isChecked ? 'checked' : ''} />
-                                <label for="customer_${customer.customer_id}">
-                                    ${customer.first_name} ${customer.last_name}
-                                </label>
-                            </div>
-                        `;
-                    });
-
-                    if (filteredCustomers.length === 0) {
-                        html = '<p class="sm">No customers found matching your search.</p>';
-                    }
-
-                    customerList.innerHTML = html;
-
-                    // Re-attach event listeners to checkboxes
-                    document.querySelectorAll('.customer-checkbox').forEach(checkbox => {
-                        checkbox.addEventListener('change', updateSelectedCustomers);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error searching customers:', error);
-                });
-        });
-
-        // Function to update the selected customers display
-        function updateSelectedCustomers() {
-            const selectedList = document.getElementById('selectedCustomersList');
-            const selectedCheckboxes = document.querySelectorAll('.customer-checkbox:checked');
-
+        // Render customer list with persistent selections
+        function renderCustomerList(customerArray) {
             let html = '';
+            if (customerArray.length === 0) {
+                html = '<p class="sm">No customers found matching your search.</p>';
+            } else {
+                customerArray.forEach(customer => {
+                    const isChecked = selectedCustomerIds.includes(String(customer.customer_id));
+                    html += `
+                    <div class="customer-item">
+                        <input type="checkbox" id="customer_${customer.customer_id}" 
+                               name="customers[]" value="${customer.customer_id}" 
+                               class="customer-checkbox" ${isChecked ? 'checked' : ''} />
+                        <label for="customer_${customer.customer_id}">
+                            ${customer.first_name} ${customer.last_name}
+                        </label>
+                    </div>
+                `;
+                });
+            }
+            customerList.innerHTML = html;
+            attachCheckboxListeners();
+        }
 
-            if (selectedCheckboxes.length === 0) {
+        // Attach event listeners to checkboxes
+        function attachCheckboxListeners() {
+            document.querySelectorAll('.customer-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        if (!selectedCustomerIds.includes(this.value)) {
+                            selectedCustomerIds.push(this.value);
+                        }
+                    } else {
+                        selectedCustomerIds = selectedCustomerIds.filter(id => id !== this.value);
+                    }
+                    updateSelectedCustomersDisplay();
+                });
+            });
+        }
+
+        // Update selected customers display
+        function updateSelectedCustomersDisplay() {
+            const selectedList = document.getElementById('selectedCustomersList');
+            let html = '';
+            if (selectedCustomerIds.length === 0) {
                 html = '<p class="sm">No customers selected</p>';
             } else {
-                selectedCheckboxes.forEach(checkbox => {
-                    const label = checkbox.nextElementSibling.textContent.trim();
-                    html += `<span class="selected-customer-tag btn btn-tn btn-outline">${label}</span>`;
+                selectedCustomerIds.forEach(id => {
+                    const customer = customers.find(c => String(c.customer_id) === id);
+                    if (customer) {
+                        const name = `${customer.first_name} ${customer.last_name}`;
+                        html += `<span class="selected-customer-tag btn btn-tn btn-outline">${name}</span>`;
+                    }
                 });
             }
-
             selectedList.innerHTML = html;
         }
 
-        // Add change event listeners to all checkboxes
-        document.querySelectorAll('.customer-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', updateSelectedCustomers);
-        });
-
-        // Initialize selected customers display
-        updateSelectedCustomers();
-
-        // Add empty family confirmation
-        document.querySelector('.clientForm').addEventListener('submit', function(event) {
-            const selectedCheckboxes = document.querySelectorAll('.customer-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                const confirmEmpty = confirm("You are creating an empty family. Do you want to proceed?");
-                if (!confirmEmpty) {
-                    event.preventDefault(); // Stop form submission if user cancels
-                }
+        // Search functionality
+        customerSearch.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            if (searchTerm.length < 2) {
+                renderCustomerList(customers);
+                return;
             }
+            fetch(`registerFamily.php?search_customers=1&search_term=${encodeURIComponent(searchTerm)}`)
+                .then(response => response.json())
+                .then(filteredCustomers => {
+                    renderCustomerList(filteredCustomers);
+                })
+                .catch(error => console.error('Error searching customers:', error));
         });
 
-        // Check for existing family when name and address are both filled
+        // Check for existing family
         const familyNameInput = document.getElementById('family_name');
         const familyAddressInput = document.getElementById('family_address');
 
         function checkExistingFamily() {
             const familyName = familyNameInput.value.trim();
             const familyAddress = familyAddressInput.value.trim();
-
             if (familyName && familyAddress) {
                 fetch(`registerFamily.php?check_family=1&family_name=${encodeURIComponent(familyName)}&family_address=${encodeURIComponent(familyAddress)}`)
                     .then(response => response.json())
                     .then(data => {
                         const existingMembersDiv = document.getElementById('existingMembers');
                         const existingMembersList = document.getElementById('existingMembersList');
-                        console.log(existingMembersDiv);
-                        console.log(existingMembersList);
-
-
-
                         if (data.exists && data.members.length > 0) {
                             let html = '';
                             data.members.forEach(member => {
                                 html += `<span class="selected-customer-tag btn btn-tn btn-outline">${member.first_name} ${member.last_name}</span>`;
-
-                                // Auto-check the corresponding checkbox
-                                const checkbox = document.getElementById(`customer_${member.customer_id}`);
-                                if (checkbox) {
-                                    checkbox.checked = true;
+                                // Add to selectedCustomerIds if not already present
+                                if (!selectedCustomerIds.includes(String(member.customer_id))) {
+                                    selectedCustomerIds.push(String(member.customer_id));
+                                    // Check the checkbox if it exists and trigger change event
+                                    const checkbox = document.getElementById(`customer_${member.customer_id}`);
+                                    if (checkbox) {
+                                        checkbox.checked = true;
+                                        checkbox.dispatchEvent(new Event('change'));
+                                    }
                                 }
                             });
-
                             existingMembersList.innerHTML = html;
                             existingMembersDiv.style.display = 'block';
-
-                            // Update the selected customers display
-                            updateSelectedCustomers();
+                            updateSelectedCustomersDisplay();
                         } else {
                             existingMembersDiv.style.display = 'none';
                         }
                     })
-                    .catch(error => {
-                        console.error('Error checking existing family:', error);
-                    });
+                    .catch(error => console.error('Error checking existing family:', error));
             }
         }
 
         familyNameInput.addEventListener('blur', checkExistingFamily);
         familyAddressInput.addEventListener('blur', checkExistingFamily);
+
+        // Initial setup
+        renderCustomerList(customers);
+        updateSelectedCustomersDisplay();
+
+        // Form submission confirmation for empty family
+        document.querySelector('.clientForm').addEventListener('submit', function(event) {
+            if (selectedCustomerIds.length === 0) {
+                const confirmEmpty = confirm("You are creating an empty family. Do you want to proceed?");
+                if (!confirmEmpty) {
+                    event.preventDefault();
+                }
+            }
+        });
     </script>
 </body>
 

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Add after session_start()
+
 if (isset($_SESSION['message'])) {
     $successMessage = $_SESSION['message'];
     unset($_SESSION['message']);
@@ -18,7 +18,7 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-// Initialize variables
+
 $searchTerm = '';
 $viewMode = $_GET['view'] ?? 'individual';
 $data = [];
@@ -29,7 +29,7 @@ $filters = [
     'family_name'  => $_GET['family_name'] ?? null,
 ];
 
-// Get current user ID
+
 $user_id = $_SESSION['user_id'];
 
 // Build base query based on view mode
@@ -139,7 +139,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="./Styles/main.css">
     <link rel="stylesheet" href="./Styles/sidebar.css?v=1.0" />
     <link rel="stylesheet" href="./Styles/menus.css?v=1.0">
-    <link rel="stylesheet" href="./Styles/search.css?v=1.0">
+    <link rel="stylesheet" href="./Styles/search.css?v=1">
     <link rel="stylesheet" href="./Styles/modals.css?v=1.0">
 
     <title>FitLocker: Search</title>
