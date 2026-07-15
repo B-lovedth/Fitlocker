@@ -63,7 +63,7 @@ bash
 
 
 👥 Contributors
-1. Jeffery - Lead Backend Engineer
+1. Mayowa - Lead Backend Engineer
 
 2. Tomilola - UI Design and Supporting Frontend Engineer
 
